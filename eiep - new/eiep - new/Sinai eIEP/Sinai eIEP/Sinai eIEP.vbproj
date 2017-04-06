@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{E34DD178-E120-4C42-AE1B-FBE52B8424FF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sinai_eIEP</RootNamespace>
+    <AssemblyName>Sinai eIEP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Sinai eIEP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>Sinai eIEP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\..\..\..\oauth2\Lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Fonet, Version=1.0.3318.11064, Culture=neutral, PublicKeyToken=52effa152c4a9dc6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\FO.NET\Fonet.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis">
+      <HintPath>..\..\..\..\oauth2\Lib\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Authentication.OAuth2">
+      <HintPath>..\..\..\..\oauth2\Lib\Google.Apis.Authentication.OAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.FullProfile">
+      <HintPath>..\..\..\..\oauth2\Lib\Google.Apis.FullProfile.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\oauth2\Lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Build.Tasks">
+      <HintPath>..\..\..\..\oauth2\Lib\Microsoft.Bcl.Build.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\oauth2\Lib\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\..\..\oauth2\Lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
+      <HintPath>..\..\..\..\oauth2\Lib\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\oauth2\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\..\..\oauth2\Lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\..\..\oauth2\Lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.UI, Version=2013.2.717.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Web.UI.Skins, Version=2013.2.717.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL" />
+    <Reference Include="Zlib.Portable, Version=1.9.1.9000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\oauth2\Lib\Zlib.Portable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="DotNetOpenAuth" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin.aspx" />
+    <Content Include="Admin\admGoalCatalog.ascx" />
+    <Content Include="Admin\admLocks.ascx" />
+    <Content Include="Admin\admProviderServices.ascx" />
+    <Content Include="Admin\admStudents.ascx" />
+    <Content Include="Admin\admSubjects.ascx" />
+    <Content Include="Admin\admUsers.ascx" />
+    <Content Include="Admin\admServices.ascx" />
+    <Content Include="Admin\admInclusions.ascx" />
+    <Content Include="Admin\admStudentInfo.ascx" />
+    <Content Include="Admin\admAccommodations.ascx" />
+    <Content Include="Admin\WebForm1.aspx" />
+    <Content Include="cspUpdate.asmx" />
+    <Content Include="csp_details.aspx" />
+    <Content Include="csp_header.ascx" />
+    <Content Include="csp_list.aspx" />
+    <Content Include="gcCategory.ascx" />
+    <Content Include="GeneratePDF2.aspx" />
+    <Content Include="eiep_header.ascx" />
+    <Content Include="eiep_main.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="GeneratePDF.aspx" />
+    <Content Include="google39aecc4bf4415307.html" />
+    <Content Include="images\1463731389_catalog.png" />
+    <Content Include="images\AddRecord.gif" />
+    <Content Include="images\arrow_left.gif" />
+    <Content Include="images\arrow_right.gif" />
+    <Content Include="images\checkbox_checked.png" />
+    <Content Include="images\checkbox_unchecked.png" />
+    <Content Include="images\clip.png" />
+    <Content Include="images\clone.jpg" />
+    <Content Include="images\clone.png" />
+    <Content Include="images\Edit.gif" />
+    <Content Include="images\file-extension-pdf-icon.png" />
+    <Content Include="images\g-normal.png" />
+    <Content Include="images\infoIcon.jpg" />
+    <Content Include="images\note.gif" />
+    <Content Include="images\pdf.png" />
+    <Content Include="images\RedX.gif" />
+    <Content Include="images\RedX_large.gif" />
+    <Content Include="images\save.gif" />
+    <Content Include="images\seq.jpg" />
+    <Content Include="images\seq.png" />
+    <Content Include="images\SINAI Schools logo.jpeg" />
+    <Content Include="images\sinai-small.jpg" />
+    <Content Include="images\sinai-small.png" />
+    <Content Include="images\SINAI_Schools_logo.jpg" />
+    <Content Include="images\SINAI_Schools_logo.tif" />
+    <Content Include="images\undo.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="ref\DotNetOpenAuth.dll" />
+    <Content Include="ref\Fonet.dll" />
+    <Content Include="ref\Google.Apis.Authentication.OAuth2.dll" />
+    <Content Include="ref\Google.Apis.dll" />
+    <Content Include="ref\Google.Apis.FullProfile.dll" />
+    <Content Include="ref\log4net.dll" />
+    <Content Include="ref\Microsoft.Bcl.Build.Tasks.dll" />
+    <Content Include="ref\Microsoft.Threading.Tasks.dll" />
+    <Content Include="ref\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+    <Content Include="ref\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="ref\Newtonsoft.Json.dll" />
+    <Content Include="ref\System.Net.Http.dll" />
+    <Content Include="ref\System.Net.Http.Extensions.dll" />
+    <Content Include="ref\System.Net.Http.Primitives.dll" />
+    <Content Include="ref\System.Net.Http.WebRequest.dll" />
+    <Content Include="ref\System.Runtime.dll" />
+    <Content Include="ref\System.Threading.Tasks.dll" />
+    <Content Include="ref\Telerik.Web.UI.dll" />
+    <Content Include="ref\Telerik.Web.UI.Skins.dll" />
+    <Content Include="ref\Zlib.Portable.dll" />
+    <Content Include="scripts\eiep_main.js" />
+    <Content Include="SessionExpired.aspx" />
+    <Content Include="templates\comments_notes.xml" />
+    <Content Include="templates\maayanot_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\maayanot.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\services_details.xml" />
+    <Content Include="templates\maor_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\sample school_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\TABC_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\rynj_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\inclusion_details.xml" />
+    <Content Include="templates\inclusions.xml" />
+    <Content Include="templates\jkha_cover.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\sample school.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\document_shell_no_cover.xml" />
+    <Content Include="templates\services.xml" />
+    <Content Include="templates\TABC.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\maor.xml" />
+    <Content Include="templates\goal_table.xml" />
+    <Content Include="templates\htmltofo.xslt" />
+    <Content Include="templates\jkha.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="templates\rynj.xml" />
+    <Content Include="templates\document_shell.xml" />
+    <Content Include="Test.aspx" />
+    <Content Include="Test2.aspx" />
+    <Content Include="timeout.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin.aspx.designer.vb">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin.aspx.vb">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admGoalCatalog.ascx.designer.vb">
+      <DependentUpon>admGoalCatalog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admGoalCatalog.ascx.vb">
+      <DependentUpon>admGoalCatalog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admLocks.ascx.designer.vb">
+      <DependentUpon>admLocks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admLocks.ascx.vb">
+      <DependentUpon>admLocks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admProviderServices.ascx.designer.vb">
+      <DependentUpon>admProviderServices.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admProviderServices.ascx.vb">
+      <DependentUpon>admProviderServices.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admStudents.ascx.designer.vb">
+      <DependentUpon>admStudents.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admStudents.ascx.vb">
+      <DependentUpon>admStudents.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admSubjects.ascx.designer.vb">
+      <DependentUpon>admSubjects.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admSubjects.ascx.vb">
+      <DependentUpon>admSubjects.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admUsers.ascx.designer.vb">
+      <DependentUpon>admUsers.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admUsers.ascx.vb">
+      <DependentUpon>admUsers.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admServices.ascx.designer.vb">
+      <DependentUpon>admServices.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admServices.ascx.vb">
+      <DependentUpon>admServices.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admInclusions.ascx.designer.vb">
+      <DependentUpon>admInclusions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admInclusions.ascx.vb">
+      <DependentUpon>admInclusions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admStudentInfo.ascx.designer.vb">
+      <DependentUpon>admStudentInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admStudentInfo.ascx.vb">
+      <DependentUpon>admStudentInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admAccommodations.ascx.designer.vb">
+      <DependentUpon>admAccommodations.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admAccommodations.ascx.vb">
+      <DependentUpon>admAccommodations.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\iepCustomFilter.vb" />
+    <Compile Include="cspUpdate.asmx.vb">
+      <DependentUpon>cspUpdate.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="csp_details.aspx.designer.vb">
+      <DependentUpon>csp_details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="csp_details.aspx.vb">
+      <DependentUpon>csp_details.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="csp_header.ascx.designer.vb">
+      <DependentUpon>csp_header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="csp_header.ascx.vb">
+      <DependentUpon>csp_header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="csp_list.aspx.designer.vb">
+      <DependentUpon>csp_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="csp_list.aspx.vb">
+      <DependentUpon>csp_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gcCategory.ascx.designer.vb">
+      <DependentUpon>gcCategory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="gcCategory.ascx.vb">
+      <DependentUpon>gcCategory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneratePDF2.aspx.designer.vb">
+      <DependentUpon>GeneratePDF2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratePDF2.aspx.vb">
+      <DependentUpon>GeneratePDF2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SessionExpired.aspx.designer.vb">
+      <DependentUpon>SessionExpired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionExpired.aspx.vb">
+      <DependentUpon>SessionExpired.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="timeout.aspx.designer.vb">
+      <DependentUpon>timeout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="timeout.aspx.vb">
+      <DependentUpon>timeout.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="userSession.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Content Include="App_Code\DDLists.vb" />
+    <Compile Include="ClientCredentials.vb" />
+    <Compile Include="eiep_header.ascx.designer.vb">
+      <DependentUpon>eiep_header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="eiep_header.ascx.vb">
+      <DependentUpon>eiep_header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="eiep_main.aspx.designer.vb">
+      <DependentUpon>eiep_main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="eiep_main.aspx.vb">
+      <DependentUpon>eiep_main.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="GeneratePDF.aspx.designer.vb">
+      <DependentUpon>GeneratePDF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratePDF.aspx.vb">
+      <DependentUpon>GeneratePDF.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="GoogleAuth\lib\AuthorizationHeader.vb" />
+    <Compile Include="GoogleAuth\lib\Util.vb" />
+    <Compile Include="GoogleAuth\lib\OAuthConsumer.vb" />
+    <Compile Include="GoogleAuth\lib\OAuthProtocolException.vb" />
+    <Compile Include="GoogleAuth\lib\OAuthUtils.vb" />
+    <Compile Include="GoogleAuth\lib\Tokens.vb" />
+    <Compile Include="Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Test.aspx.designer.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test2.aspx.designer.vb">
+      <DependentUpon>Test2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test2.aspx.vb">
+      <DependentUpon>Test2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\PublishProfiles\a.pubxml" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="ref\ARIAL.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pdf\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61438</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51653/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

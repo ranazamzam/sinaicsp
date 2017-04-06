@@ -1,0 +1,278 @@
+<fo:page-sequence master-reference="PageMaster-CoverSheet" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:static-content flow-name="xsl-region-before">
+    <fo:block text-align="center">
+      <fo:block font-weight="bold" font-size="8pt" font-family="Helvetica" display-align="center" text-align="center" text-align-last="center">
+        <fo:table>
+          <fo:table-column/>
+          <fo:table-body>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block>
+                  <fo:external-graphic src="https://sinaicsp.azurewebsites.net/images/SINAI_Schools_logo.tif" content-height="scale-to-fit" height="0.75in" content-width="1.50in" scaling="non-uniform"/>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block>Maor High School</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block font-weight="normal" padding-top="5pt">110 South Orange Avenue, Livingston, NJ 07039</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block font-weight="normal" padding-top="2pt">PHONE: 862.437.8190	FAX: 973.845.4999</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-body>
+        </fo:table>
+      </fo:block>
+    </fo:block>
+    <fo:block font-size="10pt" font-weight="bold" keep-together="always" text-align="center" padding-top="7pt">Comprehensive Student Plan (CSP) ACADEMIC YEAR @@school_year@@</fo:block>
+  </fo:static-content>
+  <fo:flow flow-name="xsl-region-body">
+    <fo:block>
+      <fo:block text-align="center" font-size="10pt" font-family="Helvetica">
+        <fo:table text-align="left">
+          <fo:table-column />
+          <fo:table-column />
+          <fo:table-body>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Student Name: @@student_name@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Parent/Guardian: @@parents@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">D.O.B: @@dob@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Address: @@address@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Age: @@age@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">City/State: @@city_state@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Gender: @@gender@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Home Phone: @@phone@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Grade: @@grade@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Father's Cell Phone: @@father_cell@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row>
+              <fo:table-cell>
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell>
+                <fo:block padding-top="5pt">Mother's Cell Phone: @@mother_cell@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-body>
+        </fo:table>
+      </fo:block>
+      <fo:block font-weight="bold" font-size="8pt" font-family="Helvetica" keep-together="always" padding-top="20pt" padding-bottom="10pt">
+        CSP MEETING DATE:
+        <fo:leader leader-length="40mm" leader-pattern="rule" rule-style="solid" rule-thickness="0.1mm" color="black"></fo:leader>
+      </fo:block>
+      <fo:block font-weight="bold" font-size="8pt" font-family="Helvetica" keep-together="always" padding-bottom="10pt">CSP MEETING PARTICIPANTS:</fo:block>
+      <fo:block text-align="center" font-weight="normal" font-size="8pt" font-family="Helvetica" >
+        <fo:table text-align="left">
+          <fo:table-column column-width="4.41cm"/>
+          <fo:table-column column-width="7.29cm"/>
+          <fo:table-column column-width="7.29cm"/>
+          <fo:table-body>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="7pt">
+                <fo:block font-weight="bold" text-align="center">TITLE</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="7pt">
+                <fo:block font-weight="bold" text-align="center">PRINTED NAME</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="7pt">
+                <fo:block font-weight="bold" text-align="center">SIGNATURE</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Parent</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Parent</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Dean</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Rabbi Dr. Yisrael Rothwachs</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Associate Dean</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Ms. Judi Karp</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Director</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Dr. Robert Klein</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Assistant Director</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Mrs. Frada Stone</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Assistant Director</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Rabbi Yehoshua Gold</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Teacher</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>Teacher</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block>
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >Teacher</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+            <fo:table-row border="1pt solid black">
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >Other</fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+              <fo:table-cell border="inherit" padding="9pt">
+                <fo:block >
+                  <fo:inline white-space-collapse="false"> </fo:inline>
+                </fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-body>
+        </fo:table>
+      </fo:block>
+    </fo:block>
+  </fo:flow>
+</fo:page-sequence>

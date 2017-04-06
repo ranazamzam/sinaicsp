@@ -1,0 +1,17 @@
+﻿<fo:table-row border="1pt solid black" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:table-cell border="inherit" display-align="center" padding="3pt">
+    <fo:block text-align="center">@@students@@</fo:block>
+  </fo:table-cell>
+  <fo:table-cell border="inherit" display-align="center" padding="3pt">
+    <fo:block text-align="center">@@length@@</fo:block>
+  </fo:table-cell>
+  <fo:table-cell border="inherit" display-align="center" padding="3pt">
+    <fo:block text-align="center">@@sessions@@</fo:block>
+  </fo:table-cell>
+  <fo:table-cell border="inherit" display-align="center" padding="3pt">
+    <fo:block text-align="center">@@start_date@@</fo:block>
+  </fo:table-cell>
+  <fo:table-cell border="inherit" display-align="center" padding="3pt">
+    <fo:block text-align="center">@@end_date@@</fo:block>
+  </fo:table-cell>
+</fo:table-row>

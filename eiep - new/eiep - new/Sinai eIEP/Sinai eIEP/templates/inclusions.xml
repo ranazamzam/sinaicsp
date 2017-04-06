@@ -1,0 +1,33 @@
+﻿<fo:block xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:block text-align="center" font-family="Helvetica" font-weight="normal" font-size="8pt" padding-top="10pt">
+    <fo:table text-align="left" table-layout="fixed">
+      <fo:table-column column-width="4.40cm"/>
+      <fo:table-column column-width="4.40cm"/>
+      <fo:table-column column-width="4.40cm"/>
+      <fo:table-column column-width="2.70cm"/>
+      <fo:table-column column-width="3.10cm"/>
+      <fo:table-body>
+        <fo:table-row border="1pt solid black">
+          <fo:table-cell border="inherit" display-align="center">
+            <fo:block font-weight="bold" text-align="center">Subject</fo:block>
+          </fo:table-cell>
+          <fo:table-cell border="inherit" display-align="center">
+            <fo:block font-weight="bold" text-align="center"># of</fo:block>
+            <fo:block font-weight="bold" text-align="center">Sessions Per Week</fo:block>
+          </fo:table-cell>
+          <fo:table-cell border="inherit" display-align="center">
+            <fo:block font-weight="bold" text-align="center">Inclusion Teacher</fo:block>
+          </fo:table-cell>
+          <fo:table-cell border="inherit" display-align="center">
+            <fo:block font-weight="bold" text-align="center">Start Date</fo:block>
+          </fo:table-cell>
+          <fo:table-cell border="inherit" display-align="center">
+            <fo:block font-weight="bold" text-align="center">End Date</fo:block>
+            <fo:block font-weight="bold" text-align="center">(if applicable)</fo:block>
+          </fo:table-cell>
+        </fo:table-row>
+        @@inclusion_details@@
+      </fo:table-body>
+    </fo:table>
+  </fo:block>
+</fo:block>

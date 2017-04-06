@@ -1,0 +1,107 @@
+﻿<fo:block xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:block padding-top="20pt" keep-together="always">
+    <fo:table>
+      <fo:table-column column-width="100%"/>
+      <fo:table-body>
+        <fo:table-row keep-together="always">
+          <fo:table-cell>
+
+            <fo:block keep-with-next="always">
+              <fo:table text-align="left" table-layout="fixed" keep-with-next="always">
+                <fo:table-column column-width="0.27cm"/>
+                <fo:table-column column-width="9.60cm"/>
+                <fo:table-column column-width="9.13cm"/>
+                <fo:table-body>
+                  <fo:table-row>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                      <fo:block font-family="Helvetica" font-weight="bold" font-size="8pt">Service: @@service@@</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                  </fo:table-row>
+                  <fo:table-row>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                      <fo:block font-family="Helvetica" font-weight="bold" font-size="8pt">Model: @@model@@</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                  </fo:table-row>
+                  <fo:table-row>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                      <fo:block font-family="Helvetica" font-weight="bold" font-size="8pt">Name of Provider: @@provider@@</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell>
+                      <fo:block>
+                        <fo:inline white-space-collapse="false"> </fo:inline>
+                      </fo:block>
+                    </fo:table-cell>
+                  </fo:table-row>
+                </fo:table-body>
+              </fo:table>
+            </fo:block>
+            <fo:block text-align="center" font-family="Helvetica" font-weight="normal" font-size="8pt" padding-top="10pt" keep-with-previous="always">
+              <fo:table text-align="left" table-layout="fixed" keep-with-previous="always">
+                <fo:table-column column-width="4.40cm"/>
+                <fo:table-column column-width="4.40cm"/>
+                <fo:table-column column-width="4.40cm"/>
+                <fo:table-column column-width="2.70cm"/>
+                <fo:table-column column-width="3.10cm"/>
+                <fo:table-body>
+                  <fo:table-row border="1pt solid black" >
+                    <fo:table-cell border="inherit" display-align="center" padding="3pt">
+                      <fo:block font-weight="bold" text-align="center"># of Students in Group</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border="inherit" display-align="center" padding="3pt">
+                      <fo:block font-weight="bold" text-align="center">Length of Session</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border="inherit" display-align="center" padding="3pt">
+                      <fo:block font-weight="bold" text-align="center"># of Sessions Per Week</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border="inherit" display-align="center" padding="3pt">
+                      <fo:block font-weight="bold" text-align="center">Start Date</fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border="inherit" display-align="center" padding="3pt">
+                      <fo:block font-weight="bold" text-align="center">End Date</fo:block>
+                      <fo:block font-weight="bold" text-align="center">(if applicable)</fo:block>
+                    </fo:table-cell>
+                  </fo:table-row>
+                  @@details@@
+                </fo:table-body>
+              </fo:table>
+            </fo:block>
+          </fo:table-cell>
+        </fo:table-row>
+      </fo:table-body>
+    </fo:table>
+  </fo:block>
+</fo:block>

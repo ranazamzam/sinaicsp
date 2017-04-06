@@ -1,0 +1,164 @@
+﻿  <fo:page-sequence master-reference="PageMaster-Body" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:static-content flow-name="header">
+      <fo:block text-align="center">
+        <fo:block space-before="2.5mm" space-before.conditionality="retain" font-weight="bold" font-size="8pt" font-family="Arial" display-align="center" text-align="center" text-align-last="center" start-indent="3in" end-indent="3in" width="2.5in" height="20mm" padding-top="5pt">
+          <fo:table>
+            <fo:table-column/>
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block >
+                    <fo:external-graphic src="@@logo_path@@/images/SINAI_Schools_logo.tif" content-height="scale-to-fit" height="0.75in"  content-width="1.50in" scaling="non-uniform"/>
+                  </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block>Comprehensive Student Plan</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block font-weight="normal">RYNJ Division</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell>
+                  <fo:block font-weight="normal">@@school_year@@</fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:block>
+        <fo:block space-before="2mm" space-before.conditionality="retain" font-weight="bold" space-after="5mm" font-size="10pt" font-family="Arial" display-align="left" text-align="left" text-align-last="left" start-indent=".5in" end-indent=".5in" width="7.5in" height="20mm" padding-top="5pt" padding-bottom="5pt">
+          <fo:table>
+            <fo:table-column column-width="4.75in"/>
+            <fo:table-column column-width="3.75in"/>
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell end-indent="0cm">
+                  <fo:block>
+                    <fo:inline>Student: </fo:inline>
+                    <fo:inline>@@student_name@@</fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+                <fo:table-cell start-indent="2mm">
+                  <fo:block>
+                    <fo:inline>Area of Instruction: </fo:inline>
+                    <fo:inline>@@iep_subject@@</fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+              <fo:table-row>
+                <fo:table-cell end-indent="0cm">
+                  <fo:block>
+                    <fo:inline>Instructor: </fo:inline>
+                    <fo:inline>@@teacher_name@@</fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+
+                <fo:table-cell start-indent="2mm">
+                  <fo:block>
+                    <fo:inline>Materials: </fo:inline>
+                    <fo:inline>@@iep_materials@@</fo:inline>
+                  </fo:block>
+                </fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:block>
+
+      </fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="footer">
+      <fo:block text-align="center">
+        <fo:block space-before="5mm" space-before.conditionality="retain" space-after="2mm" font-size="8pt" font-family="Arial" display-align="left" text-align="left" text-align-last="left" start-indent="3.5in" end-indent="3.5in" width="1.5in" height="20mm" border-style="solid" border-width="thin" padding-top="5pt" padding-bottom="5pt">
+          <fo:block font-weight="bold" text-decoration="underline" display-align="center" text-align="center" >CSP RATING SCALE</fo:block>
+          <fo:block>
+            <fo:table>
+              <fo:table-column />
+              <fo:table-body>
+                <fo:table-row>
+                  <fo:table-cell>
+                    <fo:list-block provisional-distance-between-starts="10mm" provisional-label-separation="20mm" space-before="6pt" space-after="6pt">
+                      <fo:list-item space-after="1mm">
+                        <fo:list-item-label start-indent="3.65in" end-indent="label-end()">
+                          <fo:block>
+                            M =
+                          </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="3.95in">
+                          <fo:block>Mastered</fo:block>
+                        </fo:list-item-body>
+                      </fo:list-item>
+                      <fo:list-item space-after="1mm">
+                        <fo:list-item-label start-indent="3.65in" end-indent="label-end()">
+                          <fo:block>
+                            P =
+                          </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="3.95in">
+                          <fo:block>Progressing</fo:block>
+                        </fo:list-item-body>
+                      </fo:list-item>
+                      <fo:list-item space-after="1mm">
+                        <fo:list-item-label start-indent="3.65in" end-indent="label-end()">
+                          <fo:block>
+                            DC =
+                          </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="3.95in">
+                          <fo:block>Discontinued</fo:block>
+                        </fo:list-item-body>
+                      </fo:list-item>
+                    </fo:list-block>
+                  </fo:table-cell>
+                </fo:table-row>
+              </fo:table-body>
+            </fo:table>
+          </fo:block>
+        </fo:block>
+      </fo:block>
+      <fo:block font-size="8pt" text-align="right" white-space-collapse="false">
+        <fo:inline>
+          Printed: @@date_stamp@@    
+        </fo:inline>
+      </fo:block>
+    </fo:static-content>
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block width="7in" font-family="Arial" >
+        <fo:table >
+
+          <fo:table-column column-width="4.70in"/>
+          <fo:table-column column-width="0.70in"/>
+          <fo:table-column column-width="0.70in"/>
+          <fo:table-column column-width="0.70in"/>
+          <fo:table-column column-width="0.70in"/>
+
+          <fo:table-header background-color="#A2A2A2">
+            <fo:table-row font-size="9pt" font-weight="bold" text-align="center" display-align="center">
+              <fo:table-cell padding="2pt" start-indent="0.05in">
+                <fo:block text-align="left">@@student_first_name@@ will:</fo:block>
+              </fo:table-cell>
+              <fo:table-cell padding="2pt">
+                <fo:block>Date Initiated</fo:block>
+              </fo:table-cell>
+              <fo:table-cell padding="2pt">
+                <fo:block>11/@@year_start@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell padding="2pt">
+                <fo:block>2/@@year_end@@</fo:block>
+              </fo:table-cell>
+              <fo:table-cell padding="2pt">
+                <fo:block>6/@@year_end@@</fo:block>
+              </fo:table-cell>
+            </fo:table-row>
+          </fo:table-header>
+          <fo:table-body >
+            @@GOALTABLE@@
+          </fo:table-body >
+        </fo:table>
+      </fo:block>
+      @@COMMENTS_NOTES@@
+    </fo:flow>
+  </fo:page-sequence>

@@ -1,0 +1,17 @@
+﻿  <fo:table-row font-size="10pt" padding="2" text-align="center" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:table-cell padding="3pt" start-indent="0.05in" keep-together="always" >
+      <fo:block text-align="left">@@iep_data_text@@</fo:block>
+    </fo:table-cell>
+    <fo:table-cell padding="2pt">
+      <fo:block>@@date_initiated@@</fo:block>
+    </fo:table-cell>
+    <fo:table-cell padding="2pt">
+      <fo:block>@@grade_1@@</fo:block>
+    </fo:table-cell>
+    <fo:table-cell padding="2pt">
+      <fo:block>@@grade_2@@</fo:block>
+    </fo:table-cell>
+    <fo:table-cell padding="2pt">
+      <fo:block>@@grade_3@@</fo:block>
+    </fo:table-cell>
+  </fo:table-row>
