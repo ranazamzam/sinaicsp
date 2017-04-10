@@ -11,6 +11,7 @@ namespace Sinaicsp_MVC
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.Add("catchall", new Route("{*url}", new Signin()));
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
