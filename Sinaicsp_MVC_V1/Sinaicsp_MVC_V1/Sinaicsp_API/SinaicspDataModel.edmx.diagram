@@ -23,8 +23,6 @@
         <AssociationConnector Association="SinaicspDataModel.CityStudent" />
         <EntityTypeShape EntityType="SinaicspDataModel.Inclusion" Width="1.5" PointX="0.5" PointY="15" />
         <AssociationConnector Association="SinaicspDataModel.StudentInclusion" />
-        <EntityTypeShape EntityType="SinaicspDataModel.Service" Width="1.5" PointX="2.125" PointY="15" />
-        <AssociationConnector Association="SinaicspDataModel.StudentService" />
         <EntityTypeShape EntityType="SinaicspDataModel.Accommodation" Width="2" PointX="3.75" PointY="15" />
         <AssociationConnector Association="SinaicspDataModel.StudentAccommodation" ManuallyRouted="false" >
         </AssociationConnector>
@@ -32,6 +30,15 @@
         <AssociationConnector Association="SinaicspDataModel.SubjectSubject" />
         <EntityTypeShape EntityType="SinaicspDataModel.SchoolYear" Width="1.5" PointX="9.5" PointY="3.75" />
         <AssociationConnector Association="SinaicspDataModel.SchoolSchoolYear" />
+        <EntityTypeShape EntityType="SinaicspDataModel.CSP" Width="1.5" PointX="8.375" PointY="15.125" />
+        <AssociationConnector Association="SinaicspDataModel.StudentCSP" />
+        <EntityTypeShape EntityType="SinaicspDataModel.TeacherCSP" Width="1.5" PointX="6.125" PointY="16" />
+        <AssociationConnector Association="SinaicspDataModel.TeacherTeacherCSP" />
+        <AssociationConnector Association="SinaicspDataModel.CSPTeacherCSP" />
+        <AssociationConnector Association="SinaicspDataModel.SubjectCSP" />
+        <EntityTypeShape EntityType="SinaicspDataModel.Lock" Width="1.5" PointX="4.375" PointY="20.25" />
+        <AssociationConnector Association="SinaicspDataModel.StudentLock" />
+        <AssociationConnector Association="SinaicspDataModel.SubjectLock" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
