@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SinaicspDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="SinaicspDataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ApplicationUsers" EntityType="SinaicspDataModel.ApplicationUser" />
+    <EntitySet Name="ApplicationRoles" EntityType="SinaicspDataModel.ApplicationRole" />
+    <EntitySet Name="UserRoles" EntityType="SinaicspDataModel.UserRole" />
+    <AssociationSet Name="ApplicationUserUserRole" Association="SinaicspDataModel.ApplicationUserUserRole">
+      <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationRoleUserRole" Association="SinaicspDataModel.ApplicationRoleUserRole">
+      <End Role="ApplicationRole" EntitySet="ApplicationRoles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="Schools" EntityType="SinaicspDataModel.School" />
+    <EntitySet Name="Teachers" EntityType="SinaicspDataModel.Teacher" />
+    <AssociationSet Name="SchoolTeacher" Association="SinaicspDataModel.SchoolTeacher">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <EntitySet Name="Students" EntityType="SinaicspDataModel.Student" />
+    <AssociationSet Name="SchoolStudent" Association="SinaicspDataModel.SchoolStudent">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="StudentClasses" EntityType="SinaicspDataModel.StudentClass" />
+    <EntitySet Name="StudentGrades" EntityType="SinaicspDataModel.StudentGrade" />
+    <AssociationSet Name="StudentClassStudent" Association="SinaicspDataModel.StudentClassStudent">
+      <End Role="StudentClass" EntitySet="StudentClasses" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="StudentGradeStudent" Association="SinaicspDataModel.StudentGradeStudent">
+      <End Role="StudentGrade" EntitySet="StudentGrades" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="Cities" EntityType="SinaicspDataModel.City" />
+    <AssociationSet Name="CityStudent" Association="SinaicspDataModel.CityStudent">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="Inclusions" EntityType="SinaicspDataModel.Inclusion" />
+    <AssociationSet Name="StudentInclusion" Association="SinaicspDataModel.StudentInclusion">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Inclusion" EntitySet="Inclusions" />
+    </AssociationSet>
+    <EntitySet Name="Accommodations" EntityType="SinaicspDataModel.Accommodation" />
+    <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.StudentAccommodation">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Accommodation" EntitySet="Accommodations" />
+    </AssociationSet>
+    <EntitySet Name="Subjects" EntityType="SinaicspDataModel.Subject" />
+    <AssociationSet Name="SubjectSubject" Association="SinaicspDataModel.SubjectSubject">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Subject1" EntitySet="Subjects" />
+    </AssociationSet>
+    <EntitySet Name="SchoolYears" EntityType="SinaicspDataModel.SchoolYear" />
+    <AssociationSet Name="SchoolSchoolYear" Association="SinaicspDataModel.SchoolSchoolYear">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="SchoolYear" EntitySet="SchoolYears" />
+    </AssociationSet>
+    <EntitySet Name="CSPs" EntityType="SinaicspDataModel.CSP" />
+    <AssociationSet Name="StudentCSP" Association="SinaicspDataModel.StudentCSP">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="CSP" EntitySet="CSPs" />
+    </AssociationSet>
+    <EntitySet Name="TeacherCSPs" EntityType="SinaicspDataModel.TeacherCSP" />
+    <AssociationSet Name="TeacherTeacherCSP" Association="SinaicspDataModel.TeacherTeacherCSP">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="TeacherCSP" EntitySet="TeacherCSPs" />
+    </AssociationSet>
+    <AssociationSet Name="CSPTeacherCSP" Association="SinaicspDataModel.CSPTeacherCSP">
+      <End Role="CSP" EntitySet="CSPs" />
+      <End Role="TeacherCSP" EntitySet="TeacherCSPs" />
+    </AssociationSet>
+    <AssociationSet Name="SubjectCSP" Association="SinaicspDataModel.SubjectCSP">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="CSP" EntitySet="CSPs" />
+    </AssociationSet>
+    <EntitySet Name="Locks" EntityType="SinaicspDataModel.Lock" />
+    <AssociationSet Name="StudentLock" Association="SinaicspDataModel.StudentLock">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Lock" EntitySet="Locks" />
+    </AssociationSet>
+    <AssociationSet Name="SubjectLock" Association="SinaicspDataModel.SubjectLock">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Lock" EntitySet="Locks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ApplicationUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="UserRoles" Relationship="SinaicspDataModel.ApplicationUserUserRole" FromRole="ApplicationUser" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="ApplicationRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="SinaicspDataModel.ApplicationRoleUserRole" FromRole="ApplicationRole" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ApplicationUser" Relationship="SinaicspDataModel.ApplicationUserUserRole" FromRole="UserRole" ToRole="ApplicationUser" />
+    <Property Name="ApplicationUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ApplicationRole" Relationship="SinaicspDataModel.ApplicationRoleUserRole" FromRole="UserRole" ToRole="ApplicationRole" />
+    <Property Name="ApplicationRoleId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="ApplicationUserUserRole">
+    <End Type="SinaicspDataModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
+    <End Type="SinaicspDataModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="ApplicationUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationRoleUserRole">
+    <End Type="SinaicspDataModel.ApplicationRole" Role="ApplicationRole" Multiplicity="1" />
+    <End Type="SinaicspDataModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="ApplicationRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Teachers" Relationship="SinaicspDataModel.SchoolTeacher" FromRole="School" ToRole="Teacher" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="SinaicspDataModel.SchoolStudent" FromRole="School" ToRole="Student" />
+    <NavigationProperty Name="SchoolYears" Relationship="SinaicspDataModel.SchoolSchoolYear" FromRole="School" ToRole="SchoolYear" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolTeacher" FromRole="Teacher" ToRole="School" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TeacherCSPs" Relationship="SinaicspDataModel.TeacherTeacherCSP" FromRole="Teacher" ToRole="TeacherCSP" />
+  </EntityType>
+  <Association Name="SchoolTeacher">
+    <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Teacher" Role="Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" />
+    <Property Name="LastName" Type="String" Nullable="false" />
+    <Property Name="Gender" Type="String" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" />
+    <Property Name="PrimaryParent" Type="String" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" />
+    <Property Name="State" Type="String" Nullable="false" />
+    <Property Name="MotherCell" Type="String" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolStudent" FromRole="Student" ToRole="School" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentClass" Relationship="SinaicspDataModel.StudentClassStudent" FromRole="Student" ToRole="StudentClass" />
+    <Property Name="StudentClassId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StudentGrade" Relationship="SinaicspDataModel.StudentGradeStudent" FromRole="Student" ToRole="StudentGrade" />
+    <Property Name="StudentGradeId" Type="Int32" Nullable="false" />
+    <Property Name="SecondaryParent" Type="String" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="SinaicspDataModel.CityStudent" FromRole="Student" ToRole="City" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" />
+    <Property Name="FatherCell" Type="String" Nullable="false" />
+    <NavigationProperty Name="Inclusions" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Student" ToRole="Inclusion" />
+    <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
+    <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.StudentCSP" FromRole="Student" ToRole="CSP" />
+    <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.StudentLock" FromRole="Student" ToRole="Lock" />
+  </EntityType>
+  <Association Name="SchoolStudent">
+    <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="StudentClass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="SinaicspDataModel.StudentClassStudent" FromRole="StudentClass" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="StudentGrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="SinaicspDataModel.StudentGradeStudent" FromRole="StudentGrade" ToRole="Student" />
+  </EntityType>
+  <Association Name="StudentClassStudent">
+    <End Type="SinaicspDataModel.StudentClass" Role="StudentClass" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentClass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StudentClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentGradeStudent">
+    <End Type="SinaicspDataModel.StudentGrade" Role="StudentGrade" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentGrade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StudentGradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="SinaicspDataModel.CityStudent" FromRole="City" ToRole="Student" />
+  </EntityType>
+  <Association Name="CityStudent">
+    <End Type="SinaicspDataModel.City" Role="City" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Inclusion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject" Type="String" Nullable="false" />
+    <Property Name="Classes" Type="String" Nullable="false" />
+    <Property Name="Teacher" Type="String" Nullable="false" />
+    <Property Name="SessionStart" Type="String" Nullable="false" />
+    <Property Name="SessionEnd" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Inclusion" ToRole="Student" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentInclusion">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Inclusion" Role="Inclusion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inclusion">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Accommodation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Accommodation" ToRole="Student" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentAccommodation">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Accommodation" Role="Accommodation" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subjects" Relationship="SinaicspDataModel.SubjectSubject" FromRole="Subject" ToRole="Subject1" />
+    <NavigationProperty Name="Parent" Relationship="SinaicspDataModel.SubjectSubject" FromRole="Subject1" ToRole="Subject" />
+    <Property Name="ParentId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.SubjectCSP" FromRole="Subject" ToRole="CSP" />
+    <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.SubjectLock" FromRole="Subject" ToRole="Lock" />
+  </EntityType>
+  <Association Name="SubjectSubject">
+    <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="0..1" />
+    <End Type="SinaicspDataModel.Subject" Role="Subject1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subject1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SchoolYear">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolSchoolYear" FromRole="SchoolYear" ToRole="School" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
+    <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="SchoolSchoolYear">
+    <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
+    <End Type="SinaicspDataModel.SchoolYear" Role="SchoolYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchoolYear">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CSP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentCSP" FromRole="CSP" ToRole="Student" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TeacherCSPs" Relationship="SinaicspDataModel.CSPTeacherCSP" FromRole="CSP" ToRole="TeacherCSP" />
+    <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectCSP" FromRole="CSP" ToRole="Subject" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="Materials" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentCSP">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSP">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TeacherCSP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Teacher" Relationship="SinaicspDataModel.TeacherTeacherCSP" FromRole="TeacherCSP" ToRole="Teacher" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CSP" Relationship="SinaicspDataModel.CSPTeacherCSP" FromRole="TeacherCSP" ToRole="CSP" />
+    <Property Name="CSPId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Nullable="false" Type="DateTime" />
+    <Property Name="IsDeleted" Nullable="false" Type="Boolean" />
+    <Property Name="CreatedByUserId" Nullable="false" Type="Int32" />
+  </EntityType>
+  <Association Name="TeacherTeacherCSP">
+    <End Type="SinaicspDataModel.Teacher" Role="Teacher" Multiplicity="1" />
+    <End Type="SinaicspDataModel.TeacherCSP" Role="TeacherCSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherCSP">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CSPTeacherCSP">
+    <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="1" />
+    <End Type="SinaicspDataModel.TeacherCSP" Role="TeacherCSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherCSP">
+        <PropertyRef Name="CSPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubjectCSP">
+    <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSP">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Lock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentLock" FromRole="Lock" ToRole="Student" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectLock" FromRole="Lock" ToRole="Subject" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentLock">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Lock" Role="Lock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lock">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubjectLock">
+    <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Lock" Role="Lock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lock">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

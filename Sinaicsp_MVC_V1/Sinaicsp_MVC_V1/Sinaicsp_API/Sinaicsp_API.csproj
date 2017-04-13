@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -42,12 +51,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accommodation.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="API\ApplicationRole.cs" />
+    <Compile Include="API\ApplicationUser.cs" />
     <Compile Include="API\Enums.cs" />
+    <Compile Include="API\School.cs" />
+    <Compile Include="API\SchoolYear.cs" />
+    <Compile Include="API\Subject.cs" />
+    <Compile Include="API\Teacher.cs" />
+    <Compile Include="ApplicationRole.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUser.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSP.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inclusion.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lock.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="School.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolYear.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SinaicspDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SinaicspDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SinaicspDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SinaicspDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SinaicspDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Student.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentClass.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentGrade.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subject.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherCSP.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +131,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="packages.config" />
     <None Include="SinaicspDataModel.edmx.diagram">
       <DependentUpon>SinaicspDataModel.edmx</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SinaicspDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SinaicspDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>SinaicspDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="SinaicspDataModel.edmx.sql" />
+    <Content Include="SinaicspDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SinaicspDataModel.cs</LastGenOutput>
+      <DependentUpon>SinaicspDataModel.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
