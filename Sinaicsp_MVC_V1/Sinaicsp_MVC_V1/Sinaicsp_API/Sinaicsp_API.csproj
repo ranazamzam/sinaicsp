@@ -54,11 +54,17 @@
     <Compile Include="Accommodation.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="API\Accommodation.cs" />
     <Compile Include="API\ApplicationRole.cs" />
     <Compile Include="API\ApplicationUser.cs" />
+    <Compile Include="API\City.cs" />
     <Compile Include="API\Enums.cs" />
+    <Compile Include="API\Inclusion.cs" />
     <Compile Include="API\School.cs" />
     <Compile Include="API\SchoolYear.cs" />
+    <Compile Include="API\Student.cs" />
+    <Compile Include="API\StudentClass.cs" />
+    <Compile Include="API\StudentGrade.cs" />
     <Compile Include="API\Subject.cs" />
     <Compile Include="API\Teacher.cs" />
     <Compile Include="ApplicationRole.cs">
