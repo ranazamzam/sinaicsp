@@ -2,11 +2,28 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/Theme/css/style.default.css" type="text/css" />
+    <link id="skinstyle" rel="stylesheet" href="~/Theme/css/style.default.css" type="text/css" />
+    <link rel="stylesheet" href="~/Theme/css/responsive-tables.css">
+    <script type="text/javascript" src="~/Theme/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/jquery-migrate-1.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/jquery-ui-1.9.2.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/modernizr.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/Theme/js/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/flot/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/flot/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Theme/js/responsive-tables.js"></script>
+    <script type="text/javascript" src="~/Theme/js/custom.js"></script>
+    
+
+    <title>Sinai School - Admin Panel</title>
+
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.common.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
@@ -17,62 +34,91 @@
     <script src="@Url.Content("~/Scripts/kendo/2016.1.112/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2016.1.112/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
 </head>
 <body>
-    <div class="navbar-left" style="width:170px;margin-top:23px">
-        @(Html.Kendo().PanelBar()
-    .Name("panelbar")
-    .ExpandAll(true)
-    .ExpandMode(PanelBarExpandMode.Multiple)
-    .Items(panelbar =>
-    {
-        panelbar.Add().Text("User Management")
-            .Items(MItems =>
-            {
-                MItems.Add().Text("Roles").Action("Roles", "UserManagement");
-                MItems.Add().Text("Users");
-            });
-
-        panelbar.Add().Text("Definitions")
-            .Items(MItems =>
-            {
-                MItems.Add().Text("Cities");
-                MItems.Add().Text("Classes");
-                MItems.Add().Text("Grades");
-                MItems.Add().Text("Subjects");
-                MItems.Add().Text("School Years");
-
-            });
-        panelbar.Add().Text("Operations")
-    .Items(MItems =>
-    {
-        MItems.Add().Text("Schools");
-        MItems.Add().Text("Teachers");
-        MItems.Add().Text("Students");
-        MItems.Add().Text("Locks");
-        MItems.Add().Text("Services");
-    });
+  
+    <div class="mainwrapper">
 
 
-    })
-        )
-    </div>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white">
-        <div >
-            <div class="navbar-header" >
-                <a href="@Url.Action("Index")">  <img src="~/Images/SINAI Schools logo.jpeg" height="70" /></a>
+
+        <div class="leftpanel">
+
+            <div class="leftmenu">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="nav-header">
+
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span class="iconfa-pencil"></span>User Management</a>
+                        <ul>
+                            <li ><a class="all" href="@Url.Action("Roles", "UserManagement")"><span></span>Roles</a></li>
+                            <li ><a class="all" href="#"><span></span>Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span class="iconfa-pencil"></span>Definitions</a>
+                        <ul>
+                            <li><a class="all" href="#"><span></span>Cities</a></li>
+                            <li><a class="all" href="#"><span></span>Classes</a></li>
+                            <li><a class="all" href="#"><span></span>Grades</a></li>
+                            <li><a class="all" href="#"><span></span>Subjects</a></li>
+                            <li><a class="all" href="#"><span></span>School Years</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span class="iconfa-pencil"></span>Operations</a>
+                        <ul>
+                            <li><a class="all" href="#"><span></span>Schools</a></li>
+                            <li><a class="all" href="#"><span></span>Teachers</a></li>
+                            <li><a class="all" href="#"><span></span>Students</a></li>
+                            <li><a class="all" href="#"><span></span>Locks</a></li>
+                            <li><a class="all" href="#"><span></span>Services</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
             </div>
-            <div class="navbar pull-right">
-                <div></div>
-            </div>
+            <!--leftmenu-->
+
         </div>
-    </div>
+        <!-- leftpanel -->
 
-    <div class="container body-content" style="margin-top:23px">
-        @RenderBody()
+        <div class="rightpanel">
+
+            <ul class="breadcrumbs">
+                <li class="right">
+                    <div id="div_login">
+                        <a href="#">Yasser Shehab</a> - 
+                        <a href="#">Sign Out</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </li>
+
+
+            </ul>
+
+
+            <!--pageheader-->
+
+            <div class="maincontent">
+                <div class="maincontentinner">
+                    <!--row-fluid-->
+                    @RenderBody()
+                    <div class="footer">
+                        <div class="footer-left">
+                            <span>&copy; 2017. Sinai Schools. All Rights Reserved.</span>
+                        </div>
+                    </div>
+                    <!--footer-->
+
+                </div>
+                <!--maincontentinner-->
+            </div>
+            <!--maincontent-->
+
+        </div>
+        <!--rightpanel-->
 
     </div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

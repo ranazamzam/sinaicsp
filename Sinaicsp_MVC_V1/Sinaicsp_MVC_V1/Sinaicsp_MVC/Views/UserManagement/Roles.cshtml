@@ -1,11 +1,10 @@
-﻿<div style="height:40px;width:110.1%;margin-bottom:2px;background-color:#F46B1D;text-align:center">
-    <div style="color:white;font-weight:bold;font-size:x-large;text-decoration:underline;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-         Application Roles
-    </div>
-</div>
-    @(Html.Kendo().Grid<Sinaicsp_API.ApplicationRole>()
+﻿
+<div class="widgetbox">
+    <h4 class="widgettitle">Roles</h4>
+    <div class="widgetcontent">
+        @(Html.Kendo().Grid<Sinaicsp_API.ApplicationRole>()
       .Name("grid")
-      .HtmlAttributes(new { style = "height: 600px;width:110%" })
+      .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
           columns.Bound(c => c.Name);
@@ -29,4 +28,8 @@
           .PageSize(20)
           .Read(read => read.Action("ApplicationRoles_Read", "UserManagement"))
       )
-    )
+        )
+
+
+    </div>
+</div>
