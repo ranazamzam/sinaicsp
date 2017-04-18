@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/13/2017 13:20:45
--- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 04/18/2017 09:20:32
+-- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -196,7 +196,10 @@ CREATE TABLE [dbo].[Students] (
     [SecondaryParent] nvarchar(max)  NOT NULL,
     [CityId] int  NOT NULL,
     [Phone] nvarchar(max)  NOT NULL,
-    [FatherCell] nvarchar(max)  NOT NULL
+    [FatherCell] nvarchar(max)  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreatedByUserId] int  NOT NULL
 );
 GO
 

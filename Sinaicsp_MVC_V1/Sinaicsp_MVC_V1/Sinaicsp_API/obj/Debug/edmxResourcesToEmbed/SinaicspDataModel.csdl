@@ -212,6 +212,9 @@
     <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.StudentCSP" FromRole="Student" ToRole="CSP" />
     <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.StudentLock" FromRole="Student" ToRole="Lock" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="SchoolStudent">
     <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />

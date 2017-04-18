@@ -47,7 +47,7 @@ namespace Sinaicsp_API
             return true;
         }
         public static bool Update(int id, string firstName, string lastName, string gender, DateTime DOB,
-            string primaryParent, string address, string state, string motherCell, string SecondaryParent, string phone, string fatherCell,)
+            string primaryParent, string address, string state, string motherCell, string SecondaryParent, string phone, string fatherCell)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             Student _item = _context.Students.FirstOrDefault(a => a.Id == id);

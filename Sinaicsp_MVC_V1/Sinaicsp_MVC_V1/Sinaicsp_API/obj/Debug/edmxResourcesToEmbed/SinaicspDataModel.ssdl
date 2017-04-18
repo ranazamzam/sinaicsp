@@ -159,6 +159,9 @@
     <Property Name="CityId" Type="int" Nullable="false" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FatherCell" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentClasses">
     <Key>

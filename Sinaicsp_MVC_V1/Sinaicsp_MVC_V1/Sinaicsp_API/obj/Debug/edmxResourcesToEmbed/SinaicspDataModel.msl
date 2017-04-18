@@ -78,6 +78,9 @@
           <ScalarProperty Name="CityId" ColumnName="CityId" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="FatherCell" ColumnName="FatherCell" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

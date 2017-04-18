@@ -11,7 +11,6 @@ namespace Sinaicsp_MVC
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.Add("catchall", new Route("{*url}", new Signin()));
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -19,6 +18,8 @@ namespace Sinaicsp_MVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.Add("catchall", new Route("{*url}", new Signin()));
+
         }
     }
 }
