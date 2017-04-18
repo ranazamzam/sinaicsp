@@ -10,8 +10,8 @@
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.common.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.Bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.metro.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.Default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.112/kendo.dataviz.Default.min.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/kendo/2016.1.112/jquery.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2016.1.112/jszip.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2016.1.112/kendo.all.min.js")"></script>
@@ -29,7 +29,7 @@
         panelbar.Add().Text("User Management")
             .Items(MItems =>
             {
-                MItems.Add().Text("Roles");
+                MItems.Add().Text("Roles").Action("Roles", "UserManagement");
                 MItems.Add().Text("Users");
             });
 
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <div class="container body-content" style="margin-top:40px">
+    <div class="container body-content" style="margin-top:23px">
         @RenderBody()
 
     </div>

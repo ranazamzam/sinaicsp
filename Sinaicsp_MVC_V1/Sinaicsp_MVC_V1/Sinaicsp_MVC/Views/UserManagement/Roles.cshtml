@@ -1,0 +1,32 @@
+﻿<div style="height:40px;width:110.1%;margin-bottom:2px;background-color:#F46B1D;text-align:center">
+    <div style="color:white;font-weight:bold;font-size:x-large;text-decoration:underline;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+         Application Roles
+    </div>
+</div>
+    @(Html.Kendo().Grid<Sinaicsp_API.ApplicationRole>()
+      .Name("grid")
+      .HtmlAttributes(new { style = "height: 600px;width:110%" })
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.IsDeleted);
+          columns.Bound(c => c.CreationDate);
+      })
+      .Groupable()
+      .ColumnMenu()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(20)
+          .Read(read => read.Action("ApplicationRoles_Read", "UserManagement"))
+      )
+    )
