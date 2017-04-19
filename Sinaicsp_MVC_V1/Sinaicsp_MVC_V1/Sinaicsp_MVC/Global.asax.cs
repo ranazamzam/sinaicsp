@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sinaicsp_API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace Sinaicsp_MVC
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ApplicationRole.Init();
         }
     }
 }

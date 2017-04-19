@@ -1297,13 +1297,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="AppHelpers\ApplicationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="signin.ashx.cs">
       <DependentUpon>signin.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\LoginVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1533,6 +1536,9 @@
     <Content Include="Theme\fonts\roboto\Roboto-ThinItalic-webfont.eot" />
     <Content Include="Theme\fonts\roboto\Roboto-ThinItalic-webfont.ttf" />
     <Content Include="Theme\fonts\roboto\Roboto-ThinItalic-webfont.woff" />
+    <Content Include="Views\School\Index.cshtml" />
+    <Content Include="Views\School\AddNewSchool.cshtml" />
+    <Content Include="Views\UserManagement\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

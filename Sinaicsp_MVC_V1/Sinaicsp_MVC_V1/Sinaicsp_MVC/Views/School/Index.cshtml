@@ -1,14 +1,22 @@
-﻿
+﻿<script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#g_operations').css('display', 'block');
+        });
+</script>
 <div class="widgetbox" style="min-height:610px">
-    <h4 class="widgettitle">Roles</h4>
+    <h4 class="widgettitle">Schools</h4>
+    
+
     <div class="widgetcontent">
-        @(Html.Kendo().Grid<Sinaicsp_API.ApplicationRole>()
+        <a class="btn btn-primary" href="@Url.Action("AddNewSchool")">Add New School</a>
+        @(Html.Kendo().Grid<Sinaicsp_API.School>()
       .Name("grid")
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
           columns.Bound(c => c.Name);
           columns.Bound(c => c.CreatedOn);
+          columns.Bound(c => c.CreatedByUserName);
       })
       .Groupable()
       .ColumnMenu()
@@ -25,10 +33,9 @@
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(20)
-          .Read(read => read.Action("ApplicationRoles_Read", "UserManagement"))
+          .Read(read => read.Action("Schools_Read", "School"))
       )
         )
-
 
     </div>
 </div>

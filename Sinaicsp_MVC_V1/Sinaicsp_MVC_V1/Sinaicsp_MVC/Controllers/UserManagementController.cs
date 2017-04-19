@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Sinaicsp_API;
+using Sinaicsp_MVC.ViewModels;
 
 namespace Sinaicsp_MVC.Controllers
 {
@@ -27,10 +28,21 @@ namespace Sinaicsp_MVC.Controllers
                 Id = applicationRole.Id,
                 Name = applicationRole.Name,
                 IsDeleted = applicationRole.IsDeleted,
-                CreationDate = applicationRole.CreationDate,
+                CreatedOn = applicationRole.CreatedOn,
             });
 
             return Json(result);
+        }
+
+        public ActionResult Login()
+        {
+            return View(new LoginVM());
+        }
+        [HttpPost]
+        public ActionResult Login(LoginVM model)
+        {
+            bool isLoggedId = ApplicationHelper.UserLogin(model.UserName, model.Password);
+            return View();
         }
     }
 }

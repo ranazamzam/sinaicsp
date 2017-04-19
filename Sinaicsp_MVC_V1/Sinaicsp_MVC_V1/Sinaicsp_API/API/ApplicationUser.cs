@@ -65,6 +65,11 @@ namespace Sinaicsp_API
             _usr.IsDeleted = true;
             _context.SaveChanges();
         }
-
+        public static ApplicationUser UserLogin(string userName, string password)
+        {
+            SinaicspDataModelContainer _context = new SinaicspDataModelContainer();
+            ApplicationUser _item = _context.ApplicationUsers.ToList().FirstOrDefault(a => a.UserName == userName && a.Password == password && a.IsDeleted == false);
+            return _item;
+        }
     }
 }
