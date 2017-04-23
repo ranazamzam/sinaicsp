@@ -165,7 +165,6 @@
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
-          <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
           <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -58,19 +58,19 @@
                     </li>
                     <li class="dropdown">
                         <a href=""><span class="iconfa-pencil"></span>Definitions</a>
-                        <ul>
-                            <li><a class="all" href="#"><span></span>Cities</a></li>
-                            <li><a class="all" href="#"><span></span>Classes</a></li>
-                            <li><a class="all" href="#"><span></span>Grades</a></li>
+                        <ul id="g_definitions">
+                            <li><a class="all" href="@Url.Action("Index", "City")"><span></span>Cities</a></li>
+                            <li><a class="all" href="@Url.Action("Index", "StudentClass")"><span></span>Classes</a></li>
+                            <li><a class="all" href="@Url.Action("Index", "Grade")"><span></span>Grades</a></li>
                             <li><a class="all" href="#"><span></span>Subjects</a></li>
-                            <li><a class="all" href="#"><span></span>School Years</a></li>
+                            <li><a class="all" href="@Url.Action("Index", "SchoolYear")"><span></span>School Years</a></li>
                         </ul>
                     </li>
                     <li class="dropdown" >
                         <a href=""><span class="iconfa-pencil"></span>Operations</a>
                         <ul id="g_operations">
                             <li><a class="all" href="@Url.Action("Index", "School")"><span></span>Schools</a></li>
-                            <li><a class="all" href="#"><span></span>Teachers</a></li>
+                            <li><a class="all" href="@Url.Action("Index", "Teacher")"><span></span>Teachers</a></li>
                             <li><a class="all" href="#"><span></span>Students</a></li>
                             <li><a class="all" href="#"><span></span>Locks</a></li>
                             <li><a class="all" href="#"><span></span>Services</a></li>

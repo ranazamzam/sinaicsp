@@ -1,13 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Sinaicsp_API
 {
+    [MetadataType(typeof(SchoolYearMetadata))]
     public partial class SchoolYear
     {
+        [Display(Name = "Created By")]
+        public string CreatedByUserName
+        {
+            get
+            {
+                if (CreatedByUserId > 0)
+                {
+                    return ApplicationUser.GetById(CreatedByUserId).UserName;
+                }
+                else
+                {
+                    return "T-Administartor";
+                }
+            }
+        }
+        public string CreatedOn
+        {
+            get
+            {
+                return CreationDate.ToShortDateString();
+            }
+        }
         public static List<SchoolYear> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -21,7 +45,7 @@ namespace Sinaicsp_API
         public static bool AddNew(string name, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            if (_context.Schools.ToList().Where(a => a.Name.ToLower() == name.ToLower()).Count() == 0)
+            if (_context.SchoolYears.ToList().Where(a => a.Name.ToLower() == name.ToLower()).Count() == 0)
             {
                 SchoolYear _item = new Sinaicsp_API.SchoolYear();
                 _item.Name = name;

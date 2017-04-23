@@ -1295,7 +1295,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchoolYearController.cs" />
+    <Compile Include="Controllers\StudentClassController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1539,6 +1544,16 @@
     <Content Include="Views\School\Index.cshtml" />
     <Content Include="Views\School\AddNewSchool.cshtml" />
     <Content Include="Views\UserManagement\Login.cshtml" />
+    <Content Include="Views\City\Index.cshtml" />
+    <Content Include="Views\City\AddNewCity.cshtml" />
+    <Content Include="Views\Grade\AddNewStudentGrade.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\StudentClass\Index.cshtml" />
+    <Content Include="Views\StudentClass\AddNewStudentClass.cshtml" />
+    <Content Include="Views\Teacher\AddNewTeacher.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\SchoolYear\Index.cshtml" />
+    <Content Include="Views\SchoolYear\AddNewSchoolYear.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

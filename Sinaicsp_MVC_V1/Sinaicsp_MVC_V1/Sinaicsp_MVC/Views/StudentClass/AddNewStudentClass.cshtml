@@ -1,0 +1,57 @@
+﻿@model Sinaicsp_API.StudentClass
+@{
+    ViewBag.Title = "AddNewStudentClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_definitions').css('display', 'block');
+    });
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new Student Class</h4>
+    <div class="widgetcontent">
+        @if (ViewBag.AlreadyExists)
+        {
+            <h4 class="widgettitle title-danger">Student Class already exists !</h4><br />
+        }
+        @using (Html.BeginForm("AddNewStudentClass", "StudentClass", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:90px">
+                        Student Class
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Name)
+                        @Html.ValidationMessageFor(a => a.Name, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <a class="btn btn-primary" onclick="ItemForm.submit();">Save</a>
+                        <a class="btn btn-primary" href="@Url.Action("AddNewStudentClass","StudentClass")">Clear</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

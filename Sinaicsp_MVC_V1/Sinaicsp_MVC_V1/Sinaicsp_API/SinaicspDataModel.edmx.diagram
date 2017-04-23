@@ -29,7 +29,6 @@
         <EntityTypeShape EntityType="SinaicspDataModel.Subject" Width="1.875" PointX="7.375" PointY="5.75" />
         <AssociationConnector Association="SinaicspDataModel.SubjectSubject" />
         <EntityTypeShape EntityType="SinaicspDataModel.SchoolYear" Width="1.5" PointX="9.5" PointY="3.75" />
-        <AssociationConnector Association="SinaicspDataModel.SchoolSchoolYear" />
         <EntityTypeShape EntityType="SinaicspDataModel.CSP" Width="1.5" PointX="8.375" PointY="15.125" />
         <AssociationConnector Association="SinaicspDataModel.StudentCSP" />
         <EntityTypeShape EntityType="SinaicspDataModel.TeacherCSP" Width="1.5" PointX="6.125" PointY="16" />

@@ -19,9 +19,6 @@ namespace Sinaicsp_API
         public bool IsDeleted { get; set; }
         public System.DateTime CreationDate { get; set; }
         public int CreatedByUserId { get; set; }
-        public int SchoolId { get; set; }
         public bool IsCurrent { get; set; }
-    
-        public virtual School School { get; set; }
     }
 }

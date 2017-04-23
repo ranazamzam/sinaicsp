@@ -1,13 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Sinaicsp_API
 {
+    [MetadataType(typeof(TeacherMetadata))]
     public partial class Teacher
     {
+        [Display(Name = "School")]
+        public string SchoolName
+        {
+            get
+            {
+                return this.School.Name;
+            }
+        }
+        [Display(Name = "Created By")]
+        public string CreatedByUserName
+        {
+            get
+            {
+                if (CreatedByUserId > 0)
+                {
+                    return ApplicationUser.GetById(CreatedByUserId).UserName;
+                }
+                else
+                {
+                    return "T-Administartor";
+                }
+            }
+        }
+        public string CreatedOn
+        {
+            get
+            {
+                return CreationDate.ToShortDateString();
+            }
+        }
         public static List<Teacher> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

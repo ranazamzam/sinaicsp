@@ -57,10 +57,6 @@
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="Subject1" EntitySet="Subjects" />
     </AssociationSet>
-    <AssociationSet Name="SchoolSchoolYear" Association="SinaicspDataModel.Store.SchoolSchoolYear">
-      <End Role="School" EntitySet="Schools" />
-      <End Role="SchoolYear" EntitySet="SchoolYears" />
-    </AssociationSet>
     <AssociationSet Name="StudentCSP" Association="SinaicspDataModel.Store.StudentCSP">
       <End Role="Student" EntitySet="Students" />
       <End Role="CSP" EntitySet="CSPs" />
@@ -240,7 +236,6 @@
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="CreationDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
-    <Property Name="SchoolId" Type="int" Nullable="false" />
     <Property Name="IsCurrent" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CSPs">
@@ -394,18 +389,6 @@
       </Principal>
       <Dependent Role="Subject1">
         <PropertyRef Name="ParentId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="SchoolSchoolYear">
-    <End Role="School" Type="SinaicspDataModel.Store.Schools" Multiplicity="1" />
-    <End Role="SchoolYear" Type="SinaicspDataModel.Store.SchoolYears" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="School">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SchoolYear">
-        <PropertyRef Name="SchoolId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

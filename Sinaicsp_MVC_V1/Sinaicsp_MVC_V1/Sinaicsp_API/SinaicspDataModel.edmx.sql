@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/18/2017 09:20:32
+-- Date Created: 04/23/2017 13:54:49
 -- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
@@ -278,7 +278,6 @@ CREATE TABLE [dbo].[SchoolYears] (
     [IsDeleted] bit  NOT NULL,
     [CreationDate] datetime  NOT NULL,
     [CreatedByUserId] int  NOT NULL,
-    [SchoolId] int  NOT NULL,
     [IsCurrent] bit  NOT NULL
 );
 GO
@@ -569,21 +568,6 @@ GO
 CREATE INDEX [IX_FK_SubjectSubject]
 ON [dbo].[Subjects]
     ([ParentId]);
-GO
-
--- Creating foreign key on [SchoolId] in table 'SchoolYears'
-ALTER TABLE [dbo].[SchoolYears]
-ADD CONSTRAINT [FK_SchoolSchoolYear]
-    FOREIGN KEY ([SchoolId])
-    REFERENCES [dbo].[Schools]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SchoolSchoolYear'
-CREATE INDEX [IX_FK_SchoolSchoolYear]
-ON [dbo].[SchoolYears]
-    ([SchoolId]);
 GO
 
 -- Creating foreign key on [StudentId] in table 'CSPs'

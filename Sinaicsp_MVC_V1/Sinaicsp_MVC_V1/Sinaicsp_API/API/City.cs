@@ -1,13 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Sinaicsp_API
 {
+    [MetadataType(typeof(CityMetadata))]
     public partial class City
     {
+        [Display(Name = "Created By")]
+        public string CreatedByUserName
+        {
+            get
+            {
+                if (CreatedByUserId > 0)
+                {
+                    return ApplicationUser.GetById(CreatedByUserId).UserName;
+                }
+                else
+                {
+                    return "T-Administartor";
+                }
+            }
+        }
+        public string CreatedOn
+        {
+            get
+            {
+                return CreationDate.ToShortDateString();
+            }
+        }
         public static List<City> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

@@ -1,0 +1,84 @@
+﻿@model Sinaicsp_API.Teacher
+@{
+    ViewBag.Title = "AddNewTeacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new Teacher</h4>
+    <div class="widgetcontent">
+        @if (ViewBag.AlreadyExists)
+        {
+            <h4 class="widgettitle title-danger">Email already exists !</h4><br />
+        }
+        @using (Html.BeginForm("AddNewTeacher", "Teacher", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:90px">
+                        Shcool
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(item => item.SchoolId, ViewBag.AllSchools as SelectList)
+                        @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                         Name
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.UserName)
+                        @Html.ValidationMessageFor(a => a.UserName, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Email
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Email)
+                        @Html.ValidationMessageFor(a => a.Email, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Title
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Title)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <a class="btn btn-primary" onclick="ItemForm.submit();">Save</a>
+                        <a class="btn btn-primary" href="@Url.Action("AddNewTeacher","Teacher")">Clear</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+
