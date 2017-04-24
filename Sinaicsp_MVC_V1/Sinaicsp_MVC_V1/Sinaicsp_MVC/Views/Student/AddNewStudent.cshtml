@@ -1,0 +1,194 @@
+﻿@model Sinaicsp_API.Student
+@{
+    ViewBag.Title = "AddNewGrade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new Student</h4>
+    <div class="widgetcontent">
+        @if (ViewBag.AlreadyExists)
+        {
+            <h4 class="widgettitle title-danger">Student already exists !</h4><br />
+        }
+        @using (Html.BeginForm("AddNewStudent", "Student", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:120px">
+                        School
+                    </td>
+                    <td style="width:250px">
+                        @Html.DropDownListFor(a => a.SchoolId,ViewBag.AllSchools as SelectList)
+                        @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+                    </td>
+                    <td style="width:90px">
+                        Class
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a.StudentClassId, ViewBag.AllClasses as SelectList)
+                        @Html.ValidationMessageFor(a => a.StudentClassId, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        Grade
+                    </td>
+                    <td >
+                        @Html.DropDownListFor(a => a.StudentGradeId, ViewBag.AllGrades as SelectList)
+                        @Html.ValidationMessageFor(a => a.StudentGradeId, "", new { @Style = "Color:red" })
+                    </td>
+                    <td >
+                        City
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a.CityId, ViewBag.AllCities as SelectList)
+                        @Html.ValidationMessageFor(a => a.CityId, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        First Name
+                    </td>
+                    <td >
+                        @Html.TextBoxFor(a => a.FirstName)
+                        @Html.ValidationMessageFor(a => a.FirstName, "", new { @Style = "Color:red" })
+                    </td>
+                    <td >
+                        Last Name
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.LastName)
+                        @Html.ValidationMessageFor(a => a.LastName, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a.Gender, new SelectList(new List<string>() { "Male", "Female" }))
+                    </td>
+                    <td>
+                        DOB
+                    </td>
+                    <td>
+                        @(Html.Kendo().DatePickerFor(a => a.DOB)
+                        .Value(DateTime.Now)
+                        .HtmlAttributes(new { style = "width: 95%" }))
+                        @Html.ValidationMessageFor(a => a.DOB, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Primary Parent
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.PrimaryParent)
+                        @Html.ValidationMessageFor(a => a.PrimaryParent, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                    <td>
+                        Address
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Address)
+                        @Html.ValidationMessageFor(a => a.Address, "", new { @Style = "Color:red" })
+
+
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        State
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.State)
+                        @Html.ValidationMessageFor(a => a.State, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                    <td>
+                        Mother Cell
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.MotherCell)
+                        @Html.ValidationMessageFor(a => a.MotherCell, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Secondary Parent
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.SecondaryParent)
+                        @Html.ValidationMessageFor(a => a.SecondaryParent, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                    <td>
+                        Phone
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.Phone)
+                        @Html.ValidationMessageFor(a => a.Phone, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Father Cell
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.FatherCell)
+                        @Html.ValidationMessageFor(a => a.FatherCell, "", new { @Style = "Color:red" })
+
+
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                    </td>
+                    <td>
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <a class="btn btn-primary" onclick="ItemForm.submit();">Save</a>
+                        <a class="btn btn-primary" href="@Url.Action("AddNewStudent","Student")">Clear</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+        }
+    </div>
+</div>
+

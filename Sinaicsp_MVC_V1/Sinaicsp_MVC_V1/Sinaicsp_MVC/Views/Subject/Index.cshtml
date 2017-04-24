@@ -1,18 +1,23 @@
 ﻿<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery('#g_admin').css('display', 'block');
-    });
+        jQuery(document).ready(function () {
+            jQuery('#g_definitions').css('display', 'block');
+        });
 </script>
 <div class="widgetbox" style="min-height:610px">
-    <h4 class="widgettitle">Roles</h4>
+    <h4 class="widgettitle">Subjects</h4>
+
+
     <div class="widgetcontent">
-        @(Html.Kendo().Grid<Sinaicsp_API.ApplicationRole>()
+        <a class="btn btn-primary" href="@Url.Action("AddNewSubject")">Add New Subject</a>
+        @(Html.Kendo().Grid<Sinaicsp_API.Subject>()
       .Name("grid")
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
+          columns.Bound(c => c.ParentName);
           columns.Bound(c => c.Name);
           columns.Bound(c => c.CreatedOn);
+          columns.Bound(c => c.CreatedByUserName);
       })
       .Groupable()
       .ColumnMenu()
@@ -29,10 +34,9 @@
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(20)
-          .Read(read => read.Action("ApplicationRoles_Read", "UserManagement"))
+          .Read(read => read.Action("Subjects_Read", "Subject"))
       )
         )
-
 
     </div>
 </div>

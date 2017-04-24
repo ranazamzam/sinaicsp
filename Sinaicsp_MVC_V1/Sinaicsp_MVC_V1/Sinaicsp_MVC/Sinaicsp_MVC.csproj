@@ -1300,6 +1300,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchoolYearController.cs" />
     <Compile Include="Controllers\StudentClassController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
@@ -1554,6 +1556,10 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\SchoolYear\Index.cshtml" />
     <Content Include="Views\SchoolYear\AddNewSchoolYear.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\AddNewSubject.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\AddNewStudent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
