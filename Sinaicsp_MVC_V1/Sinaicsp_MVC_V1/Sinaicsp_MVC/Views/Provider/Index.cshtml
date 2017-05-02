@@ -1,27 +1,20 @@
 ﻿<script type="text/javascript">
         jQuery(document).ready(function () {
-            jQuery('#g_operations').css('display', 'block');
+            jQuery('#g_definitions').css('display', 'block');
         });
 </script>
 <div class="widgetbox" style="min-height:610px">
-    <h4 class="widgettitle">Students</h4>
-    
-    
+    <h4 class="widgettitle">Providers</h4>
+
+
     <div class="widgetcontent">
-        <a class="btn btn-primary" href="@Url.Action("AddNewStudent")">Add New Student</a>
-        @(Html.Kendo().Grid<Sinaicsp_API.Student>()
+        <a class="btn btn-primary" href="@Url.Action("AddNewProvider")">Add New Provider</a>
+        @(Html.Kendo().Grid<Sinaicsp_API.Provider>()
       .Name("grid")
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='Student/ManageDetails/#= Id #'>Manage</a>");
-          columns.Bound(c => c.FirstName);
-          columns.Bound(c => c.LastName);
-          columns.Bound(c => c.Gender);
-          columns.Bound(c => c.SchoolName);
-          columns.Bound(c => c.GradeName);
-          columns.Bound(c => c.ClassName);
-          columns.Bound(c => c.CityName);
+          columns.Bound(c => c.Name);
           columns.Bound(c => c.CreatedOn);
           columns.Bound(c => c.CreatedByUserName);
       })
@@ -40,9 +33,10 @@
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(20)
-          .Read(read => read.Action("Students_Read", "Student"))
+          .Read(read => read.Action("Providers_Read", "Provider"))
       )
         )
 
     </div>
 </div>
+

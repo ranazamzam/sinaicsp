@@ -44,10 +44,6 @@
       <End Role="Inclusion" EntitySet="Inclusions" />
     </AssociationSet>
     <EntitySet Name="Accommodations" EntityType="SinaicspDataModel.Accommodation" />
-    <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.StudentAccommodation">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="Accommodation" EntitySet="Accommodations" />
-    </AssociationSet>
     <EntitySet Name="Subjects" EntityType="SinaicspDataModel.Subject" />
     <AssociationSet Name="SubjectSubject" Association="SinaicspDataModel.SubjectSubject">
       <End Role="Subject" EntitySet="Subjects" />
@@ -80,6 +76,25 @@
     <AssociationSet Name="SubjectLock" Association="SinaicspDataModel.SubjectLock">
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="Lock" EntitySet="Locks" />
+    </AssociationSet>
+    <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.StudentAccommodation">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Accommodation" EntitySet="Accommodations" />
+    </AssociationSet>
+    <EntitySet Name="Providers" EntityType="SinaicspDataModel.Provider" />
+    <EntitySet Name="Services" EntityType="SinaicspDataModel.Service" />
+    <AssociationSet Name="ProviderService" Association="SinaicspDataModel.ProviderService">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
+    <EntitySet Name="StudentServices" EntityType="SinaicspDataModel.StudentService" />
+    <AssociationSet Name="StudentStudentService" Association="SinaicspDataModel.StudentStudentService">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentService" EntitySet="StudentServices" />
+    </AssociationSet>
+    <AssociationSet Name="ServiceStudentService" Association="SinaicspDataModel.ServiceStudentService">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="StudentService" EntitySet="StudentServices" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUser">
@@ -204,12 +219,13 @@
     <Property Name="Phone" Type="String" Nullable="false" />
     <Property Name="FatherCell" Type="String" Nullable="false" />
     <NavigationProperty Name="Inclusions" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Student" ToRole="Inclusion" />
-    <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.StudentCSP" FromRole="Student" ToRole="CSP" />
     <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.StudentLock" FromRole="Student" ToRole="Lock" />
     <Property Name="CreationDate" Type="DateTime" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
+    <NavigationProperty Name="StudentServices" Relationship="SinaicspDataModel.StudentStudentService" FromRole="Student" ToRole="StudentService" />
   </EntityType>
   <Association Name="SchoolStudent">
     <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
@@ -332,10 +348,6 @@
     <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Accommodation" ToRole="Student" />
     <Property Name="StudentId" Type="Int32" Nullable="false" />
   </EntityType>
-  <Association Name="StudentAccommodation">
-    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="SinaicspDataModel.Accommodation" Role="Accommodation" Multiplicity="*" />
-  </Association>
   <EntityType Name="Subject">
     <Key>
       <PropertyRef Name="Id" />
@@ -484,6 +496,97 @@
       </Principal>
       <Dependent Role="Lock">
         <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentAccommodation">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Accommodation" Role="Accommodation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Accommodation">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Services" Relationship="SinaicspDataModel.ProviderService" FromRole="Provider" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Provider" Relationship="SinaicspDataModel.ProviderService" FromRole="Service" ToRole="Provider" />
+    <Property Name="ProviderId" Type="Int32" Nullable="false" />
+    <Property Name="Model" Type="String" Nullable="false" />
+    <Property Name="NumberOfStudents" Type="Int32" Nullable="false" />
+    <Property Name="SessionLength" Type="String" Nullable="false" />
+    <Property Name="WeeklySession" Type="String" Nullable="false" />
+    <Property Name="SessionStart" Type="String" Nullable="false" />
+    <Property Name="SessionEnd" Type="String" Nullable="false" />
+    <NavigationProperty Name="StudentServices" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="Service" ToRole="StudentService" />
+  </EntityType>
+  <Association Name="ProviderService">
+    <End Type="SinaicspDataModel.Provider" Role="Provider" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Service" Role="Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="StudentService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentStudentService" FromRole="StudentService" ToRole="Student" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Service" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="StudentService" ToRole="Service" />
+    <Property Name="ServiceId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentStudentService">
+    <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="SinaicspDataModel.StudentService" Role="StudentService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentService">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ServiceStudentService">
+    <End Type="SinaicspDataModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="SinaicspDataModel.StudentService" Role="StudentService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentService">
+        <PropertyRef Name="ServiceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

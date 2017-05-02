@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Sinaicsp_API;
+using Sinaicsp_MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,23 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+
+        public ActionResult ManageDetails(int id)
+        {
+            StudentDetailViewModel model = StudentDetailViewModel.GetViewData(id);
+            return View(model);
+        }
+        public ActionResult SaveNewInclusion(StudentDetailViewModel model)
+        {
+            Inclusion.AddNew(model.StudentId, model.SelectedSubject, model.SelectedClass, model.SelectedTeacher, model.SessionStart, model.SessionEnd, ApplicationHelper.LoggedUserId);
+            return RedirectToAction("ManageDetails", new { id = model.StudentId });
+        }
+
+        public ActionResult SaveNewAccommodation(StudentDetailViewModel model)
+        {
+            Accommodation.AddNew(model.StudentId, model.Accommodation, ApplicationHelper.LoggedUserId);
+            return RedirectToAction("ManageDetails", new { id = model.StudentId });
         }
     }
 }

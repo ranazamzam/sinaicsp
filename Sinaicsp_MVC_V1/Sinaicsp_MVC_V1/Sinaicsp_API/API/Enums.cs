@@ -10,4 +10,9 @@ namespace Sinaicsp_API
     {
         Admin = 0
     }
+    public enum E_ServiceModel
+    {
+        Pull_Out = 0,
+        Push_In = 1
+    }
 }

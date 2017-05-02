@@ -89,5 +89,10 @@ namespace Sinaicsp_API
         public string FatherCell { get; set; }
 
     }
+    public class ProviderMetadata
+    {
+        [Required(ErrorMessage = "*")]
+        public string Name { get; set; }
+    }
 
 }

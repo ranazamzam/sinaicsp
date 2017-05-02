@@ -1,0 +1,329 @@
+﻿@model Sinaicsp_MVC.ViewModels.StudentDetailViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+    function SaveNewInclusion() {
+        var error = 0;
+        $('#lbl_val_SelectedTeacher').hide();
+        $('#lbl_val_SelectedSubject').hide();
+        $('#lbl_val_SelectedClass').hide();
+        $('#lbl_val_SessionStart').hide();
+        $('#lbl_val_SessionEnd').hide();
+
+        var SelectedTeacher = $('#SelectedTeacher').val();
+        var SelectedSubject = $('#SelectedSubject').val();
+        var SelectedClass = $('#SelectedClass').val();
+        var SessionStart = $('#SessionStart').val();
+        var SessionEnd = $('#SessionEnd').val();
+        if (SelectedTeacher.trim().length < 1) {
+            error++;
+            $('#lbl_val_SelectedTeacher').show();
+        }
+        if (SelectedSubject.trim().length < 1) {
+            error++;
+            $('#lbl_val_SelectedSubject').show();
+        }
+        if (SelectedClass.trim().length < 1) {
+            error++;
+            $('#lbl_val_SelectedClass').show();
+        }
+        if (SessionStart.trim().length < 1) {
+            error++;
+            $('#lbl_val_SessionStart').show();
+        }
+        if (SessionEnd.trim().length < 1) {
+            error++;
+            $('#lbl_val_SessionEnd').show();
+        }
+        if (error == 0) {
+            $("#InclusionForm").submit();
+        }
+    }
+    function SaveNewAccommodation() {
+        var error = 0;
+        $('#lbl_val_Accommodation').hide();
+        var Accommodation = $('#Accommodation').val();
+        if (Accommodation.trim().length < 1) {
+            error++;
+            $('#lbl_val_Accommodation').show();
+        }
+        if (error == 0) {
+            $("#AccommodationForm").submit();
+        }
+    }
+</script>
+<div class="widgetbox">
+    <h4 class="widgettitle">Manage Student Details</h4>
+    <div class="widgetcontent">
+        @using (Html.BeginForm("AddNewStudent", "Student", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:120px">
+                        School
+                    </td>
+                    <td style="width:250px">
+                        <input type="text" disabled value="@Model.CurrentStudent.School.Name" />
+                    </td>
+                    <td style="width:90px">
+                        Class
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.StudentClass.Name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Grade
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.StudentGrade.Name" />
+                    </td>
+                    <td>
+                        City
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.City.Name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        First Name
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.FirstName" />
+                    </td>
+                    <td>
+                        Last Name
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.LastName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.Gender" />
+                    </td>
+                    <td>
+                        DOB
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.DOB.ToShortDateString()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Primary Parent
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.PrimaryParent" />
+                    </td>
+                    <td>
+                        Address
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.Address" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        State
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.State" />
+                    </td>
+                    <td>
+                        Mother Cell
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.MotherCell" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Secondary Parent
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.SecondaryParent" />
+                    </td>
+                    <td>
+                        Phone
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.Phone" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Father Cell
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.FatherCell" />
+                    </td>
+                    <td>
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.CreatedByUserName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" disabled value="@Model.CurrentStudent.CreationDate.ToString()" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
+            </table>
+        }
+        <div class="widgetbox">
+            <h4 class="widgettitle"> - Inclusions</h4>
+            <div class="widgetcontent">
+                @using (Html.BeginForm("SaveNewInclusion", "Student", FormMethod.Post, new { id = "InclusionForm" }))
+                {
+                @Html.HiddenFor(a => a.StudentId)
+                <table>
+                    <tr>
+                        <td style="width:105px">Teacher</td>
+                        <td style="width:250px">
+                            @Html.TextBoxFor(a => a.SelectedTeacher)
+                            <span style="color:red;display:none" id="lbl_val_SelectedTeacher">*</span>
+                        </td>
+                        <td style="width:90px">Subject</td>
+                        <td>
+                            @Html.TextBoxFor(a => a.SelectedSubject)
+                            <span style="color:red;display:none" id="lbl_val_SelectedSubject">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>
+                            @Html.TextBoxFor(a => a.SelectedClass)
+                            <span style="color:red;display:none" id="lbl_val_SelectedClass">*</span>
+                        </td>
+                        <td>Session Start</td>
+                        <td>
+                            @Html.TextBoxFor(a => a.SessionStart)
+                            <span style="color:red;display:none" id="lbl_val_SessionStart">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Session End</td>
+                        <td>
+                            @Html.TextBoxFor(a => a.SessionEnd)
+                            <span style="color:red;display:none" id="lbl_val_SessionEnd">*</span>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a class="btn btn-primary" onclick="SaveNewInclusion()">Save</a>
+                            <a class="btn btn-primary" href="@Url.Action("ManageDetails", "Student", new { id = Model.CurrentStudent.Id })">Clear</a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table id="Inclusiondyntable" class="table table-bordered responsive">
+                    <thead>
+                        <tr>
+                            <th>Teacher</th>
+                            <th>Subject</th>
+                            <th>Class</th>
+                            <th>Session Start</th>
+                            <th>Session End</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Sinaicsp_API.Inclusion item in Model.CurrentStudent.Inclusions)
+                            {
+                            <tr>
+                                <td>@item.Teacher</td>
+                                <td>@item.Subject</td>
+                                <td>@item.Classes</td>
+                                <td>@item.SessionStart</td>
+                                <td>@item.SessionEnd</td>
+                            </tr>
+                            }
+                    </tbody>
+                </table>
+                }
+            </div>
+        </div>
+        <div class="widgetbox">
+            <h4 class="widgettitle"> - Services</h4>
+            <div class="widgetcontent">
+                @using (Html.BeginForm("SaveNewService", "Student", FormMethod.Post, new { id = "ServiceForm" }))
+                {
+                @Html.HiddenFor(a => a.StudentId)
+
+                }
+            </div>
+        </div>
+        <div class="widgetbox">
+            <h4 class="widgettitle"> - Accommodations</h4>
+            <div class="widgetcontent">
+                @using (Html.BeginForm("SaveNewAccommodation", "Student", FormMethod.Post, new { id = "AccommodationForm" }))
+                {
+                    @Html.HiddenFor(a => a.StudentId)
+                    <table>
+                        <tr>
+                            <td style="width:105px">Accommodation</td>
+                            <td style="width:250px">
+                                @Html.TextBoxFor(a => a.Accommodation)
+                                <span style="color:red;display:none" id="lbl_val_Accommodation">*</span>
+                            </td>
+                            <td style="width:90px"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-primary" onclick="SaveNewAccommodation()">Save</a>
+                                <a class="btn btn-primary" href="@Url.Action("ManageDetails", "Student", new { id = Model.CurrentStudent.Id })">Clear</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    if (Model.CurrentStudent.Accommodations.Count > 0)
+                    {
+                        <table id="Accommodationdyntable" class="table table-bordered responsive">
+                            <thead>
+                                <tr>
+                                    <th>Accommodation</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Sinaicsp_API.Accommodation item in Model.CurrentStudent.Accommodations)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>

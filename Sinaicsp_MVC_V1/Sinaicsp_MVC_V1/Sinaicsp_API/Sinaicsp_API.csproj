@@ -60,6 +60,7 @@
     <Compile Include="API\City.cs" />
     <Compile Include="API\Enums.cs" />
     <Compile Include="API\Inclusion.cs" />
+    <Compile Include="API\Provider.cs" />
     <Compile Include="API\School.cs" />
     <Compile Include="API\SchoolYear.cs" />
     <Compile Include="API\Student.cs" />
@@ -87,10 +88,16 @@
     </Compile>
     <Compile Include="Metadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="School.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SchoolYear.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SinaicspDataModel.Context.cs">
@@ -115,6 +122,9 @@
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentGrade.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudentService.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subject.cs">

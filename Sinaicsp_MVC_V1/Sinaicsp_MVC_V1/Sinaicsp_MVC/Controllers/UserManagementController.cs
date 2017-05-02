@@ -36,10 +36,10 @@ namespace Sinaicsp_MVC.Controllers
 
         public ActionResult Login()
         {
-            return View(new LoginVM());
+            return View(new LoginViewModel());
         }
         [HttpPost]
-        public ActionResult Login(LoginVM model)
+        public ActionResult Login(LoginViewModel model)
         {
             bool isLoggedId = ApplicationHelper.UserLogin(model.UserName, model.Password);
             return View();

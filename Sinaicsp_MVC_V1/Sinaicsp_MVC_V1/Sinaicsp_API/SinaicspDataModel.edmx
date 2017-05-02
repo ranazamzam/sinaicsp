@@ -22,6 +22,9 @@
     <EntitySet Name="CSPs" EntityType="SinaicspDataModel.Store.CSPs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TeacherCSPs" EntityType="SinaicspDataModel.Store.TeacherCSPs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Locks" EntityType="SinaicspDataModel.Store.Locks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Providers" EntityType="SinaicspDataModel.Store.Providers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Services" EntityType="SinaicspDataModel.Store.Services" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentServices" EntityType="SinaicspDataModel.Store.StudentServices" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ApplicationUserUserRole" Association="SinaicspDataModel.Store.ApplicationUserUserRole">
       <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
       <End Role="UserRole" EntitySet="UserRoles" />
@@ -54,10 +57,6 @@
       <End Role="Student" EntitySet="Students" />
       <End Role="Inclusion" EntitySet="Inclusions" />
     </AssociationSet>
-    <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.Store.StudentAccommodation">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="Accommodation" EntitySet="Accommodations" />
-    </AssociationSet>
     <AssociationSet Name="SubjectSubject" Association="SinaicspDataModel.Store.SubjectSubject">
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="Subject1" EntitySet="Subjects" />
@@ -85,6 +84,22 @@
     <AssociationSet Name="SubjectLock" Association="SinaicspDataModel.Store.SubjectLock">
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="Lock" EntitySet="Locks" />
+    </AssociationSet>
+    <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.Store.StudentAccommodation">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Accommodation" EntitySet="Accommodations" />
+    </AssociationSet>
+    <AssociationSet Name="ProviderService" Association="SinaicspDataModel.Store.ProviderService">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Service" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="StudentStudentService" Association="SinaicspDataModel.Store.StudentStudentService">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentService" EntitySet="StudentServices" />
+    </AssociationSet>
+    <AssociationSet Name="ServiceStudentService" Association="SinaicspDataModel.Store.ServiceStudentService">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="StudentService" EntitySet="StudentServices" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUsers">
@@ -219,7 +234,6 @@
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
     <Property Name="StudentId" Type="int" Nullable="false" />
-    <Property Name="Student_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Subjects">
     <Key>
@@ -276,6 +290,44 @@
     <Property Name="CreatedByUserId" Type="int" Nullable="false" />
     <Property Name="StudentId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Providers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProviderId" Type="int" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumberOfStudents" Type="int" Nullable="false" />
+    <Property Name="SessionLength" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WeeklySession" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SessionStart" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SessionEnd" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentServices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="ApplicationUserUserRole">
     <End Role="ApplicationUser" Type="SinaicspDataModel.Store.ApplicationUsers" Multiplicity="1" />
@@ -373,18 +425,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="StudentAccommodation">
-    <End Role="Student" Type="SinaicspDataModel.Store.Students" Multiplicity="1" />
-    <End Role="Accommodation" Type="SinaicspDataModel.Store.Accommodations" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Accommodation">
-        <PropertyRef Name="Student_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="SubjectSubject">
     <End Role="Subject" Type="SinaicspDataModel.Store.Subjects" Multiplicity="0..1" />
     <End Role="Subject1" Type="SinaicspDataModel.Store.Subjects" Multiplicity="*" />
@@ -469,6 +509,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="StudentAccommodation">
+    <End Role="Student" Type="SinaicspDataModel.Store.Students" Multiplicity="1" />
+    <End Role="Accommodation" Type="SinaicspDataModel.Store.Accommodations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Accommodation">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProviderService">
+    <End Role="Provider" Type="SinaicspDataModel.Store.Providers" Multiplicity="1" />
+    <End Role="Service" Type="SinaicspDataModel.Store.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="ProviderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentStudentService">
+    <End Role="Student" Type="SinaicspDataModel.Store.Students" Multiplicity="1" />
+    <End Role="StudentService" Type="SinaicspDataModel.Store.StudentServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentService">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ServiceStudentService">
+    <End Role="Service" Type="SinaicspDataModel.Store.Services" Multiplicity="1" />
+    <End Role="StudentService" Type="SinaicspDataModel.Store.StudentServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentService">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -517,10 +605,6 @@
             <End Role="Inclusion" EntitySet="Inclusions" />
           </AssociationSet>
           <EntitySet Name="Accommodations" EntityType="SinaicspDataModel.Accommodation" />
-          <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.StudentAccommodation">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Accommodation" EntitySet="Accommodations" />
-          </AssociationSet>
           <EntitySet Name="Subjects" EntityType="SinaicspDataModel.Subject" />
           <AssociationSet Name="SubjectSubject" Association="SinaicspDataModel.SubjectSubject">
             <End Role="Subject" EntitySet="Subjects" />
@@ -553,6 +637,25 @@
           <AssociationSet Name="SubjectLock" Association="SinaicspDataModel.SubjectLock">
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="Lock" EntitySet="Locks" />
+          </AssociationSet>
+          <AssociationSet Name="StudentAccommodation" Association="SinaicspDataModel.StudentAccommodation">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Accommodation" EntitySet="Accommodations" />
+          </AssociationSet>
+          <EntitySet Name="Providers" EntityType="SinaicspDataModel.Provider" />
+          <EntitySet Name="Services" EntityType="SinaicspDataModel.Service" />
+          <AssociationSet Name="ProviderService" Association="SinaicspDataModel.ProviderService">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <EntitySet Name="StudentServices" EntityType="SinaicspDataModel.StudentService" />
+          <AssociationSet Name="StudentStudentService" Association="SinaicspDataModel.StudentStudentService">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentService" EntitySet="StudentServices" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceStudentService" Association="SinaicspDataModel.ServiceStudentService">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="StudentService" EntitySet="StudentServices" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApplicationUser">
@@ -677,12 +780,13 @@
           <Property Name="Phone" Type="String" Nullable="false" />
           <Property Name="FatherCell" Type="String" Nullable="false" />
           <NavigationProperty Name="Inclusions" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Student" ToRole="Inclusion" />
-          <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
           <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.StudentCSP" FromRole="Student" ToRole="CSP" />
           <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.StudentLock" FromRole="Student" ToRole="Lock" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
+          <NavigationProperty Name="StudentServices" Relationship="SinaicspDataModel.StudentStudentService" FromRole="Student" ToRole="StudentService" />
         </EntityType>
         <Association Name="SchoolStudent">
           <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
@@ -805,10 +909,6 @@
           <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Accommodation" ToRole="Student" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="StudentAccommodation">
-          <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="SinaicspDataModel.Accommodation" Role="Accommodation" Multiplicity="*" />
-        </Association>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Id" />
@@ -957,6 +1057,97 @@
             </Principal>
             <Dependent Role="Lock">
               <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentAccommodation">
+          <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SinaicspDataModel.Accommodation" Role="Accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Accommodation">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="SinaicspDataModel.ProviderService" FromRole="Provider" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="SinaicspDataModel.ProviderService" FromRole="Service" ToRole="Provider" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" Nullable="false" />
+          <Property Name="NumberOfStudents" Type="Int32" Nullable="false" />
+          <Property Name="SessionLength" Type="String" Nullable="false" />
+          <Property Name="WeeklySession" Type="String" Nullable="false" />
+          <Property Name="SessionStart" Type="String" Nullable="false" />
+          <Property Name="SessionEnd" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudentServices" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="Service" ToRole="StudentService" />
+        </EntityType>
+        <Association Name="ProviderService">
+          <End Type="SinaicspDataModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="SinaicspDataModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentStudentService" FromRole="StudentService" ToRole="Student" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="StudentService" ToRole="Service" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="StudentStudentService">
+          <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SinaicspDataModel.StudentService" Role="StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentService">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceStudentService">
+          <End Type="SinaicspDataModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="SinaicspDataModel.StudentService" Role="StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentService">
+              <PropertyRef Name="ServiceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1171,14 +1362,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="StudentAccommodation" TypeName="SinaicspDataModel.StudentAccommodation" StoreEntitySet="Accommodations">
-      <EndProperty Name="Student">
-        <ScalarProperty Name="Id" ColumnName="Student_Id" />
-      </EndProperty>
-      <EndProperty Name="Accommodation">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.Provider)">
+        <MappingFragment StoreEntitySet="Providers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.Service)">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+          <ScalarProperty Name="SessionLength" ColumnName="SessionLength" />
+          <ScalarProperty Name="WeeklySession" ColumnName="WeeklySession" />
+          <ScalarProperty Name="SessionStart" ColumnName="SessionStart" />
+          <ScalarProperty Name="SessionEnd" ColumnName="SessionEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentServices">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.StudentService)">
+        <MappingFragment StoreEntitySet="StudentServices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

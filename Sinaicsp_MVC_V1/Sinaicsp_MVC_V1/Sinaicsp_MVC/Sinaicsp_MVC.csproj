@@ -1336,6 +1336,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\SchoolYearController.cs" />
     <Compile Include="Controllers\StudentClassController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -1351,7 +1352,8 @@
     <Compile Include="signin.ashx.cs">
       <DependentUpon>signin.ashx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\StudentDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1598,6 +1600,9 @@
     <Content Include="Views\Subject\AddNewSubject.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\AddNewStudent.cshtml" />
+    <Content Include="Views\Student\ManageDetails.cshtml" />
+    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Provider\AddNewProvider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

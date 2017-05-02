@@ -206,13 +206,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="StudentAccommodation" TypeName="SinaicspDataModel.StudentAccommodation" StoreEntitySet="Accommodations">
-      <EndProperty Name="Student">
-        <ScalarProperty Name="Id" ColumnName="Student_Id" />
-      </EndProperty>
-      <EndProperty Name="Accommodation">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.Provider)">
+        <MappingFragment StoreEntitySet="Providers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.Service)">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+          <ScalarProperty Name="SessionLength" ColumnName="SessionLength" />
+          <ScalarProperty Name="WeeklySession" ColumnName="WeeklySession" />
+          <ScalarProperty Name="SessionStart" ColumnName="SessionStart" />
+          <ScalarProperty Name="SessionEnd" ColumnName="SessionEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentServices">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.StudentService)">
+        <MappingFragment StoreEntitySet="StudentServices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -18,9 +18,10 @@ namespace Sinaicsp_API
         public Student()
         {
             this.Inclusions = new HashSet<Inclusion>();
-            this.Accommodations = new HashSet<Accommodation>();
             this.CSPs = new HashSet<CSP>();
             this.Locks = new HashSet<Lock>();
+            this.Accommodations = new HashSet<Accommodation>();
+            this.StudentServices = new HashSet<StudentService>();
         }
     
         public int Id { get; set; }
@@ -50,10 +51,12 @@ namespace Sinaicsp_API
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inclusion> Inclusions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accommodation> Accommodations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CSP> CSPs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lock> Locks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Accommodation> Accommodations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentService> StudentServices { get; set; }
     }
 }

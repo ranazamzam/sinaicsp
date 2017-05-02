@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/23/2017 13:54:49
--- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/02/2017 15:19:29
+-- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -41,14 +41,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_StudentInclusion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Inclusions] DROP CONSTRAINT [FK_StudentInclusion];
 GO
-IF OBJECT_ID(N'[dbo].[FK_StudentAccommodation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Accommodations] DROP CONSTRAINT [FK_StudentAccommodation];
-GO
 IF OBJECT_ID(N'[dbo].[FK_SubjectSubject]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Subjects] DROP CONSTRAINT [FK_SubjectSubject];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SchoolSchoolYear]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SchoolYears] DROP CONSTRAINT [FK_SchoolSchoolYear];
 GO
 IF OBJECT_ID(N'[dbo].[FK_StudentCSP]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CSPs] DROP CONSTRAINT [FK_StudentCSP];
@@ -67,6 +61,15 @@ IF OBJECT_ID(N'[dbo].[FK_StudentLock]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_SubjectLock]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Locks] DROP CONSTRAINT [FK_SubjectLock];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentAccommodation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accommodations] DROP CONSTRAINT [FK_StudentAccommodation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProviderService]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Services] DROP CONSTRAINT [FK_ProviderService];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StudentService]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Services] DROP CONSTRAINT [FK_StudentService];
 GO
 
 -- --------------------------------------------------
@@ -120,6 +123,12 @@ IF OBJECT_ID(N'[dbo].[TeacherCSPs]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Locks]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Locks];
+GO
+IF OBJECT_ID(N'[dbo].[Providers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Providers];
+GO
+IF OBJECT_ID(N'[dbo].[Services]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Services];
 GO
 
 -- --------------------------------------------------
@@ -255,8 +264,7 @@ CREATE TABLE [dbo].[Accommodations] (
     [CreationDate] datetime  NOT NULL,
     [IsDeleted] bit  NOT NULL,
     [CreatedByUserId] int  NOT NULL,
-    [StudentId] int  NOT NULL,
-    [Student_Id] int  NOT NULL
+    [StudentId] int  NOT NULL
 );
 GO
 
@@ -313,6 +321,44 @@ CREATE TABLE [dbo].[Locks] (
     [CreatedByUserId] int  NOT NULL,
     [StudentId] int  NOT NULL,
     [SubjectId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Providers'
+CREATE TABLE [dbo].[Providers] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreatedByUserId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Services'
+CREATE TABLE [dbo].[Services] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreatedByUserId] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [ProviderId] int  NOT NULL,
+    [Model] nvarchar(max)  NOT NULL,
+    [NumberOfStudents] int  NOT NULL,
+    [SessionLength] nvarchar(max)  NOT NULL,
+    [WeeklySession] nvarchar(max)  NOT NULL,
+    [SessionStart] nvarchar(max)  NOT NULL,
+    [SessionEnd] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'StudentServices'
+CREATE TABLE [dbo].[StudentServices] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [StudentId] int  NOT NULL,
+    [ServiceId] int  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreatedByUserId] int  NOT NULL
 );
 GO
 
@@ -413,6 +459,24 @@ GO
 -- Creating primary key on [Id] in table 'Locks'
 ALTER TABLE [dbo].[Locks]
 ADD CONSTRAINT [PK_Locks]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Providers'
+ALTER TABLE [dbo].[Providers]
+ADD CONSTRAINT [PK_Providers]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Services'
+ALTER TABLE [dbo].[Services]
+ADD CONSTRAINT [PK_Services]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'StudentServices'
+ALTER TABLE [dbo].[StudentServices]
+ADD CONSTRAINT [PK_StudentServices]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -540,21 +604,6 @@ ON [dbo].[Inclusions]
     ([StudentId]);
 GO
 
--- Creating foreign key on [Student_Id] in table 'Accommodations'
-ALTER TABLE [dbo].[Accommodations]
-ADD CONSTRAINT [FK_StudentAccommodation]
-    FOREIGN KEY ([Student_Id])
-    REFERENCES [dbo].[Students]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_StudentAccommodation'
-CREATE INDEX [IX_FK_StudentAccommodation]
-ON [dbo].[Accommodations]
-    ([Student_Id]);
-GO
-
 -- Creating foreign key on [ParentId] in table 'Subjects'
 ALTER TABLE [dbo].[Subjects]
 ADD CONSTRAINT [FK_SubjectSubject]
@@ -658,6 +707,66 @@ GO
 CREATE INDEX [IX_FK_SubjectLock]
 ON [dbo].[Locks]
     ([SubjectId]);
+GO
+
+-- Creating foreign key on [StudentId] in table 'Accommodations'
+ALTER TABLE [dbo].[Accommodations]
+ADD CONSTRAINT [FK_StudentAccommodation]
+    FOREIGN KEY ([StudentId])
+    REFERENCES [dbo].[Students]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StudentAccommodation'
+CREATE INDEX [IX_FK_StudentAccommodation]
+ON [dbo].[Accommodations]
+    ([StudentId]);
+GO
+
+-- Creating foreign key on [ProviderId] in table 'Services'
+ALTER TABLE [dbo].[Services]
+ADD CONSTRAINT [FK_ProviderService]
+    FOREIGN KEY ([ProviderId])
+    REFERENCES [dbo].[Providers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProviderService'
+CREATE INDEX [IX_FK_ProviderService]
+ON [dbo].[Services]
+    ([ProviderId]);
+GO
+
+-- Creating foreign key on [StudentId] in table 'StudentServices'
+ALTER TABLE [dbo].[StudentServices]
+ADD CONSTRAINT [FK_StudentStudentService]
+    FOREIGN KEY ([StudentId])
+    REFERENCES [dbo].[Students]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_StudentStudentService'
+CREATE INDEX [IX_FK_StudentStudentService]
+ON [dbo].[StudentServices]
+    ([StudentId]);
+GO
+
+-- Creating foreign key on [ServiceId] in table 'StudentServices'
+ALTER TABLE [dbo].[StudentServices]
+ADD CONSTRAINT [FK_ServiceStudentService]
+    FOREIGN KEY ([ServiceId])
+    REFERENCES [dbo].[Services]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ServiceStudentService'
+CREATE INDEX [IX_FK_ServiceStudentService]
+ON [dbo].[StudentServices]
+    ([ServiceId]);
 GO
 
 -- --------------------------------------------------
