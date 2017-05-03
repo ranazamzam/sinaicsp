@@ -521,6 +521,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\add1.png" />
+    <Content Include="Images\Remove.png" />
     <Content Include="Images\SINAI Schools logo.jpeg" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1340,6 +1342,7 @@
     <Compile Include="Controllers\SchoolYearController.cs" />
     <Compile Include="Controllers\StudentClassController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentServiceController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
@@ -1354,6 +1357,7 @@
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailViewModel.cs" />
+    <Compile Include="ViewModels\StudentServiceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1603,6 +1607,8 @@
     <Content Include="Views\Student\ManageDetails.cshtml" />
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\AddNewProvider.cshtml" />
+    <Content Include="Views\StudentService\Index.cshtml" />
+    <Content Include="Views\StudentService\AddNewStudentService.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

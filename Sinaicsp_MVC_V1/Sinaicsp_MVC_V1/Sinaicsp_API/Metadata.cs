@@ -94,5 +94,25 @@ namespace Sinaicsp_API
         [Required(ErrorMessage = "*")]
         public string Name { get; set; }
     }
+    public class ServiceMetadata
+    {
+        [Required(ErrorMessage = "*")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "*")]
+        public int ProviderId { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string Model { get; set; }
+        [Required(ErrorMessage = "*")]
+        public int NumberOfStudents { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string WeeklySession { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string SessionStart { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string SessionEnd { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string SessionLength { get; set; }
 
+    }
+    
 }

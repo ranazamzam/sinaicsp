@@ -1,0 +1,182 @@
+﻿@model Sinaicsp_MVC.ViewModels.StudentServiceViewModel
+@{
+    ViewBag.Title = "AddNewService";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+    var allStudents = [];
+    function AddStudentToService() {
+        var value = $('#ddl_students').data("kendoDropDownList").value();
+        var text = $('#ddl_students').data("kendoDropDownList").text();
+        if (allStudents.indexOf(value) > -1) {
+            alert(text + ' already exists !');
+            return;
+        }
+        allStudents.push(value);
+        $('#tbl_students tr:last').after("<tr><td><a href='#' onclick='RemoveStudent('3')'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
+
+
+    }
+    function SaveStudentService()
+    {
+        var objModel = new Object();
+        objModel.CurrentService = { Name: 'Yasser' };
+        jQuery.ajax({
+            type: 'POST',
+            url: 'AddStudentService',
+            data: { model: objModel, studentIds: allStudents },
+            success: function (data) {
+                // do what you have to do with the result of the action
+            }
+        });
+    }
+    function RemoveStudent(id)
+    {
+        alert(id);
+    }
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new Service</h4>
+    <div class="widgetcontent">
+        @using (Html.BeginForm("AddNewStudentService", "StudentService", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:90px">
+                        Name
+                    </td>
+                    <td style="width:250px">
+                        @Html.TextBoxFor(a => a.CurrentService.Name)
+                        @Html.ValidationMessageFor(a => a.CurrentService.Name, "", new { @Style = "Color:red" })
+                    </td>
+                    <td style="width:90px">
+                        Provider
+                    </td>
+                    <td style="width:250px">
+                        @Html.DropDownListFor(a => a.CurrentService.ProviderId, new SelectList(Model.AllProviders, "Id", "Name"))
+                        @Html.ValidationMessageFor(a => a.CurrentService.ProviderId, "", new { @Style = "Color:red" })
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Model
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a.CurrentService.Model, new SelectList(Model.AllEModels))
+                        @Html.ValidationMessageFor(a => a.CurrentService.Model, "", new { @Style = "Color:red" })
+                    </td>
+
+                    <td>
+                        # Student
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.CurrentService.NumberOfStudents)
+                        @Html.ValidationMessageFor(a => a.CurrentService.NumberOfStudents, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Session Length</td>
+                    <td>
+                        @Html.TextBoxFor(a => a.CurrentService.SessionLength)
+                        @Html.ValidationMessageFor(a => a.CurrentService.SessionLength, "", new { @Style = "Color:red" })
+                    </td>
+                    <td>Weekly Session</td>
+                    <td>
+                        @Html.TextBoxFor(a => a.CurrentService.WeeklySession)
+                        @Html.ValidationMessageFor(a => a.CurrentService.WeeklySession, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Session Start</td>
+                    <td>
+                        @Html.TextBoxFor(a => a.CurrentService.SessionStart)
+                        @Html.ValidationMessageFor(a => a.CurrentService.SessionStart, "", new { @Style = "Color:red" })
+                    </td>
+                    <td>Session End</td>
+                    <td>
+                        @Html.TextBoxFor(a => a.CurrentService.SessionEnd)
+                        @Html.ValidationMessageFor(a => a.CurrentService.SessionEnd, "", new { @Style = "Color:red" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Student</td>
+                    <td>
+                        <div class="demo-section k-content">
+                            @(Html.Kendo().DropDownList()
+                          .Name("ddl_students")
+                          .DataTextField("FullName")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("Students_Read", "StudentService");
+                              });
+
+                          })
+                            )
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#" onclick="AddStudentToService()" style="margin-left: -25px">
+                            <img style="vertical-align:bottom" src="~/Images/add1.png" width="25" />
+                        </a>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr style="height:3px"></tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <table id="tbl_students" class="table table-bordered responsive">
+                            <thead>
+                                <tr>
+                                    <th width="30"></th>
+                                    <th>Full Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    @*<td><a href="#" onclick="RemoveStudent('3')"><img src="~/Images/Remove.png" width="25" /></a></td>
+                                        <td>Yasser Shehab</td>*@
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+                <tr style="height:5px"></tr>
+                <tr>
+                    <td>
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                    </td>
+                    <td>
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <a class="btn btn-primary" onclick="SaveStudentService()">Save</a>
+                        <a class="btn btn-primary" href="@Url.Action("AddNewStudentService","StudentService")">Clear</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

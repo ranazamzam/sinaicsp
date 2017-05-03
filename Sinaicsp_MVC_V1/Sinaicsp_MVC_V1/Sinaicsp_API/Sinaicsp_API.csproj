@@ -63,6 +63,7 @@
     <Compile Include="API\Provider.cs" />
     <Compile Include="API\School.cs" />
     <Compile Include="API\SchoolYear.cs" />
+    <Compile Include="API\Service.cs" />
     <Compile Include="API\Student.cs" />
     <Compile Include="API\StudentClass.cs" />
     <Compile Include="API\StudentGrade.cs" />

@@ -11,6 +11,13 @@ namespace Sinaicsp_API
 
     public partial class Student
     {
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstName;
+            }
+        }
         [Display(Name = "School")]
         public string SchoolName
         {
