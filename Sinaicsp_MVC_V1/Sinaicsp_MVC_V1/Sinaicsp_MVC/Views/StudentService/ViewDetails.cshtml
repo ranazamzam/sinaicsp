@@ -1,0 +1,113 @@
+﻿@model Sinaicsp_API.Service
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Service Details</h4>
+    <div class="widgetcontent">
+        @using (Html.BeginForm("AddNewStudentService", "StudentService", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+                <tr>
+                    <td style="width:90px">
+                        Name
+                    </td>
+                    <td style="width:250px">
+                        <input type="text" class="form-control" value="@Model.Name" disabled />
+                    </td>
+                    <td style="width:90px">
+                        Provider
+                    </td>
+                    <td style="width:250px">
+                        <input type="text" class="form-control" value="@Model.ProviderName" disabled />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Model
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.Model" disabled />
+                    </td>
+
+                    <td>
+                        # Student
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.NumberOfStudents" disabled />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Session Length</td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.SessionLength" disabled />
+                    </td>
+                    <td>Weekly Session</td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.WeeklySession" disabled />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Session Start</td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.SessionStart" disabled />
+                    </td>
+                    <td>Session End</td>
+                    <td>
+                        <input type="text" class="form-control" value="@Model.SessionEnd" disabled />
+                    </td>
+                </tr>
+
+                <tr style="height:3px"></tr>
+                <tr>
+                    <td>Students </td>
+                    <td>
+                        <table style="width: 88%;" id="tbl_students" class="table table-bordered responsive">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Sinaicsp_API.StudentService item in Model.StudentServices)
+                                {
+                                    <tr>
+                                        <td>@item.Student.FullName</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="height:5px"></tr>
+                <tr>
+                    <td>
+                        Date Created
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@Model.CreatedOn" />
+                    </td>
+                    <td>
+                        Created By
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" disabled value="@Model.CreatedByUserName" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Index","StudentService")">Back</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

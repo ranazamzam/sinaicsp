@@ -14,7 +14,7 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='Student/ManageDetails/#= Id #'>Manage</a>");
+          columns.Template(e => { }).ClientTemplate("<a href='Student/ManageDetails/#= Id #'>Manage</a>").Width(65); ;
           columns.Bound(c => c.FirstName);
           columns.Bound(c => c.LastName);
           columns.Bound(c => c.Gender);

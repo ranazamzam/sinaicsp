@@ -11,38 +11,65 @@
     function AddStudentToService() {
         var value = $('#ddl_students').data("kendoDropDownList").value();
         var text = $('#ddl_students').data("kendoDropDownList").text();
-        if (allStudents.indexOf(value) > -1) {
+        if (allStudents.indexOf(parseInt(value)) > -1) {
             alert(text + ' already exists !');
             return;
         }
-        allStudents.push(value);
-        $('#tbl_students tr:last').after("<tr><td><a href='#' onclick='RemoveStudent('3')'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
+        allStudents.push(parseInt(value));
+        $('#tbl_students tr:last').after("<tr id='TR_" + value + "'><td><a href='#' onclick='RemoveStudent(" + parseInt(value) + ")' class='delete'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
 
 
     }
-    function SaveStudentService()
-    {
+
+    function SaveStudentService() {
         var objModel = new Object();
-        objModel.CurrentService = { Name: 'Yasser' };
+        var CurrentService_Name = $('#CurrentService_Name').val();
+        var CurrentService_Model = $('#CurrentService_Model').val();
+        var CurrentService_SessionLength = $('#CurrentService_SessionLength').val();
+        var CurrentService_SessionStart = $('#CurrentService_SessionStart').val();
+        var CurrentService_NumberOfStudents = $('#CurrentService_NumberOfStudents').val();
+        var CurrentService_WeeklySession = $('#CurrentService_WeeklySession').val();
+        var CurrentService_SessionEnd = $('#CurrentService_SessionEnd').val();
+        var CurrentService_ProviderId = $('#CurrentService_ProviderId').val();
+
+        objModel.CurrentService = {
+            Name: CurrentService_Name,
+            Model: CurrentService_Model,
+            NumberOfStudents: CurrentService_NumberOfStudents,
+            SessionEnd: CurrentService_SessionEnd,
+            WeeklySession: CurrentService_SessionEnd,
+            SessionStart: CurrentService_SessionStart,
+            SessionLength: CurrentService_SessionLength,
+            providerId: CurrentService_ProviderId
+        };
         jQuery.ajax({
             type: 'POST',
             url: 'AddStudentService',
             data: { model: objModel, studentIds: allStudents },
             success: function (data) {
-                // do what you have to do with the result of the action
+                if (data == true) {
+                    var url = '@Url.Action("Index", "StudentService", new {  })';
+                    window.location.href = url;
+                } else {
+                    alert('Please fill all required fields !');
+                }
             }
         });
     }
-    function RemoveStudent(id)
-    {
-        alert(id);
+    function RemoveStudent(id) {
+        //var i = allStudents.indexOf(id);
+
+        //if (i != -1) {
+        //    allStudents.splice(i, 1);
+        //}
+        allStudents.splice(allStudents.indexOf(id), 1);
+        $("#TR_" + id).remove();
     }
 </script>
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Add new Service</h4>
     <div class="widgetcontent">
-        @using (Html.BeginForm("AddNewStudentService", "StudentService", FormMethod.Post, new { id = "ItemForm" }))
-        {
+        
             <table>
                 <tr>
                     <td style="width:90px">
@@ -133,7 +160,7 @@
                 <tr style="height:3px"></tr>
                 <tr>
                     <td></td>
-                    <td colspan="2">
+                    <td>
                         <table id="tbl_students" class="table table-bordered responsive">
                             <thead>
                                 <tr>
@@ -150,7 +177,8 @@
                             </tbody>
                         </table>
                     </td>
-
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr style="height:5px"></tr>
                 <tr>
@@ -177,6 +205,6 @@
                     </td>
                 </tr>
             </table>
-        }
+        
     </div>
 </div>

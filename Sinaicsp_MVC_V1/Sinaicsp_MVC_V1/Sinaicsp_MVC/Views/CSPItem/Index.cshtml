@@ -4,21 +4,16 @@
         });
 </script>
 <div class="widgetbox" style="min-height:610px">
-    <h4 class="widgettitle">Services</h4>
+    <h4 class="widgettitle">CSPs</h4>
 
 
     <div class="widgetcontent">
-        <a class="btn btn-primary" href="@Url.Action("AddNewStudentService")">Add New Service</a>
-        @(Html.Kendo().Grid<Sinaicsp_API.Service>()
+        <a class="btn btn-primary" href="@Url.Action("AddNewCSP")">Add New CSP</a>
+        @(Html.Kendo().Grid<Sinaicsp_API.Student>()
       .Name("grid")
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='StudentService/ViewDetails/#= Id #'>Details</a>").Width(65);
-          columns.Bound(c => c.Name);
-          columns.Bound(c => c.Model);
-          columns.Bound(c => c.ProviderName);
-          columns.Bound(c => c.NumberOfStudents).Title("# Students");
           columns.Bound(c => c.CreatedOn);
           columns.Bound(c => c.CreatedByUserName);
       })
@@ -37,12 +32,9 @@
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(20)
-          .Read(read => read.Action("Services_Read", "StudentService"))
+          .Read(read => read.Action("CSPs_Read", "CSPItem"))
       )
         )
 
     </div>
 </div>
-
-
-

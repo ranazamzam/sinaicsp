@@ -194,74 +194,77 @@
             <div class="widgetcontent">
                 @using (Html.BeginForm("SaveNewInclusion", "Student", FormMethod.Post, new { id = "InclusionForm" }))
                 {
-                @Html.HiddenFor(a => a.StudentId)
-                <table>
-                    <tr>
-                        <td style="width:105px">Teacher</td>
-                        <td style="width:250px">
-                            @Html.TextBoxFor(a => a.SelectedTeacher)
-                            <span style="color:red;display:none" id="lbl_val_SelectedTeacher">*</span>
-                        </td>
-                        <td style="width:90px">Subject</td>
-                        <td>
-                            @Html.TextBoxFor(a => a.SelectedSubject)
-                            <span style="color:red;display:none" id="lbl_val_SelectedSubject">*</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td>
-                            @Html.TextBoxFor(a => a.SelectedClass)
-                            <span style="color:red;display:none" id="lbl_val_SelectedClass">*</span>
-                        </td>
-                        <td>Session Start</td>
-                        <td>
-                            @Html.TextBoxFor(a => a.SessionStart)
-                            <span style="color:red;display:none" id="lbl_val_SessionStart">*</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Session End</td>
-                        <td>
-                            @Html.TextBoxFor(a => a.SessionEnd)
-                            <span style="color:red;display:none" id="lbl_val_SessionEnd">*</span>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <a class="btn btn-primary" onclick="SaveNewInclusion()">Save</a>
-                            <a class="btn btn-primary" href="@Url.Action("ManageDetails", "Student", new { id = Model.CurrentStudent.Id })">Clear</a>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-                <table id="Inclusiondyntable" class="table table-bordered responsive">
-                    <thead>
+                    @Html.HiddenFor(a => a.StudentId)
+                    <table>
                         <tr>
-                            <th>Teacher</th>
-                            <th>Subject</th>
-                            <th>Class</th>
-                            <th>Session Start</th>
-                            <th>Session End</th>
+                            <td style="width:105px">Teacher</td>
+                            <td style="width:250px">
+                                @Html.TextBoxFor(a => a.SelectedTeacher)
+                                <span style="color:red;display:none" id="lbl_val_SelectedTeacher">*</span>
+                            </td>
+                            <td style="width:90px">Subject</td>
+                            <td>
+                                @Html.TextBoxFor(a => a.SelectedSubject)
+                                <span style="color:red;display:none" id="lbl_val_SelectedSubject">*</span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Sinaicsp_API.Inclusion item in Model.CurrentStudent.Inclusions)
-                            {
-                            <tr>
-                                <td>@item.Teacher</td>
-                                <td>@item.Subject</td>
-                                <td>@item.Classes</td>
-                                <td>@item.SessionStart</td>
-                                <td>@item.SessionEnd</td>
-                            </tr>
-                            }
-                    </tbody>
-                </table>
+                        <tr>
+                            <td>Class</td>
+                            <td>
+                                @Html.TextBoxFor(a => a.SelectedClass)
+                                <span style="color:red;display:none" id="lbl_val_SelectedClass">*</span>
+                            </td>
+                            <td>Session Start</td>
+                            <td>
+                                @Html.TextBoxFor(a => a.SessionStart)
+                                <span style="color:red;display:none" id="lbl_val_SessionStart">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Session End</td>
+                            <td>
+                                @Html.TextBoxFor(a => a.SessionEnd)
+                                <span style="color:red;display:none" id="lbl_val_SessionEnd">*</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a class="btn btn-primary" onclick="SaveNewInclusion()">Save</a>
+                                <a class="btn btn-primary" href="@Url.Action("ManageDetails", "Student", new { id = Model.CurrentStudent.Id })">Clear</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    if (Model.CurrentStudent.Inclusions.Count > 0)
+                    {
+                        <table id="Inclusiondyntable" class="table table-bordered responsive">
+                            <thead>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Session Start</th>
+                                    <th>Session End</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Sinaicsp_API.Inclusion item in Model.CurrentStudent.Inclusions)
+                                {
+                                    <tr>
+                                        <td>@item.Teacher</td>
+                                        <td>@item.Subject</td>
+                                        <td>@item.Classes</td>
+                                        <td>@item.SessionStart</td>
+                                        <td>@item.SessionEnd</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
                 }
             </div>
         </div>
@@ -270,8 +273,39 @@
             <div class="widgetcontent">
                 @using (Html.BeginForm("SaveNewService", "Student", FormMethod.Post, new { id = "ServiceForm" }))
                 {
-                @Html.HiddenFor(a => a.StudentId)
-
+                    @Html.HiddenFor(a => a.StudentId)
+                    if (Model.CurrentStudent.StudentServices.Count > 0)
+                    {
+                        <table id="Accommodationdyntable" class="table table-bordered responsive">
+                            <thead>
+                                <tr>
+                                    <th>Services</th>
+                                    <th>Provider</th>
+                                    <th>Model</th>
+                                    <th># Students</th>
+                                    <th>Weekly Session</th>
+                                    <th>Session Length</th>
+                                    <th>Session Start</th>
+                                    <th>Session End</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Sinaicsp_API.StudentService item in Model.CurrentStudent.StudentServices)
+                                {
+                                    <tr>
+                                        <td>@item.Service.Name</td>
+                                        <td>@item.Service.ProviderName</td>
+                                        <td>@item.Service.Model</td>
+                                        <td>@item.Service.NumberOfStudents</td>
+                                        <td>@item.Service.WeeklySession</td>
+                                        <td>@item.Service.SessionLength</td>
+                                        <td>@item.Service.SessionStart</td>
+                                        <td>@item.Service.SessionEnd</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
                 }
             </div>
         </div>

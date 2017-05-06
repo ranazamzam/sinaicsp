@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Sinaicsp_MVC.Controllers
@@ -24,6 +25,13 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = item.Id,
                 Name = item.Name,
+                Model = item.Model,
+                ProviderName = item.ProviderName,
+                WeeklySession = item.WeeklySession,
+                SessionLength = item.SessionLength,
+                NumberOfStudents = item.NumberOfStudents,
+                SessionStart = item.SessionStart,
+                SessionEnd = item.SessionEnd,
                 IsDeleted = item.IsDeleted,
                 CreatedOn = item.CreatedOn,
                 CreatedByUserId = item.CreatedByUserId,
@@ -54,7 +62,7 @@ namespace Sinaicsp_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddStudentService(StudentServiceViewModel model, List<int> studentIds)
+        public JsonResult AddStudentService(StudentServiceViewModel model, List<int> studentIds)
         {
             model.AllProviders = Provider.GetAll();
             model.AllEModels = Enum.GetNames(typeof(E_ServiceModel)).ToList().Select(a => a.ToString().Replace("_", " ")).ToList();
@@ -62,15 +70,21 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Service.AddNew(model.CurrentService.ProviderId, model.CurrentService.Name, model.CurrentService.Model,
                     model.CurrentService.NumberOfStudents, model.CurrentService.SessionLength, model.CurrentService.WeeklySession,
-                    model.CurrentService.SessionStart, model.CurrentService.SessionEnd, new List<int>(), ApplicationHelper.LoggedUserId);
+                    model.CurrentService.SessionStart, model.CurrentService.SessionEnd, studentIds, ApplicationHelper.LoggedUserId);
 
-                return RedirectToAction("Index");
+                return Json(true, JsonRequestBehavior.AllowGet);
 
             }
             else
             {
-                return View(model);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult ViewDetails(int id)
+        {
+            Service _item = Service.GetById(id);
+            return View(_item);
         }
     }
 }

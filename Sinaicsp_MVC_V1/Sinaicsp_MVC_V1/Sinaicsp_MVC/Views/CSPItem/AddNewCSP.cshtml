@@ -1,0 +1,237 @@
+﻿@model Sinaicsp_API.CSP
+@{
+    ViewBag.Title = "AddNewCSP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+    var allTeachers = [];
+    function AddTeacher() {
+        var value = $('#ddl_teachers').data("kendoDropDownList").value();
+        var text = $('#ddl_teachers').data("kendoDropDownList").text();
+        if (allTeachers.indexOf(parseInt(value)) > -1) {
+            alert(text + ' already exists !');
+            return;
+        }
+        allTeachers.push(parseInt(value));
+        $('#tbl_teachers tr:last').after("<tr id='TR_" + value + "'><td><a href='#' onclick='RemoveTeacher(" + parseInt(value) + ")' class='delete'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
+
+
+    }
+
+    function SaveStudentService() {
+        var objModel = new Object();
+        var CurrentService_Name = $('#CurrentService_Name').val();
+        var CurrentService_Model = $('#CurrentService_Model').val();
+        var CurrentService_SessionLength = $('#CurrentService_SessionLength').val();
+        var CurrentService_SessionStart = $('#CurrentService_SessionStart').val();
+        var CurrentService_NumberOfStudents = $('#CurrentService_NumberOfStudents').val();
+        var CurrentService_WeeklySession = $('#CurrentService_WeeklySession').val();
+        var CurrentService_SessionEnd = $('#CurrentService_SessionEnd').val();
+        var CurrentService_ProviderId = $('#CurrentService_ProviderId').val();
+
+        objModel.CurrentService = {
+            Name: CurrentService_Name,
+            Model: CurrentService_Model,
+            NumberOfStudents: CurrentService_NumberOfStudents,
+            SessionEnd: CurrentService_SessionEnd,
+            WeeklySession: CurrentService_SessionEnd,
+            SessionStart: CurrentService_SessionStart,
+            SessionLength: CurrentService_SessionLength,
+            providerId: CurrentService_ProviderId
+        };
+        jQuery.ajax({
+            type: 'POST',
+            url: 'AddStudentService',
+            data: { model: objModel, studentIds: allStudents },
+            success: function (data) {
+                if (data == true) {
+                    var url = '@Url.Action("Index", "StudentService", new {  })';
+                    window.location.href = url;
+                } else {
+                    alert('Please fill all required fields !');
+                }
+            }
+        });
+    }
+    function RemoveTeacher(id) {
+        allTeachers.splice(allTeachers.indexOf(id), 1);
+        $("#TR_" + id).remove();
+    }
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new CSP</h4>
+    <div class="widgetcontent">
+
+        <table>
+
+            <tr>
+                <td style="width:90px">
+                    School
+                </td>
+                <td style="width:250px">
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_schools")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("Schools_Read", "CSPItem");
+                              });
+
+                          })
+                        )
+                    </div>
+                </td>
+
+            </tr>
+            <tr style="height:7px"></tr>
+            <tr>
+                <td>
+                    Students
+                </td>
+                <td>
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_students")
+                          .DataTextField("FullName")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("Students_Read", "CSPItem");
+                              });
+
+                          })
+                        )
+                    </div>
+                </td>
+            </tr>
+            <tr style="height:7px"></tr>
+            <tr>
+                <td>Teachers</td>
+                <td>
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_teachers")
+                          .DataTextField("UserName")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("Teachers_Read", "CSPItem");
+                              });
+
+                          })
+                        )
+                        <a href="#" onclick="AddTeacher()">
+                            <img style="vertical-align:bottom" src="~/Images/add1.png" width="25" />
+                        </a>
+                    </div>
+
+                </td>
+
+
+            </tr>
+            <tr style="height:3px"></tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table id="tbl_teachers" class="table table-bordered responsive">
+                        <thead>
+                            <tr>
+                                <th width="30"></th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                @*<td><a href="#" onclick="RemoveStudent('3')"><img src="~/Images/Remove.png" width="25" /></a></td>
+                                    <td>Yasser Shehab</td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="height:5px"></tr>
+            <tr>
+                <td>
+                    Subject
+                </td>
+                <td>
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_subjects")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("Subjects_Read", "CSPItem");
+                              });
+
+                          })
+                        )
+                    </div>
+                </td>
+
+            </tr>
+            <tr style="height:7px"></tr>
+            <tr>
+                <td>
+                    Materials
+                </td>
+                <td>
+                    @Html.TextBoxFor(a=>a.Materials)
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    Date Created
+                </td>
+                <td>
+                    <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    Created By
+                </td>
+                <td>
+                    <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+
+                    <a class="btn btn-primary" onclick="SaveStudentService()">Save</a>
+                    <a class="btn btn-primary" href="@Url.Action("AddNewStudentService","StudentService")">Clear</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/02/2017 15:19:29
+-- Date Created: 05/04/2017 18:09:27
 -- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
@@ -68,8 +68,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProviderService]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Services] DROP CONSTRAINT [FK_ProviderService];
 GO
-IF OBJECT_ID(N'[dbo].[FK_StudentService]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Services] DROP CONSTRAINT [FK_StudentService];
+IF OBJECT_ID(N'[dbo].[FK_StudentStudentService]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentServices] DROP CONSTRAINT [FK_StudentStudentService];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ServiceStudentService]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentServices] DROP CONSTRAINT [FK_ServiceStudentService];
 GO
 
 -- --------------------------------------------------
@@ -129,6 +132,9 @@ IF OBJECT_ID(N'[dbo].[Providers]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Services]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Services];
+GO
+IF OBJECT_ID(N'[dbo].[StudentServices]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[StudentServices];
 GO
 
 -- --------------------------------------------------

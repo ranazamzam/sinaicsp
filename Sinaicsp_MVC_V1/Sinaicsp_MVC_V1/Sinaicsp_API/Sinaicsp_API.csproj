@@ -58,6 +58,7 @@
     <Compile Include="API\ApplicationRole.cs" />
     <Compile Include="API\ApplicationUser.cs" />
     <Compile Include="API\City.cs" />
+    <Compile Include="API\CSP.cs" />
     <Compile Include="API\Enums.cs" />
     <Compile Include="API\Inclusion.cs" />
     <Compile Include="API\Provider.cs" />

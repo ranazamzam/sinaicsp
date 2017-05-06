@@ -10,6 +10,14 @@ namespace Sinaicsp_API
     [MetadataType(typeof(ServiceMetadata))]
     public partial class Service
     {
+        [Display(Name = "Provider")]
+        public string ProviderName
+        {
+            get
+            {
+                return this.Provider.Name;
+            }
+        }
         [Display(Name = "Created By")]
         public string CreatedByUserName
         {
@@ -37,6 +45,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Services.Where(a => a.IsDeleted == false).ToList();
         }
+        public static Service GetById(int id)
+        {
+            SinaicspDataModelContainer _context = new SinaicspDataModelContainer();
+            return _context.Services.FirstOrDefault(a => a.Id == id);
+        }
         public static void AddNew(int providerId, string name, string model, int numberOfStudent, string sessionLength, string weeklySession, string sessionStart, string sessionEnd, List<int> studentIds, int createdByUserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -58,7 +71,8 @@ namespace Sinaicsp_API
             {
                 StudentService _sService = new Sinaicsp_API.StudentService();
                 _sService.StudentId = item;
-                _sService.Service = _item;
+                _sService.CreationDate = DateTime.Now;
+                _sService.CreatedByUserId = createdByUserId;
                 _item.StudentServices.Add(_sService);
             }
             _context.Services.Add(_item);
