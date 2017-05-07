@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/04/2017 18:09:27
--- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/07/2017 13:53:42
+-- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -304,7 +304,8 @@ CREATE TABLE [dbo].[CSPs] (
     [CreatedByUserId] int  NOT NULL,
     [StudentId] int  NOT NULL,
     [SubjectId] int  NOT NULL,
-    [Materials] nvarchar(max)  NOT NULL
+    [Materials] nvarchar(max)  NOT NULL,
+    [SchoolYearId] int  NOT NULL
 );
 GO
 
@@ -773,6 +774,21 @@ GO
 CREATE INDEX [IX_FK_ServiceStudentService]
 ON [dbo].[StudentServices]
     ([ServiceId]);
+GO
+
+-- Creating foreign key on [SchoolYearId] in table 'CSPs'
+ALTER TABLE [dbo].[CSPs]
+ADD CONSTRAINT [FK_SchoolYearCSP]
+    FOREIGN KEY ([SchoolYearId])
+    REFERENCES [dbo].[SchoolYears]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SchoolYearCSP'
+CREATE INDEX [IX_FK_SchoolYearCSP]
+ON [dbo].[CSPs]
+    ([SchoolYearId]);
 GO
 
 -- --------------------------------------------------

@@ -27,10 +27,12 @@ namespace Sinaicsp_API
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
         public string Materials { get; set; }
+        public int SchoolYearId { get; set; }
     
         public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherCSP> TeacherCSPs { get; set; }
         public virtual Subject Subject { get; set; }
+        public virtual SchoolYear SchoolYear { get; set; }
     }
 }

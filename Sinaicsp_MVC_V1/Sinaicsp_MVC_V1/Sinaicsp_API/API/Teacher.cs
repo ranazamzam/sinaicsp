@@ -45,6 +45,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Teachers.Where(a => a.IsDeleted == false).ToList();
         }
+        public static List<Teacher> GetAll(int schoolId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.Teachers.Where(a => a.IsDeleted == false && a.SchoolId == schoolId).ToList();
+        }
         public static Teacher GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

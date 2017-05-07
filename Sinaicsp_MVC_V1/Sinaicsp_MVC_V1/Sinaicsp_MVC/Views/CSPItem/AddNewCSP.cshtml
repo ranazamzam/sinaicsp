@@ -17,38 +17,26 @@
         }
         allTeachers.push(parseInt(value));
         $('#tbl_teachers tr:last').after("<tr id='TR_" + value + "'><td><a href='#' onclick='RemoveTeacher(" + parseInt(value) + ")' class='delete'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
-
-
+        if (allTeachers.length > 0) {
+            $('#ddl_schools').data("kendoDropDownList").enable(false);
+        }
     }
 
-    function SaveStudentService() {
+    function SaveCSP() {
         var objModel = new Object();
-        var CurrentService_Name = $('#CurrentService_Name').val();
-        var CurrentService_Model = $('#CurrentService_Model').val();
-        var CurrentService_SessionLength = $('#CurrentService_SessionLength').val();
-        var CurrentService_SessionStart = $('#CurrentService_SessionStart').val();
-        var CurrentService_NumberOfStudents = $('#CurrentService_NumberOfStudents').val();
-        var CurrentService_WeeklySession = $('#CurrentService_WeeklySession').val();
-        var CurrentService_SessionEnd = $('#CurrentService_SessionEnd').val();
-        var CurrentService_ProviderId = $('#CurrentService_ProviderId').val();
-
-        objModel.CurrentService = {
-            Name: CurrentService_Name,
-            Model: CurrentService_Model,
-            NumberOfStudents: CurrentService_NumberOfStudents,
-            SessionEnd: CurrentService_SessionEnd,
-            WeeklySession: CurrentService_SessionEnd,
-            SessionStart: CurrentService_SessionStart,
-            SessionLength: CurrentService_SessionLength,
-            providerId: CurrentService_ProviderId
+        objModel = {
+            StudentId: $('#ddl_students').data("kendoDropDownList").value(),
+            SubjectId: $('#ddl_subjects').data("kendoDropDownList").value(),
+            SchoolYearId: $('#ddl_schoolYears').data("kendoDropDownList").value(),
+            Materials: $('#Materials').val()
         };
         jQuery.ajax({
             type: 'POST',
-            url: 'AddStudentService',
-            data: { model: objModel, studentIds: allStudents },
+            url: 'AddNewCSPItem',
+            data: { model: objModel, teachersIds: allTeachers },
             success: function (data) {
                 if (data == true) {
-                    var url = '@Url.Action("Index", "StudentService", new {  })';
+                    var url = '@Url.Action("Index", "CSPItem", new {  })';
                     window.location.href = url;
                 } else {
                     alert('Please fill all required fields !');
@@ -59,7 +47,26 @@
     function RemoveTeacher(id) {
         allTeachers.splice(allTeachers.indexOf(id), 1);
         $("#TR_" + id).remove();
+        if (allTeachers.length == 0) {
+            $('#ddl_schools').data("kendoDropDownList").enable(true);
+        }
     }
+    function School_OnChange() {
+        $('#ddl_students').data("kendoDropDownList").dataSource.read();
+        $('#ddl_teachers').data("kendoDropDownList").dataSource.read();
+    }
+    function Student_OnLoaded() {
+        $('#ddl_students').data("kendoDropDownList").select(0);
+    }
+    function Teacher_OnLoaded() {
+        $('#ddl_teachers').data("kendoDropDownList").select(0);
+    }
+    function GetSelectedSchool() {
+        var selectedSchoolId = $('#ddl_schools').data("kendoDropDownList").value();
+        return {
+            schoolId: selectedSchoolId
+        }
+    };
 </script>
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Add new CSP</h4>
@@ -79,6 +86,10 @@
                           .DataValueField("Id")
                           .HtmlAttributes(new { style = "width:88%" })
                           .Filter("contains")
+                          .Events(e =>
+                                {
+                                    e.Change("School_OnChange").DataBound("School_OnChange");
+                                })
                           .DataSource(source =>
                           {
                               source.Read(read =>
@@ -101,15 +112,20 @@
                     <div class="demo-section k-content">
                         @(Html.Kendo().DropDownList()
                           .Name("ddl_students")
+                          .AutoBind(false)
                           .DataTextField("FullName")
                           .DataValueField("Id")
+                             .Events(e =>
+                                {
+                                    e.DataBound("Student_OnLoaded");
+                                })
                           .HtmlAttributes(new { style = "width:88%" })
                           .Filter("contains")
                           .DataSource(source =>
                           {
                               source.Read(read =>
                               {
-                                  read.Action("Students_Read", "CSPItem");
+                                  read.Action("Students_Read", "CSPItem").Data("GetSelectedSchool");
                               });
 
                           })
@@ -125,14 +141,19 @@
                         @(Html.Kendo().DropDownList()
                           .Name("ddl_teachers")
                           .DataTextField("UserName")
+                          .AutoBind(false)
                           .DataValueField("Id")
                           .HtmlAttributes(new { style = "width:88%" })
                           .Filter("contains")
+                              .Events(e =>
+                              {
+                                  e.DataBound("Teacher_OnLoaded");
+                              })
                           .DataSource(source =>
                           {
                               source.Read(read =>
                               {
-                                  read.Action("Teachers_Read", "CSPItem");
+                                  read.Action("Teachers_Read", "CSPItem").Data("GetSelectedSchool");
                               });
 
                           })
@@ -195,13 +216,39 @@
                 </td>
 
             </tr>
+            <tr style="height:5px"></tr>
+            <tr>
+                <td>
+                    School Year
+                </td>
+                <td>
+                    <div class="demo-section k-content">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_schoolYears")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("SchoolYears_Read", "CSPItem");
+                              });
+
+                          })
+                        )
+                    </div>
+                </td>
+
+            </tr>
             <tr style="height:7px"></tr>
             <tr>
                 <td>
                     Materials
                 </td>
                 <td>
-                    @Html.TextBoxFor(a=>a.Materials)
+                    @Html.TextBoxFor(a => a.Materials)
                 </td>
 
             </tr>
@@ -226,12 +273,11 @@
                 <td></td>
                 <td>
 
-                    <a class="btn btn-primary" onclick="SaveStudentService()">Save</a>
-                    <a class="btn btn-primary" href="@Url.Action("AddNewStudentService","StudentService")">Clear</a>
+                    <a class="btn btn-primary" onclick="SaveCSP()">Save</a>
+                    <a class="btn btn-primary" href="@Url.Action("AddNewCSP","CSPItem")">Clear</a>
                 </td>
             </tr>
         </table>
 
     </div>
 </div>
-

@@ -96,6 +96,10 @@
       <End Role="Service" EntitySet="Services" />
       <End Role="StudentService" EntitySet="StudentServices" />
     </AssociationSet>
+    <AssociationSet Name="SchoolYearCSP" Association="SinaicspDataModel.Store.SchoolYearCSP">
+      <End Role="SchoolYear" EntitySet="SchoolYears" />
+      <End Role="CSP" EntitySet="CSPs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUsers">
     <Key>
@@ -263,6 +267,7 @@
     <Property Name="StudentId" Type="int" Nullable="false" />
     <Property Name="SubjectId" Type="int" Nullable="false" />
     <Property Name="Materials" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SchoolYearId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TeacherCSPs">
     <Key>
@@ -549,6 +554,18 @@
       </Principal>
       <Dependent Role="StudentService">
         <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolYearCSP">
+    <End Role="SchoolYear" Type="SinaicspDataModel.Store.SchoolYears" Multiplicity="1" />
+    <End Role="CSP" Type="SinaicspDataModel.Store.CSPs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolYear">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSP">
+        <PropertyRef Name="SchoolYearId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

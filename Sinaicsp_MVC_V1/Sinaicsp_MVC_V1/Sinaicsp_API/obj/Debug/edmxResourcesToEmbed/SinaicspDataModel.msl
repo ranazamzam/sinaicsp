@@ -179,6 +179,7 @@
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
           <ScalarProperty Name="Materials" ColumnName="Materials" />
+          <ScalarProperty Name="SchoolYearId" ColumnName="SchoolYearId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -37,6 +37,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.SchoolYears.ToList();
         }
+        public static List<SchoolYear> GetCurrent()
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.SchoolYears.Where(a=>a.IsCurrent).ToList();
+        }
         public static SchoolYear GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

@@ -9,11 +9,17 @@
 
     <div class="widgetcontent">
         <a class="btn btn-primary" href="@Url.Action("AddNewCSP")">Add New CSP</a>
-        @(Html.Kendo().Grid<Sinaicsp_API.Student>()
+        @(Html.Kendo().Grid<Sinaicsp_API.CSP>()
       .Name("grid")
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
+          columns.Bound(c => c.StudentName);
+          columns.Bound(c => c.SchoolName);
+          columns.Bound(c => c.SubjectName);
+          columns.Bound(c => c.Materials);
+          columns.Bound(c => c.TeacherNames);
+          columns.Bound(c => c.SchoolYearName);
           columns.Bound(c => c.CreatedOn);
           columns.Bound(c => c.CreatedByUserName);
       })

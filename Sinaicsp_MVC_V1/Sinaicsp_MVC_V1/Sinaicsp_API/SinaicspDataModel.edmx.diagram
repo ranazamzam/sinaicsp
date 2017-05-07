@@ -43,6 +43,7 @@
         <EntityTypeShape EntityType="SinaicspDataModel.StudentService" Width="1.5" PointX="8.375" PointY="9.875" />
         <AssociationConnector Association="SinaicspDataModel.StudentStudentService" />
         <AssociationConnector Association="SinaicspDataModel.ServiceStudentService" />
+        <AssociationConnector Association="SinaicspDataModel.SchoolYearCSP" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

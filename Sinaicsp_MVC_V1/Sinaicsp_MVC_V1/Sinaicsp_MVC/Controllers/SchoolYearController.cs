@@ -24,6 +24,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = _item.Id,
                 Name = _item.Name,
+                IsCurrent = _item.IsCurrent,
                 IsDeleted = _item.IsDeleted,
                 CreatedOn = _item.CreatedOn,
                 CreatedByUserId = _item.CreatedByUserId,
@@ -56,6 +57,12 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+
+        public ActionResult SetCurrentSchoolYear(int id)
+        {
+            SchoolYear.SetCurrent(id);
+            return RedirectToAction("Index");
         }
     }
 }

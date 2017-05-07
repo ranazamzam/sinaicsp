@@ -96,6 +96,10 @@
       <End Role="Service" EntitySet="Services" />
       <End Role="StudentService" EntitySet="StudentServices" />
     </AssociationSet>
+    <AssociationSet Name="SchoolYearCSP" Association="SinaicspDataModel.SchoolYearCSP">
+      <End Role="SchoolYear" EntitySet="SchoolYears" />
+      <End Role="CSP" EntitySet="CSPs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUser">
     <Key>
@@ -385,6 +389,7 @@
     <Property Name="CreationDate" Type="DateTime" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.SchoolYearCSP" FromRole="SchoolYear" ToRole="CSP" />
   </EntityType>
   <EntityType Name="CSP">
     <Key>
@@ -400,6 +405,8 @@
     <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectCSP" FromRole="CSP" ToRole="Subject" />
     <Property Name="SubjectId" Type="Int32" Nullable="false" />
     <Property Name="Materials" Type="String" Nullable="false" />
+    <NavigationProperty Name="SchoolYear" Relationship="SinaicspDataModel.SchoolYearCSP" FromRole="CSP" ToRole="SchoolYear" />
+    <Property Name="SchoolYearId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="StudentCSP">
     <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
@@ -587,6 +594,18 @@
       </Principal>
       <Dependent Role="StudentService">
         <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolYearCSP">
+    <End Type="SinaicspDataModel.SchoolYear" Role="SchoolYear" Multiplicity="1" />
+    <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolYear">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSP">
+        <PropertyRef Name="SchoolYearId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
