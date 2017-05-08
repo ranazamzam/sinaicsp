@@ -1,0 +1,113 @@
+﻿@model Sinaicsp_API.ApplicationUser
+@{
+    ViewBag.Title = "AddNewUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_admin').css('display', 'block');
+    });
+
+
+
+    function SaveNewUser() {
+        var objModel = new Object();
+        var UserName = $('#UserName').val();
+        var Email = $('#Email').val();
+        var Password = $('#Password').val();
+        var txt_confirmPassword = $('#txt_confirmPassword').val();
+        var role = $('#ddl_roles').val();
+
+        if (UserName.trim().length == 0 || Email.trim().length == 0 || Password.trim().length == 0 || txt_confirmPassword.trim().length == 0) {
+            alert('Please fill all required fields !');        
+            return;
+        }
+        if (Password.trim() != txt_confirmPassword.trim()) {
+            alert('Mismatch password !');
+            return;
+        }
+        objModel = {
+            UserName: UserName,
+            Email: Email,
+            Password: Password
+        };
+        jQuery.ajax({
+            type: 'POST',
+            url: 'SaveNewUser',
+            data: { model: objModel, roleId: role },
+            success: function (data) {
+                if (data == true) {
+                    var url = '@Url.Action("Users", "UserManagement", new {  })';
+                    window.location.href = url;
+                } else {
+                    alert('User already exists  !');
+                }
+            }
+        });
+    }
+
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Add new User</h4>
+    <div class="widgetcontent">
+        <table>
+            <tr>
+                <td style="width:120px">
+                    User Name
+                </td>
+                <td>
+                    @Html.DropDownList("ddl_roles", ViewBag.AllRoles as SelectList)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:90px">
+                    User Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:90px">
+                    Email
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.Email)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:90px">
+                    Password
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.Password)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:90px">
+                    Confirm Password
+                </td>
+                <td>
+                    <input type="password" id="txt_confirmPassword" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width:90px">
+                    Date Created
+                </td>
+                <td>
+                    <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+
+                    <a class="btn btn-primary" onclick="SaveNewUser()">Save</a>
+                    <a class="btn btn-primary" href="@Url.Action("AddNewUser","UserManagement")">Clear</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>

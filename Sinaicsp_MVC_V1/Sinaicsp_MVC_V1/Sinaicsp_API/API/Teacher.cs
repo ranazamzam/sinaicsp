@@ -55,6 +55,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Teachers.FirstOrDefault(a => a.Id == id);
         }
+        public static Teacher GetByEmail(string email)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.Teachers.FirstOrDefault(a => a.Email == email);
+        }
         public static bool AddNew(int schoolId, string userName, string email, string title, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -69,6 +74,7 @@ namespace Sinaicsp_API
                 _item.CreatedByUserId = LoggeduserId;
                 _context.Teachers.Add(_item);
                 _context.SaveChanges();
+                ApplicationUser.AddNew(email, email, email, E_Role.Teacher);
                 return true;
             }
             return false;

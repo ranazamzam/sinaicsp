@@ -1,8 +1,88 @@
-﻿
+﻿@model Sinaicsp_MVC.ViewModels.LoginViewModel
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_admin').css('display', 'block');
+    });
 
-<h2>Login</h2>
 
+
+    function SaveNewUser() {
+        var objModel = new Object();
+        var UserName = $('#UserName').val();
+        var Email = $('#Email').val();
+        var Password = $('#Password').val();
+        var txt_confirmPassword = $('#txt_confirmPassword').val();
+        var role = $('#ddl_roles').val();
+
+        if (UserName.trim().length == 0 || Email.trim().length == 0 || Password.trim().length == 0 || txt_confirmPassword.trim().length == 0) {
+            alert('Please fill all required fields !');
+            return;
+        }
+        if (Password.trim() != txt_confirmPassword.trim()) {
+            alert('Mismatch password !');
+            return;
+        }
+        objModel = {
+            UserName: UserName,
+            Email: Email,
+            Password: Password
+        };
+        jQuery.ajax({
+            type: 'POST',
+            url: 'SaveNewUser',
+            data: { model: objModel, roleId: role },
+            success: function (data) {
+                if (data == true) {
+                    var url = '@Url.Action("Users", "UserManagement", new {  })';
+                    window.location.href = url;
+                } else {
+                    alert('User already exists  !');
+                }
+            }
+        });
+    }
+
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Login</h4>
+    <div class="widgetcontent">
+        @if (ViewBag.InValid)
+        {
+            <h4 class="widgettitle title-danger">Invalid user name or password !</h4><br />
+        }
+        @using (Html.BeginForm("Login", "UserManagement", FormMethod.Post, new { id = "ItemForm" }))
+        {
+            <table>
+
+                <tr>
+                    <td style="width:110px">
+                        User Name / Email
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.UserName)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
+                        Password
+                    </td>
+                    <td>
+                        @Html.PasswordFor(a => a.Password)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <a class="btn btn-primary" onclick="ItemForm.submit();">Login</a>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>

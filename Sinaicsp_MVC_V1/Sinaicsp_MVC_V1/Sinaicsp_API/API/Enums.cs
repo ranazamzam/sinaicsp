@@ -8,7 +8,8 @@ namespace Sinaicsp_API
 {
     public enum E_Role
     {
-        Admin = 0
+        Admin = 0,
+        Teacher = 1
     }
     public enum E_ServiceModel
     {

@@ -22,14 +22,24 @@ namespace Sinaicsp_MVC.Controllers
         }
         public JsonResult Schools_Read()
         {
-            IQueryable<School> items = School.GetAll().AsQueryable();
+            IQueryable<School> items = new List<School>().AsQueryable();
+            if (ApplicationHelper.IsLoggedIn)
+            {
+                if (ApplicationHelper.LoggedUser.CurrentRoles.Contains(E_Role.Admin))
+                {
+                    items = School.GetAll().AsQueryable();
+                }
+                if (ApplicationHelper.LoggedUser.CurrentRoles.Contains(E_Role.Teacher))
+                {
+                    items = School.GetAll(ApplicationHelper.LoggedUserId).AsQueryable();
+                }
+            }
             var result = from item in items
                          select new
                          {
                              Id = item.Id,
                              Name = item.Name
                          };
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Students_Read(int schoolId)

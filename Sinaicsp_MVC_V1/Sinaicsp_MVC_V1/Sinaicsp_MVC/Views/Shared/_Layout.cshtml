@@ -20,7 +20,7 @@
     <script type="text/javascript" src="~/Theme/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Theme/js/responsive-tables.js"></script>
     <script type="text/javascript" src="~/Theme/js/custom.js"></script>
-    
+
 
     <title>Sinai School - Admin Panel</title>
 
@@ -37,7 +37,7 @@
 
 </head>
 <body>
-  
+
     <div class="mainwrapper">
 
 
@@ -45,41 +45,64 @@
         <div class="leftpanel">
 
             <div class="leftmenu">
-                <ul class="nav nav-tabs nav-stacked">
-                    <li class="nav-header">
+                @if (ApplicationHelper.IsLoggedIn)
+                {
+                    if (ApplicationHelper.LoggedUser.CurrentRoles.Contains(Sinaicsp_API.E_Role.Admin))
+                    {
+                        <ul class="nav nav-tabs nav-stacked">
+                            <li class="nav-header">
 
-                    </li>
-                    <li class="dropdown">
-                        <a href=""><span class="iconfa-pencil"></span>User Management</a>
-                        <ul id="g_admin">
-                            <li ><a class="all" href="@Url.Action("Roles", "UserManagement")"><span></span>Roles</a></li>
-                            @*<li ><a class="all" href="#"><span></span>Users</a></li>*@
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href=""><span class="iconfa-pencil"></span>Definitions</a>
-                        <ul id="g_definitions">
-                            <li><a class="all" href="@Url.Action("Index", "City")"><span></span>Cities</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "StudentClass")"><span></span>Classes</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "Grade")"><span></span>Grades</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "Subject")"><span></span>Subjects</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "SchoolYear")"><span></span>School Years</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "Provider")"><span></span>Providers</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" >
-                        <a href=""><span class="iconfa-pencil"></span>Operations</a>
-                        <ul id="g_operations">
-                            <li><a class="all" href="@Url.Action("Index", "School")"><span></span>Schools</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "Teacher")"><span></span>Teachers</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "Student")"><span></span>Students</a></li>
-                            @*<li><a class="all" href="#"><span></span>Locks</a></li>*@
-                            <li><a class="all" href="@Url.Action("Index", "StudentService")"><span></span>Services</a></li>
-                            <li><a class="all" href="@Url.Action("Index", "CSPItem")"><span></span>CSPs</a></li>
-                        </ul>
-                    </li>
+                            </li>
+                            <li class="dropdown">
+                                <a href=""><span class="iconfa-pencil"></span>User Management</a>
+                                <ul id="g_admin">
+                                    <li><a class="all" href="@Url.Action("Roles", "UserManagement")"><span></span>Roles</a></li>
+                                    <li><a class="all" href="@Url.Action("Users", "UserManagement")"><span></span>Users</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href=""><span class="iconfa-pencil"></span>Definitions</a>
+                                <ul id="g_definitions">
+                                    <li><a class="all" href="@Url.Action("Index", "City")"><span></span>Cities</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "StudentClass")"><span></span>Classes</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "Grade")"><span></span>Grades</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "Subject")"><span></span>Subjects</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "SchoolYear")"><span></span>School Years</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "Provider")"><span></span>Providers</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href=""><span class="iconfa-pencil"></span>Operations</a>
+                                <ul id="g_operations">
+                                    <li><a class="all" href="@Url.Action("Index", "School")"><span></span>Schools</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "Teacher")"><span></span>Teachers</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "Student")"><span></span>Students</a></li>
+                                    @*<li><a class="all" href="#"><span></span>Locks</a></li>*@
+                                    <li><a class="all" href="@Url.Action("Index", "StudentService")"><span></span>Services</a></li>
+                                    <li><a class="all" href="@Url.Action("Index", "CSPItem")"><span></span>CSPs</a></li>
+                                </ul>
+                            </li>
 
-                </ul>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav nav-tabs nav-stacked">
+                            <li class="nav-header">
+
+                            </li>
+                          
+                            <li class="dropdown">
+                                <a href=""><span class="iconfa-pencil"></span>Operations</a>
+                                <ul id="g_operations" style="display:block">
+                                   
+                                    <li><a class="all" href="@Url.Action("Index", "CSPItem")"><span></span>CSPs</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    }
+                }
             </div>
             <!--leftmenu-->
 
@@ -90,10 +113,19 @@
 
             <ul class="breadcrumbs">
                 <li class="right">
-                    <div id="div_login">
-                        <a href="#">T-Administrator</a> - 
-                        <a href="#">Sign Out</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
+                    @if (ApplicationHelper.IsLoggedIn)
+                    {
+                        <div>
+                            <a href="#">@ApplicationHelper.LoggedUser.UserName [ @ApplicationHelper.LoggedUser.Roles ]</a> -
+                            <a href="@Url.Action("LogOut", "UserManagement")">Sign Out</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a href="@Url.Action("Login", "UserManagement")">Sign in</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    }
                 </li>
 
 

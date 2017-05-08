@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,40 @@ namespace Sinaicsp_API
 {
     public partial class ApplicationUser
     {
+        public List< E_Role> CurrentRoles
+        {
+            get
+            {
+                List<E_Role> RetVal = new List<E_Role>();
+                foreach (UserRole item in UserRoles)
+                {
+                    RetVal.Add((E_Role)Enum.Parse(typeof(E_Role), item.ApplicationRole.Name));
+                }
+                return RetVal;
+            }
+        }
+        public string Roles
+        {
+            get
+            {
+                return string.Join(",", UserRoles.Select(a => a.ApplicationRole.Name));
+            }
+        }
+        public string CreatedOn
+        {
+            get
+            {
+                return CreationDate.ToShortDateString();
+            }
+        }
+        public static void Init()
+        {
+            SinaicspDataModelContainer _context = new SinaicspDataModelContainer();
+            if (_context.ApplicationUsers.ToList().Count == 0)
+            {
+                AddNew("admin", "admin", "admin", E_Role.Admin);
+            }
+        }
         public static List<ApplicationUser> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -38,7 +73,7 @@ namespace Sinaicsp_API
         public static bool AddNew(string email, string userName, string password, E_Role role)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            if (_context.ApplicationUsers.ToList().Where(a => a.Email.ToLower() == email.ToLower()).Count() == 0)
+            if (_context.ApplicationUsers.ToList().Where(a => a.Email.ToLower() == email.ToLower()).Count() == 0 && _context.ApplicationUsers.ToList().Where(a => a.UserName.ToLower() == userName.ToLower()).Count() == 0)
             {
                 ApplicationUser _item = new Sinaicsp_API.ApplicationUser();
                 _item.Email = email;

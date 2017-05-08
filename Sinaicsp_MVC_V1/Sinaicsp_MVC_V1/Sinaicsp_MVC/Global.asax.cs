@@ -15,6 +15,7 @@ namespace Sinaicsp_MVC
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ApplicationRole.Init();
+            ApplicationUser.Init();
         }
     }
 }

@@ -38,6 +38,12 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Schools.ToList();
         }
+        public static List<School> GetAll(int userId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            string email = ApplicationUser.GetById(userId).Email;
+            return new List<School>() { _context.Teachers.ToList().FirstOrDefault(a => a.Id == Teacher.GetByEmail(email).Id).School };
+        }
         public static School GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
