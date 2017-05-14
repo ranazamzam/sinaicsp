@@ -23,8 +23,20 @@
                         Shcool
                     </td>
                     <td>
-                        @Html.DropDownListFor(item => item.SchoolId, ViewBag.AllSchools as SelectList)
-                        @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+                     
+
+                        @if (Model.Id == 0)
+                        {
+                            @Html.DropDownListFor(item => item.SchoolId, ViewBag.AllSchools as SelectList)
+                            @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(a => a.SchoolId, ViewBag.AllSchools as SelectList, new { disabled = "disabled" })
+                            @Html.HiddenFor(x => x.SchoolId)
+
+
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +70,16 @@
                         Date Created
                     </td>
                     <td>
-                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                        @if (Model.CreationDate == DateTime.Parse("1/1/0001"))
+                        {
+                            <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(a => a.CreatedOn, new { disabled = "disabled" })
+
+                        }
                     </td>
                 </tr>
                 <tr>

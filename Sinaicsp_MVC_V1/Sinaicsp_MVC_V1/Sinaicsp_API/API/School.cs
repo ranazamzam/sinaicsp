@@ -36,13 +36,13 @@ namespace Sinaicsp_API
         public static List<School> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Schools.ToList();
+            return _context.Schools.Where(a => a.IsDeleted == false).ToList();
         }
         public static List<School> GetAll(int userId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             string email = ApplicationUser.GetById(userId).Email;
-            return new List<School>() { _context.Teachers.ToList().FirstOrDefault(a => a.Id == Teacher.GetByEmail(email).Id).School };
+            return new List<School>() { _context.Teachers.Where(a => a.IsDeleted == false).ToList().FirstOrDefault(a => a.Id == Teacher.GetByEmail(email).Id).School };
         }
         public static School GetById(int id)
         {

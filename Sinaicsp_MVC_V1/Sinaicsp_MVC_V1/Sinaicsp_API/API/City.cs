@@ -35,7 +35,7 @@ namespace Sinaicsp_API
         public static List<City> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Cities.ToList();
+            return _context.Cities.Where(a=>a.IsDeleted==false).ToList();
         }
         public static City GetById(int id)
         {

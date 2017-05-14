@@ -13,6 +13,8 @@
     <div class="widgetcontent">
         @if (ViewBag.AlreadyExists)
         {
+
+
             <h4 class="widgettitle title-danger">Student already exists !</h4><br />
         }
         @using (Html.BeginForm("AddNewStudent", "Student", FormMethod.Post, new { id = "ItemForm" }))
@@ -23,15 +25,37 @@
                         School
                     </td>
                     <td style="width:250px">
-                        @Html.DropDownListFor(a => a.SchoolId,ViewBag.AllSchools as SelectList)
-                        @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+                        @if (Model.Id == 0)
+                        {
+                            @Html.DropDownListFor(a => a.SchoolId, ViewBag.AllSchools as SelectList)
+                            @Html.ValidationMessageFor(a => a.SchoolId, "", new { @Style = "Color:red" })
+
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(a => a.SchoolId, ViewBag.AllSchools as SelectList, new { disabled = "disabled" })
+                            @Html.HiddenFor(x => x.SchoolId)
+
+                        }
+                       
                     </td>
                     <td style="width:90px">
                         Class
                     </td>
                     <td>
-                        @Html.DropDownListFor(a => a.StudentClassId, ViewBag.AllClasses as SelectList)
-                        @Html.ValidationMessageFor(a => a.StudentClassId, "", new { @Style = "Color:red" })
+                        @if (Model.Id == 0)
+                        {
+                            @Html.DropDownListFor(a => a.StudentClassId, ViewBag.AllClasses as SelectList)
+                            @Html.ValidationMessageFor(a => a.StudentClassId, "", new { @Style = "Color:red" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(a => a.StudentClassId, ViewBag.AllClasses as SelectList, new { disabled = "disabled" })
+                            @Html.HiddenFor(x => x.StudentClassId)
+
+
+                        }
+                       
                     </td>
                 </tr>
                 <tr>
@@ -39,15 +63,37 @@
                         Grade
                     </td>
                     <td >
-                        @Html.DropDownListFor(a => a.StudentGradeId, ViewBag.AllGrades as SelectList)
-                        @Html.ValidationMessageFor(a => a.StudentGradeId, "", new { @Style = "Color:red" })
+                        @if (Model.Id == 0)
+                        {
+                            @Html.DropDownListFor(a => a.StudentGradeId, ViewBag.AllGrades as SelectList)
+                            @Html.ValidationMessageFor(a => a.StudentGradeId, "", new { @Style = "Color:red" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(a => a.StudentGradeId, ViewBag.AllGrades as SelectList, new { disabled = "disabled" })
+                            @Html.HiddenFor(x => x.StudentGradeId)
+
+
+                        }
+                       
                     </td>
                     <td >
                         City
                     </td>
                     <td>
-                        @Html.DropDownListFor(a => a.CityId, ViewBag.AllCities as SelectList)
-                        @Html.ValidationMessageFor(a => a.CityId, "", new { @Style = "Color:red" })
+                        @if (Model.Id == 0)
+                        {
+                            @Html.DropDownListFor(a => a.CityId, ViewBag.AllCities as SelectList)
+                            @Html.ValidationMessageFor(a => a.CityId, "", new { @Style = "Color:red" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(a => a.CityId, ViewBag.AllCities as SelectList, new { disabled = "disabled" })
+                            @Html.HiddenFor(x => x.CityId)
+
+
+                        }
+                       
                     </td>
                 </tr>
                 <tr>
@@ -166,7 +212,16 @@
                         Date Created
                     </td>
                     <td>
-                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                        @if (Model.CreationDate == DateTime.Parse("1/1/0001"))
+                        {
+                            <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(a => a.CreatedOn, new { disabled = "disabled" })
+
+                        }
                     </td>
                     <td>
                         Created By

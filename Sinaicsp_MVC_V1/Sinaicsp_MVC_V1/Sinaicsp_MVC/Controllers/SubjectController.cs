@@ -25,7 +25,7 @@ namespace Sinaicsp_MVC.Controllers
                 Id = _item.Id,
                 Name = _item.Name,
                 ParentName = _item.ParentName,
-                IsDeleted = _item.IsDeleted,
+                //IsDeleted = _item.IsDeleted,
                 CreatedOn = _item.CreatedOn,
                 CreatedByUserId = _item.CreatedByUserId,
                 CreatedByUserName = _item.CreatedByUserName
@@ -33,30 +33,59 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewSubject()
+        public ActionResult AddNewSubject(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            Subject _item = new Subject();
-            ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
-            return View(_item);
+            if (id != null)
+            {
+                ViewBag.AlreadyExists = false;
+                Subject _item = Subject.GetById(id.Value);
+                ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
+                return View(_item);
+            }
+            else
+            {
+
+
+                ViewBag.AlreadyExists = false;
+                Subject _item = new Subject();
+                ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
+                return View(_item);
+            }
         }
         [HttpPost]
         public ActionResult AddNewSubject(Subject model)
         {
             bool isAdded = false;
+            bool IsUpdated = false;
             ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
                 if (model.ParentId == null)
                 {
-                    isAdded = Subject.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    if (model.Id != 0)
+                    {
+                         IsUpdated = Subject.Update(model.Id,null,model.Name);
+                      
+                    }
+                    else
+                    {
+                        isAdded = Subject.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    }
                 }
                 else
                 {
-                    isAdded = Subject.AddNew(model.ParentId.Value, model.Name, ApplicationHelper.LoggedUserId);
+                    if (model.Id != 0)
+                    {
+                         IsUpdated = Subject.Update(model.Id,model.ParentId, model.Name);
+
+                    }
+                    else
+                    {
+                        isAdded = Subject.AddNew(model.ParentId.Value, model.Name, ApplicationHelper.LoggedUserId);
+                    }
                 }
-                if (isAdded)
+                if (isAdded||IsUpdated)
                 {
                     return RedirectToAction("Index");
                 }
@@ -67,6 +96,11 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+        public ActionResult Delete(int id)
+        {
+            Subject.SoftDelete(id);
+            return RedirectToAction("Index");
         }
     }
 }

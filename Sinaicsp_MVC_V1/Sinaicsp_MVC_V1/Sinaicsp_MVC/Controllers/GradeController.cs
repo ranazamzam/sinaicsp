@@ -24,7 +24,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = _item.Id,
                 Name = _item.Name,
-                IsDeleted = _item.IsDeleted,
+               // IsDeleted = _item.IsDeleted,
                 CreatedOn = _item.CreatedOn,
                 CreatedByUserId = _item.CreatedByUserId,
                 CreatedByUserName = _item.CreatedByUserName
@@ -32,11 +32,21 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewStudentGrade()
+        public ActionResult AddNewStudentGrade(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            StudentGrade _item = new StudentGrade();
-            return View(_item);
+            if (id != null)
+            {
+                ViewBag.AlreadyExists = false;
+
+                StudentGrade _item = StudentGrade.GetById(id.Value);
+                return View(_item);
+            }
+            else
+            {
+                ViewBag.AlreadyExists = false;
+                StudentGrade _item = new StudentGrade();
+                return View(_item);
+            }
         }
         [HttpPost]
         public ActionResult AddNewStudentGrade(StudentGrade model)
@@ -44,10 +54,21 @@ namespace Sinaicsp_MVC.Controllers
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
-                bool isAdded = StudentGrade.AddNew(model.Name, ApplicationHelper.LoggedUserId);
-                if (isAdded)
+                if (model.Id != 0)
                 {
-                    return RedirectToAction("Index");
+                    bool IsUpdated = StudentGrade.Update(model.Id, model.Name);
+                    if (IsUpdated)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    bool isAdded = StudentGrade.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 ViewBag.AlreadyExists = true;
                 return View(model);
@@ -56,6 +77,12 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            StudentGrade.SoftDelete(id);
+            return RedirectToAction("Index");
         }
     }
 }

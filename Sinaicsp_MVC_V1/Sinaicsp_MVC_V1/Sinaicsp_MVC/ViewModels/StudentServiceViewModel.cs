@@ -13,6 +13,7 @@ namespace Sinaicsp_MVC.ViewModels
             students = new List<int>();
         }
         public Service CurrentService { get; set; }
+        public DateTime CreatedOn { get; set; }
         public List<int> students { get; set; }
         public List<Provider> AllProviders { get; set; }
         public int SelectedProvider { get; set; }

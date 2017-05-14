@@ -14,6 +14,8 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
+          columns.Template(e => { }).ClientTemplate("<a href='CSPItem/AddNewCSP/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='CSPItem/Delete/#= Id #'>Delete</a>").Width(85);
+
           columns.Bound(c => c.StudentName);
           columns.Bound(c => c.SchoolName);
           columns.Bound(c => c.SubjectName);

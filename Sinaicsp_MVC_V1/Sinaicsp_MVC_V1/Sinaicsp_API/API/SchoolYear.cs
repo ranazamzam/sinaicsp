@@ -35,7 +35,7 @@ namespace Sinaicsp_API
         public static List<SchoolYear> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.SchoolYears.ToList();
+            return _context.SchoolYears.Where(a => a.IsDeleted == false).ToList();
         }
         public static List<SchoolYear> GetCurrent()
         {

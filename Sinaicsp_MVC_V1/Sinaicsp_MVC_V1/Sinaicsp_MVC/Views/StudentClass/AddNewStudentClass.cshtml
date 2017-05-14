@@ -32,7 +32,16 @@
                         Date Created
                     </td>
                     <td>
-                        <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                        @if (Model.CreationDate == DateTime.Parse("1/1/0001"))
+                        {
+                            <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(a => a.CreatedOn, new { disabled = "disabled" })
+
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -40,6 +49,7 @@
                         Created By
                     </td>
                     <td>
+
                         <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
                     </td>
                 </tr>

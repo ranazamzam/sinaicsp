@@ -14,16 +14,17 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Bound(c => c.Name);
-          columns.Bound(c => c.CreatedOn);
-          columns.Bound(c => c.CreatedByUserName);
-      })
+      columns.Template(e => { }).ClientTemplate("<a href='City/AddNewCity/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='City/Delete/#= Id #'>Delete</a>").Width(85);
+            columns.Bound(c => c.Name);
+            columns.Bound(c => c.CreatedOn);
+            columns.Bound(c => c.CreatedByUserName);
+        })
       .Groupable()
       .ColumnMenu()
       .Sortable(sortable =>
       {
-          sortable.SortMode(GridSortMode.SingleColumn);
-      })
+            sortable.SortMode(GridSortMode.SingleColumn);
+        })
       .Pageable(pageable => pageable
             .Refresh(true)
             .PageSizes(true)

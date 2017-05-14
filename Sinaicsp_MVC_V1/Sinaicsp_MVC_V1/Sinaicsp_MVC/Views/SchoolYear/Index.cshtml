@@ -14,7 +14,8 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='SchoolYear/SetCurrentSchoolYear/#= Id #'>Set Current</a>").Width(85);
+
+          columns.Template(e => { }).ClientTemplate(" <a href='SchoolYear/AddNewSchoolYear/#= Id #'>Edit</a>&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='SchoolYear/Delete/#= Id #'>Delete</a> &nbsp;<a href='SchoolYear/SetCurrentSchoolYear/#= Id #'>Set Current</a>").Width(150);
           columns.Bound(c => c.Name);
           columns.Bound(p => p.IsCurrent).ClientTemplate("<input type='checkbox' disabled #= IsCurrent ? checked='checked' :'' # />").Width(100);
           columns.Bound(c => c.CreatedOn);

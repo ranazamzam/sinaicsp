@@ -23,7 +23,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = city.Id,
                 Name = city.Name,
-                IsDeleted = city.IsDeleted,
+                //IsDeleted = city.IsDeleted,
                 CreatedOn = city.CreatedOn,
                 CreatedByUserId = city.CreatedByUserId,
                 CreatedByUserName = city.CreatedByUserName
@@ -31,11 +31,23 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewCity()
+        public ActionResult AddNewCity(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            City _item = new City();
-            return View(_item);
+            if(id!=null)
+            {
+                ViewBag.AlreadyExists = false;
+
+                City _item = City.GetById(id.Value);
+                return View(_item);
+            }
+            else
+            {
+                ViewBag.AlreadyExists = false;
+                City _item = new City();
+                return View(_item);
+
+            }
+
         }
         [HttpPost]
         public ActionResult AddNewCity(City model)
@@ -43,11 +55,23 @@ namespace Sinaicsp_MVC.Controllers
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
-                bool isAdded = City.AddNew(model.Name, ApplicationHelper.LoggedUserId);
-                if (isAdded)
+                if(model.Id !=0)
                 {
-                    return RedirectToAction("Index");
+                    bool IsUpdated = City.Update(model.Id, model.Name);
+                    if (IsUpdated)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
+                else
+                {
+                    bool isAdded = City.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+               
                 ViewBag.AlreadyExists = true;
                 return View(model);
             }
@@ -55,6 +79,12 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            City.SoftDelete(id);
+            return RedirectToAction("Index");
         }
     }
 }

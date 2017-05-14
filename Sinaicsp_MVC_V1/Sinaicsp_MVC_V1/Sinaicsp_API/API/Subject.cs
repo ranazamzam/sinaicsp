@@ -51,7 +51,7 @@ namespace Sinaicsp_API
         public static List<Subject> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Subjects.ToList();
+            return _context.Subjects.Where(a => a.IsDeleted == false).ToList();
         }
         public static Subject GetById(int id)
         {
@@ -89,7 +89,7 @@ namespace Sinaicsp_API
             }
             return false;
         }
-        public static bool Update(int id, string name)
+        public static bool Update(int id,int? parentId , string name)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             Subject itemById = _context.Subjects.FirstOrDefault(a => a.Id == id);
@@ -98,6 +98,7 @@ namespace Sinaicsp_API
             if (itemByName == null || itemByName.Id == itemById.Id)
             {
                 Subject _item = itemById;
+                _item.ParentId = parentId;
                 _item.Name = name;
                 _context.SaveChanges();
                 return true;

@@ -36,7 +36,7 @@ namespace Sinaicsp_API
         public static List<Provider> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Providers.ToList();
+            return _context.Providers.Where(a => a.IsDeleted == false).ToList();
         }
         public static Provider GetById(int id)
         {

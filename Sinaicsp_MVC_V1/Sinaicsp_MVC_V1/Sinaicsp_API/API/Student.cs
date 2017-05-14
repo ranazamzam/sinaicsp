@@ -75,12 +75,12 @@ namespace Sinaicsp_API
         public static List<Student> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Students.ToList();
+            return _context.Students.Where(a => a.IsDeleted == false).ToList();
         }
         public static List<Student> GetAll(int schoolId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.Students.Where(a => a.SchoolId == schoolId).ToList();
+            return _context.Students.Where(a => a.SchoolId == schoolId && a.IsDeleted==false).ToList();
         }
         public static Student GetById(int id)
         {

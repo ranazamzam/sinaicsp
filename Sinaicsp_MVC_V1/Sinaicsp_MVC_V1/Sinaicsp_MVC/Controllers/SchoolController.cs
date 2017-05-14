@@ -27,7 +27,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = school.Id,
                 Name = school.Name,
-                IsDeleted = school.IsDeleted,
+                // IsDeleted = school.IsDeleted,
                 CreatedOn = school.CreatedOn,
                 CreatedByUserId = school.CreatedByUserId,
                 CreatedByUserName = school.CreatedByUserName
@@ -35,11 +35,21 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewSchool()
+        public ActionResult AddNewSchool(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            School _item = new School();
-            return View(_item);
+            if (id != null)
+            {
+                ViewBag.AlreadyExists = false;
+
+                School _item = School.GetById(id.Value);
+                return View(_item);
+            }
+            else
+            {
+                ViewBag.AlreadyExists = false;
+                School _item = new School();
+                return View(_item);
+            }
         }
         [HttpPost]
         public ActionResult AddNewSchool(School model)
@@ -47,18 +57,34 @@ namespace Sinaicsp_MVC.Controllers
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
-                bool isAdded = School.AddNew(model.Name, ApplicationHelper.LoggedUserId);
-                if(isAdded)
+                if (model.Id != 0)
                 {
-                    return RedirectToAction("Index");
+                    bool IsUpdated = School.Update(model.Id, model.Name);
+                    if (IsUpdated)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    bool isAdded = School.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 ViewBag.AlreadyExists = true;
                 return View(model);
-            }else
+            }
+            else
             {
                 return View(model);
             }
         }
-
+        public ActionResult Delete(int id)
+        {
+            School.SoftDelete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

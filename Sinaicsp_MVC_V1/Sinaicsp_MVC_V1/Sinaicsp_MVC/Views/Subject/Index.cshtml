@@ -14,6 +14,8 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
+          columns.Template(e => { }).ClientTemplate("<a href='Subject/AddNewSubject/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='Subject/Delete/#= Id #'>Delete</a>").Width(85);
+
           columns.Bound(c => c.ParentName);
           columns.Bound(c => c.Name);
           columns.Bound(c => c.CreatedOn);

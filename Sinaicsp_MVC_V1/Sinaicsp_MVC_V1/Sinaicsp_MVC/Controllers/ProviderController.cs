@@ -24,7 +24,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = item.Id,
                 Name = item.Name,
-                IsDeleted = item.IsDeleted,
+               // IsDeleted = item.IsDeleted,
                 CreatedOn = item.CreatedOn,
                 CreatedByUserId = item.CreatedByUserId,
                 CreatedByUserName = item.CreatedByUserName
@@ -32,11 +32,21 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewProvider()
+        public ActionResult AddNewProvider(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            Provider _item = new Provider();
-            return View(_item);
+            if (id != null)
+            {
+                ViewBag.AlreadyExists = false;
+
+                Provider _item = Provider.GetById(id.Value);
+                return View(_item);
+            }
+            else
+            {
+                ViewBag.AlreadyExists = false;
+                Provider _item = new Provider();
+                return View(_item);
+            }
         }
         [HttpPost]
         public ActionResult AddNewProvider(Provider model)
@@ -44,10 +54,21 @@ namespace Sinaicsp_MVC.Controllers
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
-                bool isAdded = Provider.AddNew(model.Name, ApplicationHelper.LoggedUserId);
-                if (isAdded)
+                if (model.Id != 0)
                 {
-                    return RedirectToAction("Index");
+                    bool IsUpdated = Provider.Update(model.Id, model.Name);
+                    if (IsUpdated)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    bool isAdded = Provider.AddNew(model.Name, ApplicationHelper.LoggedUserId);
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 ViewBag.AlreadyExists = true;
                 return View(model);
@@ -56,6 +77,11 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+        public ActionResult Delete(int id)
+        {
+            Provider.SoftDelete(id);
+            return RedirectToAction("Index");
         }
     }
 }

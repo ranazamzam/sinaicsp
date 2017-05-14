@@ -27,7 +27,7 @@ namespace Sinaicsp_MVC.Controllers
                 Email = _item.Email,
                 Title = _item.Title,
                 SchoolName = _item.School.Name,
-                IsDeleted = _item.IsDeleted,
+                //IsDeleted = _item.IsDeleted,
                 CreatedOn = _item.CreatedOn,
                 CreatedByUserId = _item.CreatedByUserId,
                 CreatedByUserName = _item.CreatedByUserName
@@ -35,12 +35,22 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result);
         }
-        public ActionResult AddNewTeacher()
+        public ActionResult AddNewTeacher(int? id)
         {
-            ViewBag.AlreadyExists = false;
-            Teacher _item = new Teacher();
-            ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
-            return View(_item);
+            if (id != null)
+            {
+                ViewBag.AlreadyExists = false;
+                Teacher _item =Teacher.GetById(id.Value);
+                ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
+                return View(_item);
+            }
+            else
+            {
+                ViewBag.AlreadyExists = false;
+                Teacher _item = new Teacher();
+                ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
+                return View(_item);
+            }
         }
         [HttpPost]
         public ActionResult AddNewTeacher(Teacher model)
@@ -50,10 +60,21 @@ namespace Sinaicsp_MVC.Controllers
 
             if (ModelState.IsValid)
             {
-                bool isAdded = Teacher.AddNew(model.SchoolId, model.UserName, model.Email, model.Title, ApplicationHelper.LoggedUserId);
-                if (isAdded)
+                if (model.Id != 0)
                 {
-                    return RedirectToAction("Index");
+                    bool IsUpdated = Teacher.Update(model.Id, model.UserName, model.Email, model.Title);
+                    if (IsUpdated)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    bool isAdded = Teacher.AddNew(model.SchoolId, model.UserName, model.Email, model.Title, ApplicationHelper.LoggedUserId);
+                    if (isAdded)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
                 ViewBag.AlreadyExists = true;
@@ -63,6 +84,11 @@ namespace Sinaicsp_MVC.Controllers
             {
                 return View(model);
             }
+        }
+        public ActionResult Delete(int id)
+        {
+            Student.SoftDelete(id);
+            return RedirectToAction("Index");
         }
     }
 }

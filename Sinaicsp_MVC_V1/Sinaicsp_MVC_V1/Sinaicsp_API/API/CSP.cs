@@ -74,7 +74,7 @@ namespace Sinaicsp_API
         public static List<CSP> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.CSPs.ToList();
+            return _context.CSPs.Where(a => a.IsDeleted == false).ToList();
         }
         public static CSP GetById(int id)
         {

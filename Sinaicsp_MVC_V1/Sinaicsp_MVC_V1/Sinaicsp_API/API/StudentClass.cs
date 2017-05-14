@@ -36,7 +36,7 @@ namespace Sinaicsp_API
         public static List<StudentClass> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.StudentClasses.ToList();
+            return _context.StudentClasses.Where(a => a.IsDeleted == false).ToList();
         }
         public static StudentClass GetById(int id)
         {
