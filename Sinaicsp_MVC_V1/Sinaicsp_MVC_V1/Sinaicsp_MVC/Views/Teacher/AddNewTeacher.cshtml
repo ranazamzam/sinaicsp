@@ -32,7 +32,7 @@
                         }
                         else
                         {
-                            @Html.DropDownListFor(a => a.SchoolId, ViewBag.AllSchools as SelectList, new { disabled = "disabled" })
+                            @Html.DropDownListFor(a => a.SchoolId, ViewBag.AllSchools++ as SelectList, new { disabled = "disabled" })
                             @Html.HiddenFor(x => x.SchoolId)
 
 
