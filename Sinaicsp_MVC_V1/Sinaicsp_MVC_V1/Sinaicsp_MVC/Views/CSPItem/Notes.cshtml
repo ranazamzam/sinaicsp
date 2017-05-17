@@ -1,0 +1,229 @@
+﻿@model Sinaicsp_API.CSP
+@{
+    ViewBag.Title = "CSP Notes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#g_operations').css('display', 'block');
+    });
+    function SaveCSPNotes() {
+        var txt_comment = $('#txt_comment').val();
+        var txt_febNote = $('#txt_febNote').val();
+        var txt_juneNote = $('#txt_juneNote').val();
+        var mitemId = '@Model.Id';
+        jQuery.ajax({
+            type: 'GET',
+            url: '/CSPItem/SaveCSPNotes',
+            data: { itemId: mitemId, comment: txt_comment, febNotes: txt_febNote, juneNotes: txt_juneNote },
+            success: function (data) {
+                var url = '@Url.Action("Notes", "CSPItem", new {id=Model.Id  })';
+                window.location.href = url;
+            }
+        });
+    }
+
+    function AddNewCSPGoalCatalog() {
+        var txt_goal = $('#txt_goal').val();
+        var ddl_Dateinitiated = $('#ddl_Dateinitiated').val();
+        var ParentGoal = $('#ParentGoal').val();
+        var rate1 = $('#rate1').val();
+        var rate2 = $('#rate2').val();
+        var rate3 = $('#rate3').val();
+
+        var mitemId = '@Model.Id';
+        jQuery.ajax({
+            type: 'GET',
+            url: '/CSPItem/AddNewCSPGoalCatalog',
+            data: { parentId: ParentGoal, CSPId: mitemId, dateInitiated: ddl_Dateinitiated, rate1: rate1, rate2: rate2, rate3: rate3, textGoal: txt_goal },
+            success: function (data) {
+                var url = '@Url.Action("Notes", "CSPItem", new {id=Model.Id  })';
+                window.location.href = url;
+            }
+        });
+    }
+    function GetCSPId() {
+        return {
+            cspId: '@Model.Id'
+        }
+    }
+    function DeleteCSPGoalCatalog(ItemId) {
+        var r = confirm("are you sure you want to delete that item?");
+        if (r == true) {
+            jQuery.ajax({
+                type: 'GET',
+                url: '/CSPItem/RemoveCSPGoalCatalog',
+                data: { id: ItemId },
+                success: function (data) {
+                    
+                }
+            });
+        }
+    }
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">CSP Notes</h4>
+    <div class="widgetcontent">
+        <table>
+            <tr>
+                <td style="width:70px"></td>
+                <td style="width:240px"><a href="@Url.Action("PreviousCSP",new { id = Model.Id})" class="btn btn-primary"><< Previous</a></td>
+                <td style="width:70px"></td>
+                <td style="text-align:right">
+
+                    <a href="@Url.Action("NextCSP",new { id = Model.Id})" class="btn btn-primary">Next >></a>
+                </td>
+            </tr>
+            <tr style="height:20px"></tr>
+            <tr>
+                <td style="width:70px">
+                    Student
+                </td>
+                <td style="width:240px">
+                    <input type="text" style="width:195px" disabled value="@Model.Student.FullName" />
+                </td>
+                <td style="width:70px">
+                    School
+                </td>
+                <td>
+                    <input type="text" style="width:195px" disabled value="@Model.Student.SchoolName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Subject
+                </td>
+                <td>
+                    <input type="text" style="width:195px" disabled value="@Model.SubjectName" />
+                </td>
+                <td>
+                    School Year
+                </td>
+                <td>
+                    <input type="text" style="width:195px" disabled value="@Model.SchoolYearName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Materials
+                </td>
+                <td colspan="3">
+                    <input type="text" style="width:505px" disabled value="@Model.Materials" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Teachers
+                </td>
+                <td colspan="3">
+                    <input type="text" style="width:505px" disabled value="@Model.TeacherNames" />
+                </td>
+            </tr>
+        </table>
+        <div class="widgetbox">
+            <h4 class="widgettitle">Goal Catalog</h4>
+            <div class="widgetcontent">
+                <table>
+                    <tr>
+                        <td style="width:80px;vertical-align:top">Parent Goal :</td>
+
+                        <td>@Html.DropDownList("ParentGoal", ViewBag.allGoals as SelectList, new { @Style = "width:264px" })</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px;vertical-align:top">
+                            Goal :
+                        </td>
+                        <td style="width:280px;vertical-align:top">
+                            <textarea id="txt_goal" rows="4" style="width:250px;vertical-align:top"></textarea>
+                        </td>
+
+                        <td>
+                            <table>
+                                <tr>
+                                    <td style="width:85px;vertical-align:top">Date initiated :</td>
+                                    <td style="vertical-align:top;width:250px">@Html.DropDownList("ddl_Dateinitiated", ViewBag.AllDateInitiated as SelectList)</td>
+                                    <td style="text-align:right">@ViewBag.rate1 &nbsp;&nbsp;</td>
+                                    <td>@Html.DropDownList("rate1", ViewBag.AllRates as SelectList)</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">@ViewBag.rate2 &nbsp;&nbsp;</td>
+                                    <td>@Html.DropDownList("rate2", ViewBag.AllRates as SelectList)</td>
+
+                                    <td style="text-align:right">@ViewBag.rate3 &nbsp;&nbsp;</td>
+                                    <td>@Html.DropDownList("rate3", ViewBag.AllRates as SelectList)</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a onclick="AddNewCSPGoalCatalog()" class="btn btn-primary">Add</a></td>
+                    </tr>
+                </table>
+                @(Html.Kendo().Grid<Sinaicsp_API.CSPGoalCatalog>()
+                          .Name("GoalCatalogGrid")
+                          .HtmlAttributes(new { style = "height:500px" })
+                          .Columns(columns =>
+                          {
+                              columns.Template(e => { }).ClientTemplate("<a onclick= \"DeleteCSPGoalCatalog(#= Id #)\" href=''>Delete</a>").Width(85);
+                              columns.Bound(c => c.ParentName);
+                              columns.Bound(c => c.TextGoal);
+                              columns.Bound(c => c.DateInitiated).Title("Date Initiated");
+                              columns.Bound(c => c.Rate1).Title(ViewBag.rate1);
+                              columns.Bound(c => c.Rate2).Title(ViewBag.rate2);
+                              columns.Bound(c => c.Rate3).Title(ViewBag.rate3);
+                              columns.Bound(c => c.CreatedOn);
+                              columns.Bound(c => c.CreatedByUserName);
+                          })
+                          .Groupable()
+                          .ColumnMenu()
+                          .Sortable(sortable =>
+                          {
+                              sortable.SortMode(GridSortMode.SingleColumn);
+                          })
+                          .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5))
+                          .Filterable()
+                          .Scrollable()
+                          .DataSource(dataSource => dataSource
+                              .Ajax()
+                              .PageSize(20)
+                              .Read(read => read.Action("CSPGoaCatalog_Read", "CSPItem").Data("GetCSPId"))
+                          )
+                )
+            </div>
+        </div>
+        <div class="widgetbox">
+            <h4 class="widgettitle"></h4>
+            <div class="widgetcontent">
+                <table>
+                    <tr>
+                        <td style="width:120px">Comment :</td>
+                        <td>
+
+                            <textarea id="txt_comment" rows="5" style="width:441px">@Model.Comments</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>February Notes :</td>
+                        <td><textarea id="txt_febNote" rows="5" style="width:441px">@Model.FebruaryNotes</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>June Notes :</td>
+                        <td><textarea rows="5" id="txt_juneNote" style="width:441px">@Model.JuneNotes</textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="#" onclick="SaveCSPNotes()" class="btn btn-primary">Save</a>
+                            <a class="btn btn-primary">Cancel</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

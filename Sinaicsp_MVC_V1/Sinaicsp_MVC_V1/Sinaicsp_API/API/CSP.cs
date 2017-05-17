@@ -81,13 +81,46 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.CSPs.FirstOrDefault(a => a.Id == id);
         }
+        public static int GetNextCSP(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            List<CSP> allStudentCSPs = _context.CSPs.Where(a => a.Id == id).FirstOrDefault().Student.CSPs.ToList();
+            List<int> allStudentIds = allStudentCSPs.OrderBy(a => a.Id).Select(a => a.Id).ToList();
+            int currentIndex = allStudentIds.IndexOf(id);
+            if (currentIndex < allStudentCSPs.Count - 1)
+            {
+                currentIndex++;
+                return allStudentIds[currentIndex];
+            }
+            else
+            {
+                return id;
+            }
+        }
+        public static int GetPreviousCSP(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            List<CSP> allStudentCSPs = _context.CSPs.Where(a => a.Id == id).FirstOrDefault().Student.CSPs.ToList();
+            List<int> allStudentIds = allStudentCSPs.OrderBy(a => a.Id).Select(a => a.Id).ToList();
+            int currentIndex = allStudentIds.IndexOf(id);
+
+            if (currentIndex > 0)
+            {
+                currentIndex--;
+                return allStudentIds[currentIndex];
+            }
+            else
+            {
+                return id;
+            }
+        }
         public static bool AddNew(int studentId, int subjectId, int schoolYearId, string matrials, List<int> teacherIds, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             CSP _item = new Sinaicsp_API.CSP();
             _item.SubjectId = subjectId;
             _item.StudentId = studentId;
-            _item.SchoolYearId= schoolYearId;
+            _item.SchoolYearId = schoolYearId;
             _item.Materials = matrials;
             foreach (int item in teacherIds)
             {
@@ -113,7 +146,7 @@ namespace Sinaicsp_API
             _item.IsDeleted = true;
             _context.SaveChanges();
         }
-        public static void SaveCSPNotes(int cspId, string comments,string februaryNotes,string juneNotes)
+        public static void SaveCSPNotes(int cspId, string comments, string februaryNotes, string juneNotes)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             CSP _item = _context.CSPs.FirstOrDefault(a => a.Id == cspId);

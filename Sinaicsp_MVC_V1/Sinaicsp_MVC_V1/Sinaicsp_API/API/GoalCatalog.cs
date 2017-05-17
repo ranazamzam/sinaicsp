@@ -38,7 +38,7 @@ namespace Sinaicsp_API
         {
             get
             {
-                return ParentGoalCatalog != null ? ParentGoalCatalog.TextGoal : string.Empty;
+                return ParentGoalCatalog != null ? ParentGoalCatalog.TextGoal : "None";
             }
         }
         public string CreatedOn

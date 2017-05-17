@@ -14,10 +14,10 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='GoalCatalog/AddNewGoalCatalog/ParentId=#= Id #'>New Sub Goal</a><br/><a href='GoalCatalog/AddNewGoalCatalog/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='GoalCatalog/Delete/#= Id #'>Delete</a>").Width(150);
+          columns.Template(e => { }).ClientTemplate("<a href='GoalCatalog/AddNewGoalCatalog?ParentId=#= Id #'>New Sub Goal</a><br/><a href='GoalCatalog/AddNewGoalCatalog/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='GoalCatalog/Delete/#= Id #'>Delete</a>").Width(150);
           columns.Bound(c => c.SubjectName);
-          columns.Bound(c => c.ParentName);
           columns.Bound(c => c.TextGoal);
+          columns.Bound(c => c.ParentName);
           columns.Bound(c => c.CreatedOn);
           columns.Bound(c => c.CreatedByUserName);
       })
@@ -34,7 +34,7 @@
       .Filterable()
       .Scrollable()
       .DataSource(dataSource => dataSource
-          .Ajax()
+          .Ajax().Group(g => g.Add(c => c.ParentName))
           .PageSize(20)
           .Read(read => read.Action("GoalCatalogs_Read", "GoalCatalog"))
       )

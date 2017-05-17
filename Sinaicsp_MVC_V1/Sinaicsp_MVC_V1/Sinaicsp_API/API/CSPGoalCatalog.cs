@@ -24,6 +24,13 @@ namespace Sinaicsp_API
                 }
             }
         }
+        public string ParentName
+        {
+            get
+            {
+                return ParentCSPGoalCatalog != null ? ParentCSPGoalCatalog.TextGoal : "NONE";
+            }
+        }
         public string CreatedOn
         {
             get

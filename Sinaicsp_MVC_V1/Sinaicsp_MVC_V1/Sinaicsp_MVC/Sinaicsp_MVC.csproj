@@ -1621,6 +1621,7 @@
     <Content Include="Views\Rating\AddNewRating.cshtml" />
     <Content Include="Views\GoalCatalog\Index.cshtml" />
     <Content Include="Views\GoalCatalog\AddNewGoalCatalog.cshtml" />
+    <Content Include="Views\CSPItem\Notes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
