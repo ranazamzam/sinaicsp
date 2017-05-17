@@ -114,5 +114,19 @@ namespace Sinaicsp_API
         public string SessionLength { get; set; }
 
     }
+    public class RatingMetadata
+    {
+        [Required(ErrorMessage = "*")]
+        public string RateValue { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string Description { get; set; }
+    }
+    public class GoalCatalogMetadata
+    {
+        [Required(ErrorMessage = "*")]
+        public string TextGoal { get; set; }
+        [Required(ErrorMessage = "*")]
+        int SubjectId { get; set; }
+    }
     
 }

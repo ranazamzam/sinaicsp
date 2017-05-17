@@ -1,0 +1,44 @@
+﻿<script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#g_definitions').css('display', 'block');
+        });
+</script>
+<div class="widgetbox" style="min-height:610px">
+    <h4 class="widgettitle">Goal Catalogs</h4>
+
+
+    <div class="widgetcontent">
+        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog")">Add New Goal Catalog</a>
+        @(Html.Kendo().Grid<Sinaicsp_API.GoalCatalog>()
+      .Name("grid")
+      .HtmlAttributes(new { style = "height:500px" })
+      .Columns(columns =>
+      {
+          columns.Template(e => { }).ClientTemplate("<a href='GoalCatalog/AddNewGoalCatalog/ParentId=#= Id #'>New Sub Goal</a><br/><a href='GoalCatalog/AddNewGoalCatalog/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='GoalCatalog/Delete/#= Id #'>Delete</a>").Width(150);
+          columns.Bound(c => c.SubjectName);
+          columns.Bound(c => c.ParentName);
+          columns.Bound(c => c.TextGoal);
+          columns.Bound(c => c.CreatedOn);
+          columns.Bound(c => c.CreatedByUserName);
+      })
+      .Groupable()
+      .ColumnMenu()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(20)
+          .Read(read => read.Action("GoalCatalogs_Read", "GoalCatalog"))
+      )
+        )
+
+    </div>
+</div>

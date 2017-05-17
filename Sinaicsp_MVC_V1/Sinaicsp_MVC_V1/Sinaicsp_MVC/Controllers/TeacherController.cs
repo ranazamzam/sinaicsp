@@ -87,7 +87,7 @@ namespace Sinaicsp_MVC.Controllers
         }
         public ActionResult Delete(int id)
         {
-            Student.SoftDelete(id);
+            Teacher.SoftDelete(id);
             return RedirectToAction("Index");
         }
     }

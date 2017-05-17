@@ -44,5 +44,8 @@ namespace Sinaicsp_API
         public virtual DbSet<Provider> Providers { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<StudentService> StudentServices { get; set; }
+        public virtual DbSet<GoalCatalog> GoalCatalogs { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<CSPGoalCatalog> CSPGoalCatalogs { get; set; }
     }
 }

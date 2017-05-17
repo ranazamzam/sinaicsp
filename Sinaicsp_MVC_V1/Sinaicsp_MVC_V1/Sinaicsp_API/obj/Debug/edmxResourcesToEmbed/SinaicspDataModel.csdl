@@ -100,6 +100,25 @@
       <End Role="SchoolYear" EntitySet="SchoolYears" />
       <End Role="CSP" EntitySet="CSPs" />
     </AssociationSet>
+    <EntitySet Name="GoalCatalogs" EntityType="SinaicspDataModel.GoalCatalog" />
+    <AssociationSet Name="GoalCatalogGoalCatalog" Association="SinaicspDataModel.GoalCatalogGoalCatalog">
+      <End Role="GoalCatalog" EntitySet="GoalCatalogs" />
+      <End Role="GoalCatalog1" EntitySet="GoalCatalogs" />
+    </AssociationSet>
+    <AssociationSet Name="SubjectGoalCatalog" Association="SinaicspDataModel.SubjectGoalCatalog">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="GoalCatalog" EntitySet="GoalCatalogs" />
+    </AssociationSet>
+    <EntitySet Name="Ratings" EntityType="SinaicspDataModel.Rating" />
+    <EntitySet Name="CSPGoalCatalogs" EntityType="SinaicspDataModel.CSPGoalCatalog" />
+    <AssociationSet Name="CSPCSPGoalCatalog" Association="SinaicspDataModel.CSPCSPGoalCatalog">
+      <End Role="CSP" EntitySet="CSPs" />
+      <End Role="CSPGoalCatalog" EntitySet="CSPGoalCatalogs" />
+    </AssociationSet>
+    <AssociationSet Name="CSPGoalCatalogCSPGoalCatalog" Association="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog">
+      <End Role="CSPGoalCatalog" EntitySet="CSPGoalCatalogs" />
+      <End Role="CSPGoalCatalog1" EntitySet="CSPGoalCatalogs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUser">
     <Key>
@@ -366,6 +385,7 @@
     <Property Name="ParentId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.SubjectCSP" FromRole="Subject" ToRole="CSP" />
     <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.SubjectLock" FromRole="Subject" ToRole="Lock" />
+    <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.SubjectGoalCatalog" FromRole="Subject" ToRole="GoalCatalog" />
   </EntityType>
   <Association Name="SubjectSubject">
     <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="0..1" />
@@ -407,6 +427,10 @@
     <Property Name="Materials" Type="String" Nullable="false" />
     <NavigationProperty Name="SchoolYear" Relationship="SinaicspDataModel.SchoolYearCSP" FromRole="CSP" ToRole="SchoolYear" />
     <Property Name="SchoolYearId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CSPGoalCatalogs" Relationship="SinaicspDataModel.CSPCSPGoalCatalog" FromRole="CSP" ToRole="CSPGoalCatalog" />
+    <Property Name="Comments" Type="String" Nullable="false" />
+    <Property Name="FebruaryNotes" Type="String" Nullable="false" />
+    <Property Name="JuneNotes" Type="String" Nullable="false" />
   </EntityType>
   <Association Name="StudentCSP">
     <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
@@ -606,6 +630,99 @@
       </Principal>
       <Dependent Role="CSP">
         <PropertyRef Name="SchoolYearId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GoalCatalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="TextGoal" Type="String" Nullable="false" />
+    <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog" ToRole="GoalCatalog1" />
+    <NavigationProperty Name="ParentGoalCatalog" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog1" ToRole="GoalCatalog" />
+    <Property Name="ParentGoalCatalogId" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectGoalCatalog" FromRole="GoalCatalog" ToRole="Subject" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="GoalCatalogGoalCatalog">
+    <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="0..1" />
+    <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoalCatalog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoalCatalog1">
+        <PropertyRef Name="ParentGoalCatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubjectGoalCatalog">
+    <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoalCatalog">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="RateValue" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CSPGoalCatalog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="TextGoal" Type="String" Nullable="false" />
+    <NavigationProperty Name="CSP" Relationship="SinaicspDataModel.CSPCSPGoalCatalog" FromRole="CSPGoalCatalog" ToRole="CSP" />
+    <Property Name="CSPId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CSPGoalCatalogs" Relationship="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" FromRole="CSPGoalCatalog" ToRole="CSPGoalCatalog1" />
+    <NavigationProperty Name="ParentCSPGoalCatalog" Relationship="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" FromRole="CSPGoalCatalog1" ToRole="CSPGoalCatalog" />
+    <Property Name="ParentCSPGoalCatalogId" Type="Int32" Nullable="true" />
+    <Property Name="DateInitiated" Type="String" Nullable="false" />
+    <Property Name="Rate1" Type="String" Nullable="false" />
+    <Property Name="Rate2" Type="String" Nullable="false" />
+    <Property Name="Rate3" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="CSPCSPGoalCatalog">
+    <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="1" />
+    <End Type="SinaicspDataModel.CSPGoalCatalog" Role="CSPGoalCatalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSPGoalCatalog">
+        <PropertyRef Name="CSPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CSPGoalCatalogCSPGoalCatalog">
+    <End Type="SinaicspDataModel.CSPGoalCatalog" Role="CSPGoalCatalog" Multiplicity="0..1" />
+    <End Type="SinaicspDataModel.CSPGoalCatalog" Role="CSPGoalCatalog1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CSPGoalCatalog">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CSPGoalCatalog1">
+        <PropertyRef Name="ParentCSPGoalCatalogId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

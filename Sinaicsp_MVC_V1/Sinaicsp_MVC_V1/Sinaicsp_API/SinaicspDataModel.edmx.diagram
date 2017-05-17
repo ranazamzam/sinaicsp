@@ -44,6 +44,13 @@
         <AssociationConnector Association="SinaicspDataModel.StudentStudentService" />
         <AssociationConnector Association="SinaicspDataModel.ServiceStudentService" />
         <AssociationConnector Association="SinaicspDataModel.SchoolYearCSP" />
+        <EntityTypeShape EntityType="SinaicspDataModel.GoalCatalog" Width="2.75" PointX="15" PointY="0.5" />
+        <AssociationConnector Association="SinaicspDataModel.GoalCatalogGoalCatalog" />
+        <AssociationConnector Association="SinaicspDataModel.SubjectGoalCatalog" />
+        <EntityTypeShape EntityType="SinaicspDataModel.Rating" Width="1.5" PointX="18.25" PointY="0.875" />
+        <EntityTypeShape EntityType="SinaicspDataModel.CSPGoalCatalog" Width="2.625" PointX="12" PointY="3.125" />
+        <AssociationConnector Association="SinaicspDataModel.CSPCSPGoalCatalog" />
+        <AssociationConnector Association="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

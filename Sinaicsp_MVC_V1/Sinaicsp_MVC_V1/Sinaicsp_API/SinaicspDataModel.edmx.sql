@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/07/2017 13:53:42
--- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/17/2017 05:17:43
+-- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -73,6 +73,9 @@ IF OBJECT_ID(N'[dbo].[FK_StudentStudentService]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ServiceStudentService]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StudentServices] DROP CONSTRAINT [FK_ServiceStudentService];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolYearCSP]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CSPs] DROP CONSTRAINT [FK_SchoolYearCSP];
 GO
 
 -- --------------------------------------------------
@@ -305,7 +308,10 @@ CREATE TABLE [dbo].[CSPs] (
     [StudentId] int  NOT NULL,
     [SubjectId] int  NOT NULL,
     [Materials] nvarchar(max)  NOT NULL,
-    [SchoolYearId] int  NOT NULL
+    [SchoolYearId] int  NOT NULL,
+    [Comments] nvarchar(max)  NOT NULL,
+    [FebruaryNotes] nvarchar(max)  NOT NULL,
+    [JuneNotes] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -366,6 +372,45 @@ CREATE TABLE [dbo].[StudentServices] (
     [CreationDate] datetime  NOT NULL,
     [IsDeleted] bit  NOT NULL,
     [CreatedByUserId] int  NOT NULL
+);
+GO
+
+-- Creating table 'GoalCatalogs'
+CREATE TABLE [dbo].[GoalCatalogs] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreatedByUserId] int  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [TextGoal] nvarchar(max)  NOT NULL,
+    [ParentGoalCatalogId] int  NULL,
+    [SubjectId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Ratings'
+CREATE TABLE [dbo].[Ratings] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreatedByUserId] int  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL,
+    [RateValue] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'CSPGoalCatalogs'
+CREATE TABLE [dbo].[CSPGoalCatalogs] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreatedByUserId] int  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [TextGoal] nvarchar(max)  NOT NULL,
+    [CSPId] int  NOT NULL,
+    [ParentCSPGoalCatalogId] int  NULL,
+    [DateInitiated] nvarchar(max)  NOT NULL,
+    [Rate1] nvarchar(max)  NOT NULL,
+    [Rate2] nvarchar(max)  NOT NULL,
+    [Rate3] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -484,6 +529,24 @@ GO
 -- Creating primary key on [Id] in table 'StudentServices'
 ALTER TABLE [dbo].[StudentServices]
 ADD CONSTRAINT [PK_StudentServices]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'GoalCatalogs'
+ALTER TABLE [dbo].[GoalCatalogs]
+ADD CONSTRAINT [PK_GoalCatalogs]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Ratings'
+ALTER TABLE [dbo].[Ratings]
+ADD CONSTRAINT [PK_Ratings]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'CSPGoalCatalogs'
+ALTER TABLE [dbo].[CSPGoalCatalogs]
+ADD CONSTRAINT [PK_CSPGoalCatalogs]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -789,6 +852,66 @@ GO
 CREATE INDEX [IX_FK_SchoolYearCSP]
 ON [dbo].[CSPs]
     ([SchoolYearId]);
+GO
+
+-- Creating foreign key on [ParentGoalCatalogId] in table 'GoalCatalogs'
+ALTER TABLE [dbo].[GoalCatalogs]
+ADD CONSTRAINT [FK_GoalCatalogGoalCatalog]
+    FOREIGN KEY ([ParentGoalCatalogId])
+    REFERENCES [dbo].[GoalCatalogs]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoalCatalogGoalCatalog'
+CREATE INDEX [IX_FK_GoalCatalogGoalCatalog]
+ON [dbo].[GoalCatalogs]
+    ([ParentGoalCatalogId]);
+GO
+
+-- Creating foreign key on [SubjectId] in table 'GoalCatalogs'
+ALTER TABLE [dbo].[GoalCatalogs]
+ADD CONSTRAINT [FK_SubjectGoalCatalog]
+    FOREIGN KEY ([SubjectId])
+    REFERENCES [dbo].[Subjects]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SubjectGoalCatalog'
+CREATE INDEX [IX_FK_SubjectGoalCatalog]
+ON [dbo].[GoalCatalogs]
+    ([SubjectId]);
+GO
+
+-- Creating foreign key on [CSPId] in table 'CSPGoalCatalogs'
+ALTER TABLE [dbo].[CSPGoalCatalogs]
+ADD CONSTRAINT [FK_CSPCSPGoalCatalog]
+    FOREIGN KEY ([CSPId])
+    REFERENCES [dbo].[CSPs]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CSPCSPGoalCatalog'
+CREATE INDEX [IX_FK_CSPCSPGoalCatalog]
+ON [dbo].[CSPGoalCatalogs]
+    ([CSPId]);
+GO
+
+-- Creating foreign key on [ParentCSPGoalCatalogId] in table 'CSPGoalCatalogs'
+ALTER TABLE [dbo].[CSPGoalCatalogs]
+ADD CONSTRAINT [FK_CSPGoalCatalogCSPGoalCatalog]
+    FOREIGN KEY ([ParentCSPGoalCatalogId])
+    REFERENCES [dbo].[CSPGoalCatalogs]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CSPGoalCatalogCSPGoalCatalog'
+CREATE INDEX [IX_FK_CSPGoalCatalogCSPGoalCatalog]
+ON [dbo].[CSPGoalCatalogs]
+    ([ParentCSPGoalCatalogId]);
 GO
 
 -- --------------------------------------------------

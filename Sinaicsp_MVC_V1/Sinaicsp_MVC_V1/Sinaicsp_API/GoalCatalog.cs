@@ -12,32 +12,25 @@ namespace Sinaicsp_API
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class GoalCatalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subject()
+        public GoalCatalog()
         {
-            this.Subjects = new HashSet<Subject>();
-            this.CSPs = new HashSet<CSP>();
-            this.Locks = new HashSet<Lock>();
             this.GoalCatalogs = new HashSet<GoalCatalog>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public System.DateTime CreationDate { get; set; }
-        public bool IsDeleted { get; set; }
         public int CreatedByUserId { get; set; }
-        public Nullable<int> ParentId { get; set; }
+        public bool IsDeleted { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public string TextGoal { get; set; }
+        public Nullable<int> ParentGoalCatalogId { get; set; }
+        public int SubjectId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subject> Subjects { get; set; }
-        public virtual Subject Parent { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CSP> CSPs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lock> Locks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoalCatalog> GoalCatalogs { get; set; }
+        public virtual GoalCatalog ParentGoalCatalog { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }

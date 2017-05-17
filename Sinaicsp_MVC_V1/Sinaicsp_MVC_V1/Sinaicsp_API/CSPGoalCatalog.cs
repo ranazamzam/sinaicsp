@@ -12,33 +12,29 @@ namespace Sinaicsp_API
     using System;
     using System.Collections.Generic;
     
-    public partial class CSP
+    public partial class CSPGoalCatalog
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CSP()
+        public CSPGoalCatalog()
         {
-            this.TeacherCSPs = new HashSet<TeacherCSP>();
             this.CSPGoalCatalogs = new HashSet<CSPGoalCatalog>();
         }
     
         public int Id { get; set; }
-        public System.DateTime CreationDate { get; set; }
-        public bool IsDeleted { get; set; }
         public int CreatedByUserId { get; set; }
-        public int StudentId { get; set; }
-        public int SubjectId { get; set; }
-        public string Materials { get; set; }
-        public int SchoolYearId { get; set; }
-        public string Comments { get; set; }
-        public string FebruaryNotes { get; set; }
-        public string JuneNotes { get; set; }
+        public bool IsDeleted { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public string TextGoal { get; set; }
+        public int CSPId { get; set; }
+        public Nullable<int> ParentCSPGoalCatalogId { get; set; }
+        public string DateInitiated { get; set; }
+        public string Rate1 { get; set; }
+        public string Rate2 { get; set; }
+        public string Rate3 { get; set; }
     
-        public virtual Student Student { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherCSP> TeacherCSPs { get; set; }
-        public virtual Subject Subject { get; set; }
-        public virtual SchoolYear SchoolYear { get; set; }
+        public virtual CSP CSP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CSPGoalCatalog> CSPGoalCatalogs { get; set; }
+        public virtual CSPGoalCatalog ParentCSPGoalCatalog { get; set; }
     }
 }

@@ -180,6 +180,9 @@
           <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
           <ScalarProperty Name="Materials" ColumnName="Materials" />
           <ScalarProperty Name="SchoolYearId" ColumnName="SchoolYearId" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="FebruaryNotes" ColumnName="FebruaryNotes" />
+          <ScalarProperty Name="JuneNotes" ColumnName="JuneNotes" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -245,6 +248,48 @@
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoalCatalogs">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.GoalCatalog)">
+        <MappingFragment StoreEntitySet="GoalCatalogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="TextGoal" ColumnName="TextGoal" />
+          <ScalarProperty Name="ParentGoalCatalogId" ColumnName="ParentGoalCatalogId" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.Rating)">
+        <MappingFragment StoreEntitySet="Ratings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RateValue" ColumnName="RateValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CSPGoalCatalogs">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.CSPGoalCatalog)">
+        <MappingFragment StoreEntitySet="CSPGoalCatalogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="TextGoal" ColumnName="TextGoal" />
+          <ScalarProperty Name="CSPId" ColumnName="CSPId" />
+          <ScalarProperty Name="ParentCSPGoalCatalogId" ColumnName="ParentCSPGoalCatalogId" />
+          <ScalarProperty Name="DateInitiated" ColumnName="DateInitiated" />
+          <ScalarProperty Name="Rate1" ColumnName="Rate1" />
+          <ScalarProperty Name="Rate2" ColumnName="Rate2" />
+          <ScalarProperty Name="Rate3" ColumnName="Rate3" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

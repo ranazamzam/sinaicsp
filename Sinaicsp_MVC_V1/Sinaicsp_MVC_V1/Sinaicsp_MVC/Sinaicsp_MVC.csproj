@@ -1337,9 +1337,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CSPItemController.cs" />
+    <Compile Include="Controllers\GoalCatalogController.cs" />
     <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\SchoolYearController.cs" />
     <Compile Include="Controllers\StudentClassController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -1615,6 +1617,10 @@
     <Content Include="Views\CSPItem\Index.cshtml" />
     <Content Include="Views\UserManagement\Users.cshtml" />
     <Content Include="Views\UserManagement\AddNewUser.cshtml" />
+    <Content Include="Views\Rating\Index.cshtml" />
+    <Content Include="Views\Rating\AddNewRating.cshtml" />
+    <Content Include="Views\GoalCatalog\Index.cshtml" />
+    <Content Include="Views\GoalCatalog\AddNewGoalCatalog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

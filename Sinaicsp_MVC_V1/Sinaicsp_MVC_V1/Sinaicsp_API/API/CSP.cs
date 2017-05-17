@@ -97,18 +97,29 @@ namespace Sinaicsp_API
                 _juTable.CreatedByUserId = LoggeduserId;
                 _item.TeacherCSPs.Add(_juTable);
             }
+            _item.Comments = string.Empty;
+            _item.FebruaryNotes = string.Empty;
+            _item.JuneNotes = string.Empty;
             _item.CreationDate = DateTime.Now;
             _item.CreatedByUserId = LoggeduserId;
             _context.CSPs.Add(_item);
             _context.SaveChanges();
             return true;
         }
-
         public static void SoftDelete(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             CSP _item = _context.CSPs.FirstOrDefault(a => a.Id == id);
             _item.IsDeleted = true;
+            _context.SaveChanges();
+        }
+        public static void SaveCSPNotes(int cspId, string comments,string februaryNotes,string juneNotes)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            CSP _item = _context.CSPs.FirstOrDefault(a => a.Id == cspId);
+            _item.Comments = comments;
+            _item.FebruaryNotes = februaryNotes;
+            _item.JuneNotes = juneNotes;
             _context.SaveChanges();
         }
     }
