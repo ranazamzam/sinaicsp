@@ -34,7 +34,7 @@ namespace Sinaicsp_MVC.Controllers
         }
         public ActionResult AddNewGoalCatalog(int? id)
         {
-            ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
+            ViewBag.AllSubjects = new SelectList(GC_Subjects.GetAll(), "Id", "Name");
             List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAll();
             allGoalCatalog.Insert(0, new GoalCatalog() { Id = -1, TextGoal = "NONE" });
             ViewBag.AllGoals = new SelectList(allGoalCatalog, "Id", "TextGoal");
@@ -65,7 +65,7 @@ namespace Sinaicsp_MVC.Controllers
             List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAll();
             allGoalCatalog.Insert(0, new GoalCatalog() { Id = -1, TextGoal = "NONE" });
             ViewBag.AllGoals = new SelectList(allGoalCatalog, "Id", "TextGoal");
-            ViewBag.AllSubjects = new SelectList(Subject.GetAll(), "Id", "Name");
+            ViewBag.AllSubjects = new SelectList(GC_Subjects.GetAll(), "Id", "Name");
             ViewBag.AlreadyExists = false;
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Sinaicsp_MVC.Controllers
                 }
                 else
                 {
-                    bool isAdded = GoalCatalog.AddNew(model.ParentGoalCatalogId != -1 ? model.ParentGoalCatalogId : null, model.SubjectId, model.TextGoal, ApplicationHelper.LoggedUserId);
+                    bool isAdded = GoalCatalog.AddNew(model.ParentGoalCatalogId != -1 ? model.ParentGoalCatalogId : null, model.GC_SubjectsId, model.TextGoal, ApplicationHelper.LoggedUserId);
                     if (isAdded)
                     {
                         return RedirectToAction("Index");

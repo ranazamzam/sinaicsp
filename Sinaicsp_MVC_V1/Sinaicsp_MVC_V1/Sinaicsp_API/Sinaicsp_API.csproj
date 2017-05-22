@@ -61,6 +61,8 @@
     <Compile Include="API\CSP.cs" />
     <Compile Include="API\CSPGoalCatalog.cs" />
     <Compile Include="API\Enums.cs" />
+    <Compile Include="API\GC_Category.cs" />
+    <Compile Include="API\GC_Subjects.cs" />
     <Compile Include="API\GoalCatalog.cs" />
     <Compile Include="API\Inclusion.cs" />
     <Compile Include="API\Provider.cs" />

@@ -260,7 +260,7 @@
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="TextGoal" ColumnName="TextGoal" />
           <ScalarProperty Name="ParentGoalCatalogId" ColumnName="ParentGoalCatalogId" />
-          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="GC_SubjectsId" ColumnName="GC_SubjectsId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -291,6 +291,29 @@
           <ScalarProperty Name="Rate1" ColumnName="Rate1" />
           <ScalarProperty Name="Rate2" ColumnName="Rate2" />
           <ScalarProperty Name="Rate3" ColumnName="Rate3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GC_Category">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.GC_Category)">
+        <MappingFragment StoreEntitySet="GC_Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GC_Subjects">
+      <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.GC_Subjects)">
+        <MappingFragment StoreEntitySet="GC_Subjects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GC_CategoryId" ColumnName="GC_CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -105,10 +105,6 @@
       <End Role="GoalCatalog" EntitySet="GoalCatalogs" />
       <End Role="GoalCatalog1" EntitySet="GoalCatalogs" />
     </AssociationSet>
-    <AssociationSet Name="SubjectGoalCatalog" Association="SinaicspDataModel.SubjectGoalCatalog">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="GoalCatalog" EntitySet="GoalCatalogs" />
-    </AssociationSet>
     <EntitySet Name="Ratings" EntityType="SinaicspDataModel.Rating" />
     <EntitySet Name="CSPGoalCatalogs" EntityType="SinaicspDataModel.CSPGoalCatalog" />
     <AssociationSet Name="CSPCSPGoalCatalog" Association="SinaicspDataModel.CSPCSPGoalCatalog">
@@ -122,6 +118,16 @@
     <AssociationSet Name="SchoolRating" Association="SinaicspDataModel.SchoolRating">
       <End Role="School" EntitySet="Schools" />
       <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
+    <EntitySet Name="GC_Category" EntityType="SinaicspDataModel.GC_Category" />
+    <EntitySet Name="GC_Subjects" EntityType="SinaicspDataModel.GC_Subjects" />
+    <AssociationSet Name="GC_CategoryGC_Subjects" Association="SinaicspDataModel.GC_CategoryGC_Subjects">
+      <End Role="GC_Category" EntitySet="GC_Category" />
+      <End Role="GC_Subjects" EntitySet="GC_Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="GC_SubjectsGoalCatalog" Association="SinaicspDataModel.GC_SubjectsGoalCatalog">
+      <End Role="GC_Subjects" EntitySet="GC_Subjects" />
+      <End Role="GoalCatalog" EntitySet="GoalCatalogs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUser">
@@ -390,7 +396,6 @@
     <Property Name="ParentId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.SubjectCSP" FromRole="Subject" ToRole="CSP" />
     <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.SubjectLock" FromRole="Subject" ToRole="Lock" />
-    <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.SubjectGoalCatalog" FromRole="Subject" ToRole="GoalCatalog" />
   </EntityType>
   <Association Name="SubjectSubject">
     <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="0..1" />
@@ -650,8 +655,8 @@
     <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog" ToRole="GoalCatalog1" />
     <NavigationProperty Name="ParentGoalCatalog" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog1" ToRole="GoalCatalog" />
     <Property Name="ParentGoalCatalogId" Type="Int32" Nullable="true" />
-    <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectGoalCatalog" FromRole="GoalCatalog" ToRole="Subject" />
-    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GC_Subjects" Relationship="SinaicspDataModel.GC_SubjectsGoalCatalog" FromRole="GoalCatalog" ToRole="GC_Subjects" />
+    <Property Name="GC_SubjectsId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="GoalCatalogGoalCatalog">
     <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="0..1" />
@@ -662,18 +667,6 @@
       </Principal>
       <Dependent Role="GoalCatalog1">
         <PropertyRef Name="ParentGoalCatalogId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="SubjectGoalCatalog">
-    <End Type="SinaicspDataModel.Subject" Role="Subject" Multiplicity="1" />
-    <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="GoalCatalog">
-        <PropertyRef Name="SubjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -742,6 +735,54 @@
       </Principal>
       <Dependent Role="Rating">
         <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GC_Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="GC_Subjects" Relationship="SinaicspDataModel.GC_CategoryGC_Subjects" FromRole="GC_Category" ToRole="GC_Subjects" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GC_Subjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="GC_Category" Relationship="SinaicspDataModel.GC_CategoryGC_Subjects" FromRole="GC_Subjects" ToRole="GC_Category" />
+    <Property Name="GC_CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.GC_SubjectsGoalCatalog" FromRole="GC_Subjects" ToRole="GoalCatalog" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="GC_CategoryGC_Subjects">
+    <End Type="SinaicspDataModel.GC_Category" Role="GC_Category" Multiplicity="1" />
+    <End Type="SinaicspDataModel.GC_Subjects" Role="GC_Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GC_Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GC_Subjects">
+        <PropertyRef Name="GC_CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GC_SubjectsGoalCatalog">
+    <End Type="SinaicspDataModel.GC_Subjects" Role="GC_Subjects" Multiplicity="1" />
+    <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GC_Subjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoalCatalog">
+        <PropertyRef Name="GC_SubjectsId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

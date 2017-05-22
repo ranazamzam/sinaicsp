@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/22/2017 11:02:14
--- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/23/2017 00:04:05
+-- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -407,7 +407,7 @@ CREATE TABLE [dbo].[GoalCatalogs] (
     [CreationDate] datetime  NOT NULL,
     [TextGoal] nvarchar(max)  NOT NULL,
     [ParentGoalCatalogId] int  NULL,
-    [SubjectId] int  NOT NULL
+    [GC_SubjectsId] int  NOT NULL
 );
 GO
 
@@ -436,6 +436,27 @@ CREATE TABLE [dbo].[CSPGoalCatalogs] (
     [Rate1] nvarchar(max)  NOT NULL,
     [Rate2] nvarchar(max)  NOT NULL,
     [Rate3] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'GC_Category'
+CREATE TABLE [dbo].[GC_Category] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [CreatedByUserId] int  NOT NULL
+);
+GO
+
+-- Creating table 'GC_Subjects'
+CREATE TABLE [dbo].[GC_Subjects] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [GC_CategoryId] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [IsDeleted] bit  NOT NULL,
+    [CreationDate] datetime  NOT NULL,
+    [CreatedByUserId] int  NOT NULL
 );
 GO
 
@@ -572,6 +593,18 @@ GO
 -- Creating primary key on [Id] in table 'CSPGoalCatalogs'
 ALTER TABLE [dbo].[CSPGoalCatalogs]
 ADD CONSTRAINT [PK_CSPGoalCatalogs]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'GC_Category'
+ALTER TABLE [dbo].[GC_Category]
+ADD CONSTRAINT [PK_GC_Category]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'GC_Subjects'
+ALTER TABLE [dbo].[GC_Subjects]
+ADD CONSTRAINT [PK_GC_Subjects]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -894,21 +927,6 @@ ON [dbo].[GoalCatalogs]
     ([ParentGoalCatalogId]);
 GO
 
--- Creating foreign key on [SubjectId] in table 'GoalCatalogs'
-ALTER TABLE [dbo].[GoalCatalogs]
-ADD CONSTRAINT [FK_SubjectGoalCatalog]
-    FOREIGN KEY ([SubjectId])
-    REFERENCES [dbo].[Subjects]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SubjectGoalCatalog'
-CREATE INDEX [IX_FK_SubjectGoalCatalog]
-ON [dbo].[GoalCatalogs]
-    ([SubjectId]);
-GO
-
 -- Creating foreign key on [CSPId] in table 'CSPGoalCatalogs'
 ALTER TABLE [dbo].[CSPGoalCatalogs]
 ADD CONSTRAINT [FK_CSPCSPGoalCatalog]
@@ -952,6 +970,36 @@ GO
 CREATE INDEX [IX_FK_SchoolRating]
 ON [dbo].[Ratings]
     ([SchoolId]);
+GO
+
+-- Creating foreign key on [GC_CategoryId] in table 'GC_Subjects'
+ALTER TABLE [dbo].[GC_Subjects]
+ADD CONSTRAINT [FK_GC_CategoryGC_Subjects]
+    FOREIGN KEY ([GC_CategoryId])
+    REFERENCES [dbo].[GC_Category]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GC_CategoryGC_Subjects'
+CREATE INDEX [IX_FK_GC_CategoryGC_Subjects]
+ON [dbo].[GC_Subjects]
+    ([GC_CategoryId]);
+GO
+
+-- Creating foreign key on [GC_SubjectsId] in table 'GoalCatalogs'
+ALTER TABLE [dbo].[GoalCatalogs]
+ADD CONSTRAINT [FK_GC_SubjectsGoalCatalog]
+    FOREIGN KEY ([GC_SubjectsId])
+    REFERENCES [dbo].[GC_Subjects]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GC_SubjectsGoalCatalog'
+CREATE INDEX [IX_FK_GC_SubjectsGoalCatalog]
+ON [dbo].[GoalCatalogs]
+    ([GC_SubjectsId]);
 GO
 
 -- --------------------------------------------------

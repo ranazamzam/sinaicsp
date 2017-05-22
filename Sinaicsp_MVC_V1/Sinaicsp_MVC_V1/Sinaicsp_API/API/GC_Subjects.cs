@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sinaicsp_API
 {
-    [MetadataType(typeof(GoalCatalogMetadata))]
-    public partial class GoalCatalog
+   public partial class GC_Subjects
     {
         [Display(Name = "Created By")]
         public string CreatedByUserName
@@ -25,22 +24,6 @@ namespace Sinaicsp_API
                 }
             }
         }
-        [Display(Name = "Subject Name")]
-        public string SubjectName
-        {
-            get
-            {
-                return GC_Subjects.Name;
-            }
-        }
-        [Display(Name = "Parent")]
-        public string ParentName
-        {
-            get
-            {
-                return ParentGoalCatalog != null ? ParentGoalCatalog.TextGoal : "None";
-            }
-        }
         public string CreatedOn
         {
             get
@@ -48,45 +31,47 @@ namespace Sinaicsp_API
                 return CreationDate.ToShortDateString();
             }
         }
-        public static List<GoalCatalog> GetAll()
+        public static List<GC_Subjects> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.GoalCatalogs.Where(a => a.IsDeleted == false).ToList();
+            return _context.GC_Subjects.Where(a => a.IsDeleted == false).ToList();
         }
-        public static GoalCatalog GetById(int id)
+        public static GC_Subjects GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.GoalCatalogs.FirstOrDefault(a => a.Id == id);
+            return _context.GC_Subjects.FirstOrDefault(a => a.Id == id);
         }
-        public static bool AddNew(int? parentId, int GCsubjectId, string textGoal, int LoggeduserId)
+        public static GC_Subjects GetByName(string name)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-
-            GoalCatalog _item = new Sinaicsp_API.GoalCatalog();
-            _item.TextGoal = textGoal;
-            _item.GC_SubjectsId = GCsubjectId;
-            _item.ParentGoalCatalogId = parentId;
+            return _context.GC_Subjects.FirstOrDefault(a => a.Name == name);
+        }
+        public static bool AddNew(int gc_CategoryId, string name, int LoggeduserId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            GC_Subjects _item = new Sinaicsp_API.GC_Subjects();
+            _item.Name = name;
+            _item.GC_CategoryId = gc_CategoryId;
             _item.CreationDate = DateTime.Now;
             _item.CreatedByUserId = LoggeduserId;
-            _context.GoalCatalogs.Add(_item);
+            _context.GC_Subjects.Add(_item);
             _context.SaveChanges();
             return true;
 
-
         }
-        public static bool Update(int id, string textGoal)
+        public static bool Update(int id, string name)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            GoalCatalog itemById = _context.GoalCatalogs.FirstOrDefault(a => a.Id == id);
-            GoalCatalog _item = itemById;
-            _item.TextGoal = textGoal;
+            GC_Subjects itemById = _context.GC_Subjects.FirstOrDefault(a => a.Id == id);
+            GC_Subjects _item = itemById;
+            _item.Name = name;
             _context.SaveChanges();
             return true;
         }
         public static void SoftDelete(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            GoalCatalog _item = _context.GoalCatalogs.FirstOrDefault(a => a.Id == id);
+            GC_Subjects _item = _context.GC_Subjects.FirstOrDefault(a => a.Id == id);
             _item.IsDeleted = true;
             _context.SaveChanges();
         }
