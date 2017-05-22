@@ -32,6 +32,13 @@ namespace Sinaicsp_API
                 return CreationDate.ToShortDateString();
             }
         }
+        public string SchoolName
+        {
+            get
+            {
+                return School != null ? School.Name : string.Empty;
+            }
+        }
         public static List<Rating> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -42,11 +49,12 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Ratings.FirstOrDefault(a => a.Id == id);
         }
-        public static bool AddNew(string rateValue, string description, int LoggeduserId)
+        public static bool AddNew(int schoolId,string rateValue, string description, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
 
             Rating _item = new Sinaicsp_API.Rating();
+            _item.SchoolId = schoolId;
             _item.RateValue = rateValue;
             _item.Description = description;
             _item.CreationDate = DateTime.Now;
@@ -57,11 +65,12 @@ namespace Sinaicsp_API
 
 
         }
-        public static bool Update(int id, string rateValue, string description)
+        public static bool Update(int id,int schoolId, string rateValue, string description)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             Rating itemById = _context.Ratings.FirstOrDefault(a => a.Id == id);
             Rating _item = itemById;
+            _item.SchoolId = schoolId;
             _item.RateValue = rateValue;
             _item.Description = description;
             _context.SaveChanges();

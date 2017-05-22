@@ -86,5 +86,11 @@ namespace Sinaicsp_MVC.Controllers
             Service _item = Service.GetById(id);
             return View(_item);
         }
+
+        public ActionResult DeleteStudentService(int id)
+        {
+            Service.Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

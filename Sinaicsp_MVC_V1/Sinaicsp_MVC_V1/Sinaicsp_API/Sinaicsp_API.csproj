@@ -88,6 +88,12 @@
     <Compile Include="CSPGoalCatalog.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GC_Category.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GC_Subjects.cs">
+      <DependentUpon>SinaicspDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GoalCatalog.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>

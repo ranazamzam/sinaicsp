@@ -20,5 +20,8 @@ namespace Sinaicsp_API
         public System.DateTime CreationDate { get; set; }
         public string Description { get; set; }
         public string RateValue { get; set; }
+        public int SchoolId { get; set; }
+    
+        public virtual School School { get; set; }
     }
 }

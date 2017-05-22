@@ -1,0 +1,12 @@
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\Sinai_Console_ImportOldData.exe.config
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\Sinai_Console_ImportOldData.exe
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\Sinai_Console_ImportOldData.pdb
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\EntityFramework.dll
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\EntityFramework.SqlServer.dll
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\Sinaicsp_API.dll
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\Sinaicsp_API.pdb
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\EntityFramework.xml
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\bin\Debug\EntityFramework.SqlServer.xml
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\obj\Debug\Sinai_Console_ImportOldData.csprojResolveAssemblyReference.cache
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\obj\Debug\Sinai_Console_ImportOldData.exe
+D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinai_Console_ImportOldData\obj\Debug\Sinai_Console_ImportOldData.pdb

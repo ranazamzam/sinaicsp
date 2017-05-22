@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eiepModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="gc_categories">
+    <Key>
+      <PropertyRef Name="gc_category_uuid" />
+    </Key>
+    <Property Name="gc_category_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_category_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="gc_category_order" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="gc_data">
+    <Key>
+      <PropertyRef Name="gc_data_uuid" />
+    </Key>
+    <Property Name="gc_data_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_data_sequence" Type="smallint" Nullable="false" />
+    <Property Name="gc_data_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="gc_data_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="gc_sub_data_sequence" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="gc_goals">
+    <Key>
+      <PropertyRef Name="gc_goal_uuid" />
+    </Key>
+    <Property Name="gc_goal_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="gc_goal_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="gc_goal_sub_sequence" Type="tinyint" />
+    <Property Name="gc_goal_text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gc_goals_bak">
+    <Key>
+      <PropertyRef Name="gc_goal_uuid" />
+    </Key>
+    <Property Name="gc_goal_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="gc_goal_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="gc_goal_sub_sequence" Type="tinyint" />
+    <Property Name="gc_goal_text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gc_goals_old">
+    <Key>
+      <PropertyRef Name="gc_goal_uuid" />
+    </Key>
+    <Property Name="gc_goal_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="gc_goal_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="gc_goal_sub_sequence" Type="tinyint" />
+    <Property Name="gc_goal_text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gc_subjects">
+    <Key>
+      <PropertyRef Name="gc_subject_uuid" />
+    </Key>
+    <Property Name="gc_subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="gc_category_uuid" Type="uniqueidentifier" />
+    <Property Name="gc_subject_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="gc_subject_order" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="grades">
+    <Key>
+      <PropertyRef Name="grade_id" />
+    </Key>
+    <Property Name="grade_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" Nullable="false" />
+    <Property Name="grade_text" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="grade_desc" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="iep">
+    <Key>
+      <PropertyRef Name="iep_uuid" />
+    </Key>
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" Nullable="false" />
+    <Property Name="iep_subject" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="teacher_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_materials" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="iep_year" Type="nchar" MaxLength="11" />
+    <Property Name="iep_comments" Type="nvarchar(max)" />
+    <Property Name="iep_feb_notes" Type="nvarchar(max)" />
+    <Property Name="iep_june_notes" Type="nvarchar(max)" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="teacher_2_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_3_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_4_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_5_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by" Type="nvarchar" MaxLength="255" />
+    <Property Name="locked_by_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by_date" Type="smalldatetime" />
+    <Property Name="iep_subject_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="iep_20141006">
+    <Key>
+      <PropertyRef Name="iep_uuid" />
+    </Key>
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" Nullable="false" />
+    <Property Name="iep_subject" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="teacher_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_materials" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="iep_year" Type="nchar" MaxLength="11" />
+    <Property Name="iep_comments" Type="nvarchar(max)" />
+    <Property Name="iep_feb_notes" Type="nvarchar(max)" />
+    <Property Name="iep_june_notes" Type="nvarchar(max)" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="teacher_2_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_3_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_4_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_5_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by" Type="nvarchar" MaxLength="255" />
+    <Property Name="locked_by_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by_date" Type="smalldatetime" />
+    <Property Name="iep_subject_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="iep_bak">
+    <Key>
+      <PropertyRef Name="iep_uuid" />
+    </Key>
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" Nullable="false" />
+    <Property Name="iep_subject" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="teacher_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_materials" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="iep_year" Type="nchar" MaxLength="11" />
+    <Property Name="iep_comments" Type="nvarchar(max)" />
+    <Property Name="iep_feb_notes" Type="nvarchar(max)" />
+    <Property Name="iep_june_notes" Type="nvarchar(max)" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="teacher_2_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_3_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_4_uuid" Type="uniqueidentifier" />
+    <Property Name="teacher_5_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by" Type="nvarchar" MaxLength="255" />
+    <Property Name="locked_by_uuid" Type="uniqueidentifier" />
+    <Property Name="locked_by_date" Type="smalldatetime" />
+    <Property Name="iep_subject_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="iep_data">
+    <Key>
+      <PropertyRef Name="iep_data_uuid" />
+    </Key>
+    <Property Name="iep_data_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_data_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="iep_data_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="iep_data_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iep_date_initiated" Type="nvarchar" MaxLength="5" />
+    <Property Name="iep_data_grade_1_id" Type="tinyint" />
+    <Property Name="iep_data_grade_2_id" Type="tinyint" />
+    <Property Name="iep_data_grade_3_id" Type="tinyint" />
+    <Property Name="iep_sub_data_sequence" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="iep_data_20150218">
+    <Key>
+      <PropertyRef Name="iep_data_uuid" />
+    </Key>
+    <Property Name="iep_data_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_data_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="iep_data_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="iep_data_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iep_date_initiated" Type="nvarchar" MaxLength="5" />
+    <Property Name="iep_data_grade_1_id" Type="tinyint" />
+    <Property Name="iep_data_grade_2_id" Type="tinyint" />
+    <Property Name="iep_data_grade_3_id" Type="tinyint" />
+    <Property Name="iep_sub_data_sequence" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="iep_data_bak">
+    <Key>
+      <PropertyRef Name="iep_data_uuid" />
+    </Key>
+    <Property Name="iep_data_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_data_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="iep_data_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="iep_data_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iep_date_initiated" Type="nvarchar" MaxLength="5" />
+    <Property Name="iep_data_grade_1_id" Type="tinyint" />
+    <Property Name="iep_data_grade_2_id" Type="tinyint" />
+    <Property Name="iep_data_grade_3_id" Type="tinyint" />
+    <Property Name="iep_sub_data_sequence" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="iep_data_undo">
+    <Key>
+      <PropertyRef Name="iep_data_uuid" />
+    </Key>
+    <Property Name="iep_data_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="iep_data_sequence" Type="tinyint" Nullable="false" />
+    <Property Name="iep_data_parent_uuid" Type="uniqueidentifier" />
+    <Property Name="iep_data_text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iep_date_initiated" Type="nvarchar" MaxLength="5" />
+    <Property Name="iep_data_grade_1_id" Type="tinyint" />
+    <Property Name="iep_data_grade_2_id" Type="tinyint" />
+    <Property Name="iep_data_grade_3_id" Type="tinyint" />
+    <Property Name="iep_sub_data_sequence" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="pdf_temp">
+    <Key>
+      <PropertyRef Name="pdf_uuid" />
+    </Key>
+    <Property Name="pdf_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="pdf_fo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pdf_temp_06172016">
+    <Key>
+      <PropertyRef Name="pdf_uuid" />
+    </Key>
+    <Property Name="pdf_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="pdf_fo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pdf_temp_20150603">
+    <Key>
+      <PropertyRef Name="pdf_uuid" />
+    </Key>
+    <Property Name="pdf_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="pdf_fo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="placements">
+    <Key>
+      <PropertyRef Name="placement_uuid" />
+    </Key>
+    <Property Name="placement_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="placement" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="schedule_course_students">
+    <Key>
+      <PropertyRef Name="course_uuid" />
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="course_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="schedule_courses">
+    <Key>
+      <PropertyRef Name="course_uuid" />
+    </Key>
+    <Property Name="course_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="course_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="course_color" Type="nvarchar" MaxLength="50" />
+    <Property Name="teacher_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="schedule_session_exceptions">
+    <Key>
+      <PropertyRef Name="session_uuid" />
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="session_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="schedule_sessions">
+    <Key>
+      <PropertyRef Name="session_uuid" />
+    </Key>
+    <Property Name="session_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="course_uuid" Type="uniqueidentifier" />
+    <Property Name="session_day" Type="tinyint" />
+    <Property Name="session_start" Type="varchar" MaxLength="10" />
+    <Property Name="session_end" Type="varchar" MaxLength="10" />
+    <Property Name="session_color" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="schools">
+    <Key>
+      <PropertyRef Name="school_id" />
+    </Key>
+    <Property Name="school_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="school_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service_providers">
+    <Key>
+      <PropertyRef Name="providers_uuid" />
+    </Key>
+    <Property Name="providers_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="provider_name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="service_providers_bak">
+    <Key>
+      <PropertyRef Name="providers_uuid" />
+    </Key>
+    <Property Name="providers_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="provider_name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="services">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+    <Property Name="provider_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="services_bak">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+    <Property Name="provider_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="services_bak_20141103">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+    <Property Name="provider_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="services_bak_20150617">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+    <Property Name="provider_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="services_students">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="services_tmp">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="provider_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="student_list" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student_accommodations">
+    <Key>
+      <PropertyRef Name="accommodations_uuid" />
+    </Key>
+    <Property Name="accommodations_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="accommodation_details" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student_inclusions">
+    <Key>
+      <PropertyRef Name="inclusion_uuid" />
+    </Key>
+    <Property Name="inclusion_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="num_classes" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="teacher_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="student_inclusions_20150617">
+    <Key>
+      <PropertyRef Name="inclusion_uuid" />
+    </Key>
+    <Property Name="inclusion_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="num_classes" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="teacher_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="student_inclusions_bak">
+    <Key>
+      <PropertyRef Name="inclusion_uuid" />
+    </Key>
+    <Property Name="inclusion_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="num_classes" Type="tinyint" Nullable="false" />
+    <Property Name="teacher_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="student_services">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="provider_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="student_services_bak">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="provider_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="student_services_bak_0505">
+    <Key>
+      <PropertyRef Name="services_uuid" />
+    </Key>
+    <Property Name="services_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="services_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="provider_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="service_model" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="num_students" Type="tinyint" Nullable="false" />
+    <Property Name="session_length" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="weekly_sessions" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="session_start_date" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="session_end_date" Type="varchar" MaxLength="5" />
+    <Property Name="services_parent" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="student_tmp">
+    <Key>
+      <PropertyRef Name="org" />
+    </Key>
+    <Property Name="org" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="new" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="students">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="students_20141005">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="students_20150917">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="students_20151013">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="students_20161004">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="students_bak">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="students_bak_20140715">
+    <Key>
+      <PropertyRef Name="student_uuid" />
+    </Key>
+    <Property Name="student_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="student_first_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="student_last_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="school_id" Type="tinyint" />
+    <Property Name="date_of_birth" Type="smalldatetime" />
+    <Property Name="student_sex" Type="nchar" MaxLength="1" />
+    <Property Name="student_classification" Type="nvarchar" MaxLength="255" />
+    <Property Name="native_language" Type="nvarchar" MaxLength="50" />
+    <Property Name="student_grade" Type="tinyint" />
+    <Property Name="current_placement" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_primary" Type="nvarchar" MaxLength="255" />
+    <Property Name="parent_secondary" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_address" Type="nvarchar" MaxLength="255" />
+    <Property Name="home_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="home_state" Type="nchar" MaxLength="2" />
+    <Property Name="home_phone" Type="nchar" MaxLength="12" />
+    <Property Name="father_cell" Type="nchar" MaxLength="12" />
+    <Property Name="mother_cell" Type="nchar" MaxLength="12" />
+    <Property Name="school_year" Type="varchar" MaxLength="11" />
+    <Property Name="master_student_uuid" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="subjects">
+    <Key>
+      <PropertyRef Name="subject_uuid" />
+    </Key>
+    <Property Name="subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subject_category" Type="uniqueidentifier" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="subject_order" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subjects_20151113">
+    <Key>
+      <PropertyRef Name="subject_uuid" />
+    </Key>
+    <Property Name="subject_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subject_category" Type="uniqueidentifier" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="subject_order" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tmp_log">
+    <Key>
+      <PropertyRef Name="log_id" />
+    </Key>
+    <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="log_ts" Type="smalldatetime" />
+    <Property Name="log_data" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="usrs">
+    <Key>
+      <PropertyRef Name="usr_uuid" />
+    </Key>
+    <Property Name="usr_uuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="usr_login" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="usr_display_name" Type="nvarchar" MaxLength="254" Nullable="false" />
+    <Property Name="role_id" Type="tinyint" Nullable="false" />
+    <Property Name="last_login" Type="smalldatetime" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="usr_title" Type="varchar" MaxLength="10" />
+    <Property Name="school_id" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_grades_schools">
+    <End Role="schools" Type="Self.schools" Multiplicity="1" />
+    <End Role="grades" Type="Self.grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="schools">
+        <PropertyRef Name="school_id" />
+      </Principal>
+      <Dependent Role="grades">
+        <PropertyRef Name="school_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iep_data_iep">
+    <End Role="iep" Type="Self.iep" Multiplicity="1" />
+    <End Role="iep_data" Type="Self.iep_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iep">
+        <PropertyRef Name="iep_uuid" />
+      </Principal>
+      <Dependent Role="iep_data">
+        <PropertyRef Name="iep_uuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iep_data_iep_20150218">
+    <End Role="iep" Type="Self.iep" Multiplicity="1" />
+    <End Role="iep_data_20150218" Type="Self.iep_data_20150218" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="iep">
+        <PropertyRef Name="iep_uuid" />
+      </Principal>
+      <Dependent Role="iep_data_20150218">
+        <PropertyRef Name="iep_uuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iep_schools">
+    <End Role="schools" Type="Self.schools" Multiplicity="1" />
+    <End Role="iep" Type="Self.iep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="schools">
+        <PropertyRef Name="school_id" />
+      </Principal>
+      <Dependent Role="iep">
+        <PropertyRef Name="school_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iep_students">
+    <End Role="students" Type="Self.students" Multiplicity="1" />
+    <End Role="iep" Type="Self.iep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="students">
+        <PropertyRef Name="student_uuid" />
+      </Principal>
+      <Dependent Role="iep">
+        <PropertyRef Name="student_uuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_iep_usrs">
+    <End Role="usrs" Type="Self.usrs" Multiplicity="1" />
+    <End Role="iep" Type="Self.iep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usrs">
+        <PropertyRef Name="usr_uuid" />
+      </Principal>
+      <Dependent Role="iep">
+        <PropertyRef Name="teacher_uuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="eiepModelStoreContainer">
+    <EntitySet Name="gc_categories" EntityType="Self.gc_categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gc_data" EntityType="Self.gc_data" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gc_goals" EntityType="Self.gc_goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gc_goals_bak" EntityType="Self.gc_goals_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gc_goals_old" EntityType="Self.gc_goals_old" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gc_subjects" EntityType="Self.gc_subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="grades" EntityType="Self.grades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep" EntityType="Self.iep" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_20141006" EntityType="Self.iep_20141006" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_bak" EntityType="Self.iep_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_data" EntityType="Self.iep_data" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_data_20150218" EntityType="Self.iep_data_20150218" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_data_bak" EntityType="Self.iep_data_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iep_data_undo" EntityType="Self.iep_data_undo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pdf_temp" EntityType="Self.pdf_temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pdf_temp_06172016" EntityType="Self.pdf_temp_06172016" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pdf_temp_20150603" EntityType="Self.pdf_temp_20150603" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="placements" EntityType="Self.placements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule_course_students" EntityType="Self.schedule_course_students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule_courses" EntityType="Self.schedule_courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule_session_exceptions" EntityType="Self.schedule_session_exceptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schedule_sessions" EntityType="Self.schedule_sessions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="schools" EntityType="Self.schools" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service_providers" EntityType="Self.service_providers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service_providers_bak" EntityType="Self.service_providers_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services_bak" EntityType="Self.services_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services_bak_20141103" EntityType="Self.services_bak_20141103" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services_bak_20150617" EntityType="Self.services_bak_20150617" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services_students" EntityType="Self.services_students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="services_tmp" EntityType="Self.services_tmp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_accommodations" EntityType="Self.student_accommodations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_inclusions" EntityType="Self.student_inclusions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_inclusions_20150617" EntityType="Self.student_inclusions_20150617" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_inclusions_bak" EntityType="Self.student_inclusions_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_services" EntityType="Self.student_services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_services_bak" EntityType="Self.student_services_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_services_bak_0505" EntityType="Self.student_services_bak_0505" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student_tmp" EntityType="Self.student_tmp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_20141005" EntityType="Self.students_20141005" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_20150917" EntityType="Self.students_20150917" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_20151013" EntityType="Self.students_20151013" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_20161004" EntityType="Self.students_20161004" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_bak" EntityType="Self.students_bak" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="students_bak_20140715" EntityType="Self.students_bak_20140715" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subjects" EntityType="Self.subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subjects_20151113" EntityType="Self.subjects_20151113" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tmp_log" EntityType="Self.tmp_log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usrs" EntityType="Self.usrs" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_grades_schools" Association="Self.FK_grades_schools">
+      <End Role="schools" EntitySet="schools" />
+      <End Role="grades" EntitySet="grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iep_data_iep" Association="Self.FK_iep_data_iep">
+      <End Role="iep" EntitySet="iep" />
+      <End Role="iep_data" EntitySet="iep_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iep_data_iep_20150218" Association="Self.FK_iep_data_iep_20150218">
+      <End Role="iep" EntitySet="iep" />
+      <End Role="iep_data_20150218" EntitySet="iep_data_20150218" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iep_schools" Association="Self.FK_iep_schools">
+      <End Role="schools" EntitySet="schools" />
+      <End Role="iep" EntitySet="iep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iep_students" Association="Self.FK_iep_students">
+      <End Role="students" EntitySet="students" />
+      <End Role="iep" EntitySet="iep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_iep_usrs" Association="Self.FK_iep_usrs">
+      <End Role="usrs" EntitySet="usrs" />
+      <End Role="iep" EntitySet="iep" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

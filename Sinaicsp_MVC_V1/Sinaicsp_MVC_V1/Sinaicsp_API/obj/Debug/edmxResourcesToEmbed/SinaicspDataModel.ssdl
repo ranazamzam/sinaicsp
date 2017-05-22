@@ -119,6 +119,10 @@
       <End Role="CSPGoalCatalog" EntitySet="CSPGoalCatalogs" />
       <End Role="CSPGoalCatalog1" EntitySet="CSPGoalCatalogs" />
     </AssociationSet>
+    <AssociationSet Name="SchoolRating" Association="SinaicspDataModel.Store.SchoolRating">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUsers">
     <Key>
@@ -373,6 +377,7 @@
     <Property Name="CreationDate" Type="datetime" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RateValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SchoolId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CSPGoalCatalogs">
     <Key>
@@ -675,6 +680,18 @@
       </Principal>
       <Dependent Role="CSPGoalCatalog1">
         <PropertyRef Name="ParentCSPGoalCatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolRating">
+    <End Role="School" Type="SinaicspDataModel.Store.Schools" Multiplicity="1" />
+    <End Role="Rating" Type="SinaicspDataModel.Store.Ratings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="SchoolId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -273,6 +273,7 @@
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RateValue" ColumnName="RateValue" />
+          <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

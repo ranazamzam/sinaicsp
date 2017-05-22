@@ -20,7 +20,6 @@ namespace Sinaicsp_API
             this.Subjects = new HashSet<Subject>();
             this.CSPs = new HashSet<CSP>();
             this.Locks = new HashSet<Lock>();
-            this.GoalCatalogs = new HashSet<GoalCatalog>();
         }
     
         public int Id { get; set; }
@@ -37,7 +36,5 @@ namespace Sinaicsp_API
         public virtual ICollection<CSP> CSPs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lock> Locks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GoalCatalog> GoalCatalogs { get; set; }
     }
 }

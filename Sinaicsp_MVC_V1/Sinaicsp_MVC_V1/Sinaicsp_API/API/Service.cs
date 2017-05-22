@@ -78,5 +78,18 @@ namespace Sinaicsp_API
             _context.Services.Add(_item);
             _context.SaveChanges();
         }
+
+        public static void Delete(int id)
+        {
+            SinaicspDataModelContainer _context = new SinaicspDataModelContainer();
+            Service _service = _context.Services.FirstOrDefault(a => a.Id == id);
+            List<StudentService> _studentServices = _service.StudentServices.ToList();
+            foreach (StudentService item in _studentServices)
+            {
+                item.IsDeleted = true;
+            }
+            _service.IsDeleted = true;
+            _context.SaveChanges();
+        }
     }
 }

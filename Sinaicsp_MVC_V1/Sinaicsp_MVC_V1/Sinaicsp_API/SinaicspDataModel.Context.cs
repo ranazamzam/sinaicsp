@@ -47,5 +47,7 @@ namespace Sinaicsp_API
         public virtual DbSet<GoalCatalog> GoalCatalogs { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<CSPGoalCatalog> CSPGoalCatalogs { get; set; }
+        public virtual DbSet<GC_Category> GC_Category { get; set; }
+        public virtual DbSet<GC_Subjects> GC_Subjects { get; set; }
     }
 }

@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eiepModelStoreContainer" CdmEntityContainer="eiepEntities">
+    <EntitySetMapping Name="gc_categories">
+      <EntityTypeMapping TypeName="eiepModel.gc_categories">
+        <MappingFragment StoreEntitySet="gc_categories">
+          <ScalarProperty Name="gc_category_uuid" ColumnName="gc_category_uuid" />
+          <ScalarProperty Name="gc_category_name" ColumnName="gc_category_name" />
+          <ScalarProperty Name="gc_category_order" ColumnName="gc_category_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gc_data">
+      <EntityTypeMapping TypeName="eiepModel.gc_data">
+        <MappingFragment StoreEntitySet="gc_data">
+          <ScalarProperty Name="gc_data_uuid" ColumnName="gc_data_uuid" />
+          <ScalarProperty Name="gc_subject_uuid" ColumnName="gc_subject_uuid" />
+          <ScalarProperty Name="gc_data_sequence" ColumnName="gc_data_sequence" />
+          <ScalarProperty Name="gc_data_parent_uuid" ColumnName="gc_data_parent_uuid" />
+          <ScalarProperty Name="gc_data_text" ColumnName="gc_data_text" />
+          <ScalarProperty Name="gc_sub_data_sequence" ColumnName="gc_sub_data_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gc_goals">
+      <EntityTypeMapping TypeName="eiepModel.gc_goals">
+        <MappingFragment StoreEntitySet="gc_goals">
+          <ScalarProperty Name="gc_goal_uuid" ColumnName="gc_goal_uuid" />
+          <ScalarProperty Name="gc_subject_uuid" ColumnName="gc_subject_uuid" />
+          <ScalarProperty Name="gc_parent_uuid" ColumnName="gc_parent_uuid" />
+          <ScalarProperty Name="gc_goal_sequence" ColumnName="gc_goal_sequence" />
+          <ScalarProperty Name="gc_goal_sub_sequence" ColumnName="gc_goal_sub_sequence" />
+          <ScalarProperty Name="gc_goal_text" ColumnName="gc_goal_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gc_goals_bak">
+      <EntityTypeMapping TypeName="eiepModel.gc_goals_bak">
+        <MappingFragment StoreEntitySet="gc_goals_bak">
+          <ScalarProperty Name="gc_goal_uuid" ColumnName="gc_goal_uuid" />
+          <ScalarProperty Name="gc_subject_uuid" ColumnName="gc_subject_uuid" />
+          <ScalarProperty Name="gc_parent_uuid" ColumnName="gc_parent_uuid" />
+          <ScalarProperty Name="gc_goal_sequence" ColumnName="gc_goal_sequence" />
+          <ScalarProperty Name="gc_goal_sub_sequence" ColumnName="gc_goal_sub_sequence" />
+          <ScalarProperty Name="gc_goal_text" ColumnName="gc_goal_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gc_goals_old">
+      <EntityTypeMapping TypeName="eiepModel.gc_goals_old">
+        <MappingFragment StoreEntitySet="gc_goals_old">
+          <ScalarProperty Name="gc_goal_uuid" ColumnName="gc_goal_uuid" />
+          <ScalarProperty Name="gc_subject_uuid" ColumnName="gc_subject_uuid" />
+          <ScalarProperty Name="gc_parent_uuid" ColumnName="gc_parent_uuid" />
+          <ScalarProperty Name="gc_goal_sequence" ColumnName="gc_goal_sequence" />
+          <ScalarProperty Name="gc_goal_sub_sequence" ColumnName="gc_goal_sub_sequence" />
+          <ScalarProperty Name="gc_goal_text" ColumnName="gc_goal_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gc_subjects">
+      <EntityTypeMapping TypeName="eiepModel.gc_subjects">
+        <MappingFragment StoreEntitySet="gc_subjects">
+          <ScalarProperty Name="gc_subject_uuid" ColumnName="gc_subject_uuid" />
+          <ScalarProperty Name="gc_category_uuid" ColumnName="gc_category_uuid" />
+          <ScalarProperty Name="gc_subject_name" ColumnName="gc_subject_name" />
+          <ScalarProperty Name="gc_subject_order" ColumnName="gc_subject_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grades">
+      <EntityTypeMapping TypeName="eiepModel.grade">
+        <MappingFragment StoreEntitySet="grades">
+          <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="grade_text" ColumnName="grade_text" />
+          <ScalarProperty Name="grade_desc" ColumnName="grade_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ieps">
+      <EntityTypeMapping TypeName="eiepModel.iep">
+        <MappingFragment StoreEntitySet="iep">
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="iep_subject" ColumnName="iep_subject" />
+          <ScalarProperty Name="teacher_uuid" ColumnName="teacher_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="iep_materials" ColumnName="iep_materials" />
+          <ScalarProperty Name="iep_year" ColumnName="iep_year" />
+          <ScalarProperty Name="iep_comments" ColumnName="iep_comments" />
+          <ScalarProperty Name="iep_feb_notes" ColumnName="iep_feb_notes" />
+          <ScalarProperty Name="iep_june_notes" ColumnName="iep_june_notes" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="teacher_2_uuid" ColumnName="teacher_2_uuid" />
+          <ScalarProperty Name="teacher_3_uuid" ColumnName="teacher_3_uuid" />
+          <ScalarProperty Name="teacher_4_uuid" ColumnName="teacher_4_uuid" />
+          <ScalarProperty Name="teacher_5_uuid" ColumnName="teacher_5_uuid" />
+          <ScalarProperty Name="locked_by" ColumnName="locked_by" />
+          <ScalarProperty Name="locked_by_uuid" ColumnName="locked_by_uuid" />
+          <ScalarProperty Name="locked_by_date" ColumnName="locked_by_date" />
+          <ScalarProperty Name="iep_subject_uuid" ColumnName="iep_subject_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_20141006">
+      <EntityTypeMapping TypeName="eiepModel.iep_20141006">
+        <MappingFragment StoreEntitySet="iep_20141006">
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="iep_subject" ColumnName="iep_subject" />
+          <ScalarProperty Name="teacher_uuid" ColumnName="teacher_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="iep_materials" ColumnName="iep_materials" />
+          <ScalarProperty Name="iep_year" ColumnName="iep_year" />
+          <ScalarProperty Name="iep_comments" ColumnName="iep_comments" />
+          <ScalarProperty Name="iep_feb_notes" ColumnName="iep_feb_notes" />
+          <ScalarProperty Name="iep_june_notes" ColumnName="iep_june_notes" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="teacher_2_uuid" ColumnName="teacher_2_uuid" />
+          <ScalarProperty Name="teacher_3_uuid" ColumnName="teacher_3_uuid" />
+          <ScalarProperty Name="teacher_4_uuid" ColumnName="teacher_4_uuid" />
+          <ScalarProperty Name="teacher_5_uuid" ColumnName="teacher_5_uuid" />
+          <ScalarProperty Name="locked_by" ColumnName="locked_by" />
+          <ScalarProperty Name="locked_by_uuid" ColumnName="locked_by_uuid" />
+          <ScalarProperty Name="locked_by_date" ColumnName="locked_by_date" />
+          <ScalarProperty Name="iep_subject_uuid" ColumnName="iep_subject_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_bak">
+      <EntityTypeMapping TypeName="eiepModel.iep_bak">
+        <MappingFragment StoreEntitySet="iep_bak">
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="iep_subject" ColumnName="iep_subject" />
+          <ScalarProperty Name="teacher_uuid" ColumnName="teacher_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="iep_materials" ColumnName="iep_materials" />
+          <ScalarProperty Name="iep_year" ColumnName="iep_year" />
+          <ScalarProperty Name="iep_comments" ColumnName="iep_comments" />
+          <ScalarProperty Name="iep_feb_notes" ColumnName="iep_feb_notes" />
+          <ScalarProperty Name="iep_june_notes" ColumnName="iep_june_notes" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="teacher_2_uuid" ColumnName="teacher_2_uuid" />
+          <ScalarProperty Name="teacher_3_uuid" ColumnName="teacher_3_uuid" />
+          <ScalarProperty Name="teacher_4_uuid" ColumnName="teacher_4_uuid" />
+          <ScalarProperty Name="teacher_5_uuid" ColumnName="teacher_5_uuid" />
+          <ScalarProperty Name="locked_by" ColumnName="locked_by" />
+          <ScalarProperty Name="locked_by_uuid" ColumnName="locked_by_uuid" />
+          <ScalarProperty Name="locked_by_date" ColumnName="locked_by_date" />
+          <ScalarProperty Name="iep_subject_uuid" ColumnName="iep_subject_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_data">
+      <EntityTypeMapping TypeName="eiepModel.iep_data">
+        <MappingFragment StoreEntitySet="iep_data">
+          <ScalarProperty Name="iep_data_uuid" ColumnName="iep_data_uuid" />
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="iep_data_sequence" ColumnName="iep_data_sequence" />
+          <ScalarProperty Name="iep_data_parent_uuid" ColumnName="iep_data_parent_uuid" />
+          <ScalarProperty Name="iep_data_text" ColumnName="iep_data_text" />
+          <ScalarProperty Name="iep_date_initiated" ColumnName="iep_date_initiated" />
+          <ScalarProperty Name="iep_data_grade_1_id" ColumnName="iep_data_grade_1_id" />
+          <ScalarProperty Name="iep_data_grade_2_id" ColumnName="iep_data_grade_2_id" />
+          <ScalarProperty Name="iep_data_grade_3_id" ColumnName="iep_data_grade_3_id" />
+          <ScalarProperty Name="iep_sub_data_sequence" ColumnName="iep_sub_data_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_data_20150218">
+      <EntityTypeMapping TypeName="eiepModel.iep_data_20150218">
+        <MappingFragment StoreEntitySet="iep_data_20150218">
+          <ScalarProperty Name="iep_data_uuid" ColumnName="iep_data_uuid" />
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="iep_data_sequence" ColumnName="iep_data_sequence" />
+          <ScalarProperty Name="iep_data_parent_uuid" ColumnName="iep_data_parent_uuid" />
+          <ScalarProperty Name="iep_data_text" ColumnName="iep_data_text" />
+          <ScalarProperty Name="iep_date_initiated" ColumnName="iep_date_initiated" />
+          <ScalarProperty Name="iep_data_grade_1_id" ColumnName="iep_data_grade_1_id" />
+          <ScalarProperty Name="iep_data_grade_2_id" ColumnName="iep_data_grade_2_id" />
+          <ScalarProperty Name="iep_data_grade_3_id" ColumnName="iep_data_grade_3_id" />
+          <ScalarProperty Name="iep_sub_data_sequence" ColumnName="iep_sub_data_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_data_bak">
+      <EntityTypeMapping TypeName="eiepModel.iep_data_bak">
+        <MappingFragment StoreEntitySet="iep_data_bak">
+          <ScalarProperty Name="iep_data_uuid" ColumnName="iep_data_uuid" />
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="iep_data_sequence" ColumnName="iep_data_sequence" />
+          <ScalarProperty Name="iep_data_parent_uuid" ColumnName="iep_data_parent_uuid" />
+          <ScalarProperty Name="iep_data_text" ColumnName="iep_data_text" />
+          <ScalarProperty Name="iep_date_initiated" ColumnName="iep_date_initiated" />
+          <ScalarProperty Name="iep_data_grade_1_id" ColumnName="iep_data_grade_1_id" />
+          <ScalarProperty Name="iep_data_grade_2_id" ColumnName="iep_data_grade_2_id" />
+          <ScalarProperty Name="iep_data_grade_3_id" ColumnName="iep_data_grade_3_id" />
+          <ScalarProperty Name="iep_sub_data_sequence" ColumnName="iep_sub_data_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="iep_data_undo">
+      <EntityTypeMapping TypeName="eiepModel.iep_data_undo">
+        <MappingFragment StoreEntitySet="iep_data_undo">
+          <ScalarProperty Name="iep_data_uuid" ColumnName="iep_data_uuid" />
+          <ScalarProperty Name="iep_uuid" ColumnName="iep_uuid" />
+          <ScalarProperty Name="iep_data_sequence" ColumnName="iep_data_sequence" />
+          <ScalarProperty Name="iep_data_parent_uuid" ColumnName="iep_data_parent_uuid" />
+          <ScalarProperty Name="iep_data_text" ColumnName="iep_data_text" />
+          <ScalarProperty Name="iep_date_initiated" ColumnName="iep_date_initiated" />
+          <ScalarProperty Name="iep_data_grade_1_id" ColumnName="iep_data_grade_1_id" />
+          <ScalarProperty Name="iep_data_grade_2_id" ColumnName="iep_data_grade_2_id" />
+          <ScalarProperty Name="iep_data_grade_3_id" ColumnName="iep_data_grade_3_id" />
+          <ScalarProperty Name="iep_sub_data_sequence" ColumnName="iep_sub_data_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pdf_temp">
+      <EntityTypeMapping TypeName="eiepModel.pdf_temp">
+        <MappingFragment StoreEntitySet="pdf_temp">
+          <ScalarProperty Name="pdf_uuid" ColumnName="pdf_uuid" />
+          <ScalarProperty Name="pdf_fo" ColumnName="pdf_fo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pdf_temp_06172016">
+      <EntityTypeMapping TypeName="eiepModel.pdf_temp_06172016">
+        <MappingFragment StoreEntitySet="pdf_temp_06172016">
+          <ScalarProperty Name="pdf_uuid" ColumnName="pdf_uuid" />
+          <ScalarProperty Name="pdf_fo" ColumnName="pdf_fo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pdf_temp_20150603">
+      <EntityTypeMapping TypeName="eiepModel.pdf_temp_20150603">
+        <MappingFragment StoreEntitySet="pdf_temp_20150603">
+          <ScalarProperty Name="pdf_uuid" ColumnName="pdf_uuid" />
+          <ScalarProperty Name="pdf_fo" ColumnName="pdf_fo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="placements">
+      <EntityTypeMapping TypeName="eiepModel.placement">
+        <MappingFragment StoreEntitySet="placements">
+          <ScalarProperty Name="placement_uuid" ColumnName="placement_uuid" />
+          <ScalarProperty Name="placement1" ColumnName="placement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedule_course_students">
+      <EntityTypeMapping TypeName="eiepModel.schedule_course_students">
+        <MappingFragment StoreEntitySet="schedule_course_students">
+          <ScalarProperty Name="course_uuid" ColumnName="course_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedule_courses">
+      <EntityTypeMapping TypeName="eiepModel.schedule_courses">
+        <MappingFragment StoreEntitySet="schedule_courses">
+          <ScalarProperty Name="course_uuid" ColumnName="course_uuid" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="course_color" ColumnName="course_color" />
+          <ScalarProperty Name="teacher_uuid" ColumnName="teacher_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedule_session_exceptions">
+      <EntityTypeMapping TypeName="eiepModel.schedule_session_exceptions">
+        <MappingFragment StoreEntitySet="schedule_session_exceptions">
+          <ScalarProperty Name="session_uuid" ColumnName="session_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schedule_sessions">
+      <EntityTypeMapping TypeName="eiepModel.schedule_sessions">
+        <MappingFragment StoreEntitySet="schedule_sessions">
+          <ScalarProperty Name="session_uuid" ColumnName="session_uuid" />
+          <ScalarProperty Name="course_uuid" ColumnName="course_uuid" />
+          <ScalarProperty Name="session_day" ColumnName="session_day" />
+          <ScalarProperty Name="session_start" ColumnName="session_start" />
+          <ScalarProperty Name="session_end" ColumnName="session_end" />
+          <ScalarProperty Name="session_color" ColumnName="session_color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schools">
+      <EntityTypeMapping TypeName="eiepModel.school">
+        <MappingFragment StoreEntitySet="schools">
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="school_name" ColumnName="school_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service_providers">
+      <EntityTypeMapping TypeName="eiepModel.service_providers">
+        <MappingFragment StoreEntitySet="service_providers">
+          <ScalarProperty Name="providers_uuid" ColumnName="providers_uuid" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service_providers_bak">
+      <EntityTypeMapping TypeName="eiepModel.service_providers_bak">
+        <MappingFragment StoreEntitySet="service_providers_bak">
+          <ScalarProperty Name="providers_uuid" ColumnName="providers_uuid" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services">
+      <EntityTypeMapping TypeName="eiepModel.service">
+        <MappingFragment StoreEntitySet="services">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+          <ScalarProperty Name="provider_uuid" ColumnName="provider_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services_bak">
+      <EntityTypeMapping TypeName="eiepModel.services_bak">
+        <MappingFragment StoreEntitySet="services_bak">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+          <ScalarProperty Name="provider_uuid" ColumnName="provider_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services_bak_20141103">
+      <EntityTypeMapping TypeName="eiepModel.services_bak_20141103">
+        <MappingFragment StoreEntitySet="services_bak_20141103">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+          <ScalarProperty Name="provider_uuid" ColumnName="provider_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services_bak_20150617">
+      <EntityTypeMapping TypeName="eiepModel.services_bak_20150617">
+        <MappingFragment StoreEntitySet="services_bak_20150617">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+          <ScalarProperty Name="provider_uuid" ColumnName="provider_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services_students">
+      <EntityTypeMapping TypeName="eiepModel.services_students">
+        <MappingFragment StoreEntitySet="services_students">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="services_tmp">
+      <EntityTypeMapping TypeName="eiepModel.services_tmp">
+        <MappingFragment StoreEntitySet="services_tmp">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="provider_uuid" ColumnName="provider_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="student_list" ColumnName="student_list" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_accommodations">
+      <EntityTypeMapping TypeName="eiepModel.student_accommodations">
+        <MappingFragment StoreEntitySet="student_accommodations">
+          <ScalarProperty Name="accommodations_uuid" ColumnName="accommodations_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="accommodation_details" ColumnName="accommodation_details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_inclusions">
+      <EntityTypeMapping TypeName="eiepModel.student_inclusions">
+        <MappingFragment StoreEntitySet="student_inclusions">
+          <ScalarProperty Name="inclusion_uuid" ColumnName="inclusion_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="num_classes" ColumnName="num_classes" />
+          <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_inclusions_20150617">
+      <EntityTypeMapping TypeName="eiepModel.student_inclusions_20150617">
+        <MappingFragment StoreEntitySet="student_inclusions_20150617">
+          <ScalarProperty Name="inclusion_uuid" ColumnName="inclusion_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="num_classes" ColumnName="num_classes" />
+          <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_inclusions_bak">
+      <EntityTypeMapping TypeName="eiepModel.student_inclusions_bak">
+        <MappingFragment StoreEntitySet="student_inclusions_bak">
+          <ScalarProperty Name="inclusion_uuid" ColumnName="inclusion_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="num_classes" ColumnName="num_classes" />
+          <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_services">
+      <EntityTypeMapping TypeName="eiepModel.student_services">
+        <MappingFragment StoreEntitySet="student_services">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_services_bak">
+      <EntityTypeMapping TypeName="eiepModel.student_services_bak">
+        <MappingFragment StoreEntitySet="student_services_bak">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_services_bak_0505">
+      <EntityTypeMapping TypeName="eiepModel.student_services_bak_0505">
+        <MappingFragment StoreEntitySet="student_services_bak_0505">
+          <ScalarProperty Name="services_uuid" ColumnName="services_uuid" />
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="services_name" ColumnName="services_name" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+          <ScalarProperty Name="service_model" ColumnName="service_model" />
+          <ScalarProperty Name="num_students" ColumnName="num_students" />
+          <ScalarProperty Name="session_length" ColumnName="session_length" />
+          <ScalarProperty Name="weekly_sessions" ColumnName="weekly_sessions" />
+          <ScalarProperty Name="session_start_date" ColumnName="session_start_date" />
+          <ScalarProperty Name="session_end_date" ColumnName="session_end_date" />
+          <ScalarProperty Name="services_parent" ColumnName="services_parent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student_tmp">
+      <EntityTypeMapping TypeName="eiepModel.student_tmp">
+        <MappingFragment StoreEntitySet="student_tmp">
+          <ScalarProperty Name="org" ColumnName="org" />
+          <ScalarProperty Name="new" ColumnName="new" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="eiepModel.student">
+        <MappingFragment StoreEntitySet="students">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_20141005">
+      <EntityTypeMapping TypeName="eiepModel.students_20141005">
+        <MappingFragment StoreEntitySet="students_20141005">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_20150917">
+      <EntityTypeMapping TypeName="eiepModel.students_20150917">
+        <MappingFragment StoreEntitySet="students_20150917">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_20151013">
+      <EntityTypeMapping TypeName="eiepModel.students_20151013">
+        <MappingFragment StoreEntitySet="students_20151013">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_20161004">
+      <EntityTypeMapping TypeName="eiepModel.students_20161004">
+        <MappingFragment StoreEntitySet="students_20161004">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_bak">
+      <EntityTypeMapping TypeName="eiepModel.students_bak">
+        <MappingFragment StoreEntitySet="students_bak">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students_bak_20140715">
+      <EntityTypeMapping TypeName="eiepModel.students_bak_20140715">
+        <MappingFragment StoreEntitySet="students_bak_20140715">
+          <ScalarProperty Name="student_uuid" ColumnName="student_uuid" />
+          <ScalarProperty Name="student_first_name" ColumnName="student_first_name" />
+          <ScalarProperty Name="student_last_name" ColumnName="student_last_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="student_sex" ColumnName="student_sex" />
+          <ScalarProperty Name="student_classification" ColumnName="student_classification" />
+          <ScalarProperty Name="native_language" ColumnName="native_language" />
+          <ScalarProperty Name="student_grade" ColumnName="student_grade" />
+          <ScalarProperty Name="current_placement" ColumnName="current_placement" />
+          <ScalarProperty Name="parent_primary" ColumnName="parent_primary" />
+          <ScalarProperty Name="parent_secondary" ColumnName="parent_secondary" />
+          <ScalarProperty Name="home_address" ColumnName="home_address" />
+          <ScalarProperty Name="home_city" ColumnName="home_city" />
+          <ScalarProperty Name="home_state" ColumnName="home_state" />
+          <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+          <ScalarProperty Name="father_cell" ColumnName="father_cell" />
+          <ScalarProperty Name="mother_cell" ColumnName="mother_cell" />
+          <ScalarProperty Name="school_year" ColumnName="school_year" />
+          <ScalarProperty Name="master_student_uuid" ColumnName="master_student_uuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subjects">
+      <EntityTypeMapping TypeName="eiepModel.subject">
+        <MappingFragment StoreEntitySet="subjects">
+          <ScalarProperty Name="subject_uuid" ColumnName="subject_uuid" />
+          <ScalarProperty Name="subject_category" ColumnName="subject_category" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_order" ColumnName="subject_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subjects_20151113">
+      <EntityTypeMapping TypeName="eiepModel.subjects_20151113">
+        <MappingFragment StoreEntitySet="subjects_20151113">
+          <ScalarProperty Name="subject_uuid" ColumnName="subject_uuid" />
+          <ScalarProperty Name="subject_category" ColumnName="subject_category" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_order" ColumnName="subject_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tmp_log">
+      <EntityTypeMapping TypeName="eiepModel.tmp_log">
+        <MappingFragment StoreEntitySet="tmp_log">
+          <ScalarProperty Name="log_id" ColumnName="log_id" />
+          <ScalarProperty Name="log_ts" ColumnName="log_ts" />
+          <ScalarProperty Name="log_data" ColumnName="log_data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usrs">
+      <EntityTypeMapping TypeName="eiepModel.usr">
+        <MappingFragment StoreEntitySet="usrs">
+          <ScalarProperty Name="usr_uuid" ColumnName="usr_uuid" />
+          <ScalarProperty Name="usr_login" ColumnName="usr_login" />
+          <ScalarProperty Name="usr_display_name" ColumnName="usr_display_name" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="last_login" ColumnName="last_login" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="usr_title" ColumnName="usr_title" />
+          <ScalarProperty Name="school_id" ColumnName="school_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

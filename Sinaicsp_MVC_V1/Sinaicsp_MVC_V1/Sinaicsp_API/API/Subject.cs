@@ -58,6 +58,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Subjects.FirstOrDefault(a => a.Id == id);
         }
+        public static Subject GetByName(string name)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.Subjects.FirstOrDefault(a => a.Name == name);
+        }
         public static bool AddNew(string name, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -89,7 +94,7 @@ namespace Sinaicsp_API
             }
             return false;
         }
-        public static bool Update(int id,int? parentId , string name)
+        public static bool Update(int id, int? parentId, string name)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             Subject itemById = _context.Subjects.FirstOrDefault(a => a.Id == id);

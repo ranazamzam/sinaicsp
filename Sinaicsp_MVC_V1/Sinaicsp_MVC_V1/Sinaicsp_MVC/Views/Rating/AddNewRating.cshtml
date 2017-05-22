@@ -21,6 +21,14 @@
             <table>
                 <tr>
                     <td style="width:90px">
+                        School
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a.SchoolId,ViewBag.AllSchools as SelectList)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90px">
                         Rating
                     </td>
                     <td>

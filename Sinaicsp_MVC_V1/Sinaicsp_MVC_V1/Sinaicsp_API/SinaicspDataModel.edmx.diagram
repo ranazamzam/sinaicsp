@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2820660dad5543bca7f883c4e2246623" Name="Diagram1" ZoomLevel="98" >
+      <Diagram DiagramId="2820660dad5543bca7f883c4e2246623" Name="Diagram1" ZoomLevel="82" >
         <EntityTypeShape EntityType="SinaicspDataModel.ApplicationUser" Width="1.5" PointX="7.125" PointY="1.75" />
         <EntityTypeShape EntityType="SinaicspDataModel.ApplicationRole" Width="1.5" PointX="2.25" PointY="2.125" />
         <EntityTypeShape EntityType="SinaicspDataModel.UserRole" Width="1.5" PointX="4.75" PointY="1.125" />
@@ -44,13 +44,17 @@
         <AssociationConnector Association="SinaicspDataModel.StudentStudentService" />
         <AssociationConnector Association="SinaicspDataModel.ServiceStudentService" />
         <AssociationConnector Association="SinaicspDataModel.SchoolYearCSP" />
-        <EntityTypeShape EntityType="SinaicspDataModel.GoalCatalog" Width="2.75" PointX="15" PointY="0.5" />
+        <EntityTypeShape EntityType="SinaicspDataModel.GoalCatalog" Width="2.75" PointX="17.375" PointY="5.875" />
         <AssociationConnector Association="SinaicspDataModel.GoalCatalogGoalCatalog" />
-        <AssociationConnector Association="SinaicspDataModel.SubjectGoalCatalog" />
         <EntityTypeShape EntityType="SinaicspDataModel.Rating" Width="1.5" PointX="18.25" PointY="0.875" />
         <EntityTypeShape EntityType="SinaicspDataModel.CSPGoalCatalog" Width="2.625" PointX="12" PointY="3.125" />
         <AssociationConnector Association="SinaicspDataModel.CSPCSPGoalCatalog" />
         <AssociationConnector Association="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" />
+        <AssociationConnector Association="SinaicspDataModel.SchoolRating" />
+        <EntityTypeShape EntityType="SinaicspDataModel.GC_Category" Width="1.5" PointX="13.5" PointY="7.25" />
+        <EntityTypeShape EntityType="SinaicspDataModel.GC_Subjects" Width="1.5" PointX="15.375" PointY="4.75" />
+        <AssociationConnector Association="SinaicspDataModel.GC_CategoryGC_Subjects" />
+        <AssociationConnector Association="SinaicspDataModel.GC_SubjectsGoalCatalog" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

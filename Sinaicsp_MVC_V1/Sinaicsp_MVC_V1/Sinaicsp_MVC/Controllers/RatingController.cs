@@ -22,6 +22,7 @@ namespace Sinaicsp_MVC.Controllers
             DataSourceResult result = items.ToDataSourceResult(request, _currItem => new
             {
                 Id = _currItem.Id,
+                SchoolName = _currItem.SchoolName,
                 Description = _currItem.Description,
                 RateValue = _currItem.RateValue,
                 CreatedOn = _currItem.CreatedOn,
@@ -33,6 +34,7 @@ namespace Sinaicsp_MVC.Controllers
         }
         public ActionResult AddNewRating(int? id)
         {
+            ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
             if (id != null)
             {
                 ViewBag.AlreadyExists = false;
@@ -53,11 +55,12 @@ namespace Sinaicsp_MVC.Controllers
         public ActionResult AddNewRating(Rating model)
         {
             ViewBag.AlreadyExists = false;
+            ViewBag.AllSchools = new SelectList(School.GetAll(), "Id", "Name");
             if (ModelState.IsValid)
             {
                 if (model.Id != 0)
                 {
-                    bool IsUpdated = Rating.Update(model.Id,model.RateValue,model.Description);
+                    bool IsUpdated = Rating.Update(model.Id,model.SchoolId, model.RateValue, model.Description);
                     if (IsUpdated)
                     {
                         return RedirectToAction("Index");
@@ -65,7 +68,7 @@ namespace Sinaicsp_MVC.Controllers
                 }
                 else
                 {
-                    bool isAdded = Rating.AddNew( model.RateValue, model.Description, ApplicationHelper.LoggedUserId);
+                    bool isAdded = Rating.AddNew(model.SchoolId, model.RateValue, model.Description, ApplicationHelper.LoggedUserId);
                     if (isAdded)
                     {
                         return RedirectToAction("Index");

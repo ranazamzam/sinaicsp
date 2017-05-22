@@ -42,6 +42,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Cities.FirstOrDefault(a => a.Id == id);
         }
+        public static City GetByName(string cityName)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.Cities.FirstOrDefault(a => a.Name== cityName);
+        }
         public static bool AddNew(string name, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

@@ -43,6 +43,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.StudentClasses.FirstOrDefault(a => a.Id == id);
         }
+        public static StudentClass GetByName(string className)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.StudentClasses.FirstOrDefault(a => a.Name == className);
+        }
         public static bool AddNew(string name, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

@@ -32,7 +32,7 @@ namespace Sinaicsp_API
         [Required(ErrorMessage = "*")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "*")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         [Required(ErrorMessage = "*")]
         public int SchoolId { get; set; }

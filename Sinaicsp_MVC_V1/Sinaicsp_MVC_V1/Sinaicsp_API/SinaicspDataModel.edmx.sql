@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/17/2017 05:17:43
--- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/22/2017 11:02:14
+-- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -77,6 +77,21 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SchoolYearCSP]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CSPs] DROP CONSTRAINT [FK_SchoolYearCSP];
 GO
+IF OBJECT_ID(N'[dbo].[FK_GoalCatalogGoalCatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoalCatalogs] DROP CONSTRAINT [FK_GoalCatalogGoalCatalog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SubjectGoalCatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoalCatalogs] DROP CONSTRAINT [FK_SubjectGoalCatalog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CSPCSPGoalCatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CSPGoalCatalogs] DROP CONSTRAINT [FK_CSPCSPGoalCatalog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CSPGoalCatalogCSPGoalCatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CSPGoalCatalogs] DROP CONSTRAINT [FK_CSPGoalCatalogCSPGoalCatalog];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SchoolRating]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Ratings] DROP CONSTRAINT [FK_SchoolRating];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -138,6 +153,15 @@ IF OBJECT_ID(N'[dbo].[Services]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[StudentServices]', 'U') IS NOT NULL
     DROP TABLE [dbo].[StudentServices];
+GO
+IF OBJECT_ID(N'[dbo].[GoalCatalogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoalCatalogs];
+GO
+IF OBJECT_ID(N'[dbo].[Ratings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Ratings];
+GO
+IF OBJECT_ID(N'[dbo].[CSPGoalCatalogs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CSPGoalCatalogs];
 GO
 
 -- --------------------------------------------------
@@ -394,7 +418,8 @@ CREATE TABLE [dbo].[Ratings] (
     [IsDeleted] bit  NOT NULL,
     [CreationDate] datetime  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
-    [RateValue] nvarchar(max)  NOT NULL
+    [RateValue] nvarchar(max)  NOT NULL,
+    [SchoolId] int  NOT NULL
 );
 GO
 
@@ -912,6 +937,21 @@ GO
 CREATE INDEX [IX_FK_CSPGoalCatalogCSPGoalCatalog]
 ON [dbo].[CSPGoalCatalogs]
     ([ParentCSPGoalCatalogId]);
+GO
+
+-- Creating foreign key on [SchoolId] in table 'Ratings'
+ALTER TABLE [dbo].[Ratings]
+ADD CONSTRAINT [FK_SchoolRating]
+    FOREIGN KEY ([SchoolId])
+    REFERENCES [dbo].[Schools]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SchoolRating'
+CREATE INDEX [IX_FK_SchoolRating]
+ON [dbo].[Ratings]
+    ([SchoolId]);
 GO
 
 -- --------------------------------------------------

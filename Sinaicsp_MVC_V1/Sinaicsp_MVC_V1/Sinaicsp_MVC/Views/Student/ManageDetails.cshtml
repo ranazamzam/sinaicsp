@@ -290,7 +290,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Sinaicsp_API.StudentService item in Model.CurrentStudent.StudentServices)
+                                @foreach (Sinaicsp_API.StudentService item in Model.CurrentStudent.StudentServices.Where(a=>a.IsDeleted==false).ToList())
                                 {
                                     <tr>
                                         <td>@item.Service.Name</td>

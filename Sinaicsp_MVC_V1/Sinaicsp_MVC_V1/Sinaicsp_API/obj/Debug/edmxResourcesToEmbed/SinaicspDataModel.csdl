@@ -119,6 +119,10 @@
       <End Role="CSPGoalCatalog" EntitySet="CSPGoalCatalogs" />
       <End Role="CSPGoalCatalog1" EntitySet="CSPGoalCatalogs" />
     </AssociationSet>
+    <AssociationSet Name="SchoolRating" Association="SinaicspDataModel.SchoolRating">
+      <End Role="School" EntitySet="Schools" />
+      <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ApplicationUser">
     <Key>
@@ -188,6 +192,7 @@
     <NavigationProperty Name="Teachers" Relationship="SinaicspDataModel.SchoolTeacher" FromRole="School" ToRole="Teacher" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Students" Relationship="SinaicspDataModel.SchoolStudent" FromRole="School" ToRole="Student" />
+    <NavigationProperty Name="Ratings" Relationship="SinaicspDataModel.SchoolRating" FromRole="School" ToRole="Rating" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -682,6 +687,8 @@
     <Property Name="CreationDate" Type="DateTime" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" />
     <Property Name="RateValue" Type="String" Nullable="false" />
+    <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolRating" FromRole="Rating" ToRole="School" />
+    <Property Name="SchoolId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="CSPGoalCatalog">
     <Key>
@@ -723,6 +730,18 @@
       </Principal>
       <Dependent Role="CSPGoalCatalog1">
         <PropertyRef Name="ParentCSPGoalCatalogId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolRating">
+    <End Type="SinaicspDataModel.School" Role="School" Multiplicity="1" />
+    <End Type="SinaicspDataModel.Rating" Role="Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="SchoolId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
