@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/23/2017 00:04:05
--- Generated from EDMX file: D:\Freelancer\SinaiCSP\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
+-- Date Created: 05/23/2017 00:48:51
+-- Generated from EDMX file: D:\Freelancer\sinaicsp\sinaicsp\Sinaicsp_MVC_V1\Sinaicsp_MVC_V1\Sinaicsp_API\SinaicspDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -80,9 +80,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_GoalCatalogGoalCatalog]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GoalCatalogs] DROP CONSTRAINT [FK_GoalCatalogGoalCatalog];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SubjectGoalCatalog]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GoalCatalogs] DROP CONSTRAINT [FK_SubjectGoalCatalog];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CSPCSPGoalCatalog]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CSPGoalCatalogs] DROP CONSTRAINT [FK_CSPCSPGoalCatalog];
 GO
@@ -91,6 +88,12 @@ IF OBJECT_ID(N'[dbo].[FK_CSPGoalCatalogCSPGoalCatalog]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_SchoolRating]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Ratings] DROP CONSTRAINT [FK_SchoolRating];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GC_CategoryGC_Subjects]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GC_Subjects] DROP CONSTRAINT [FK_GC_CategoryGC_Subjects];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GC_SubjectsGoalCatalog]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoalCatalogs] DROP CONSTRAINT [FK_GC_SubjectsGoalCatalog];
 GO
 
 -- --------------------------------------------------
@@ -162,6 +165,12 @@ IF OBJECT_ID(N'[dbo].[Ratings]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CSPGoalCatalogs]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CSPGoalCatalogs];
+GO
+IF OBJECT_ID(N'[dbo].[GC_Category]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GC_Category];
+GO
+IF OBJECT_ID(N'[dbo].[GC_Subjects]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GC_Subjects];
 GO
 
 -- --------------------------------------------------

@@ -23,6 +23,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = _currItem.Id,
                 TextGoal = _currItem.TextGoal,
+                CategoryName=_currItem.CategoryName,
                 SubjectName = _currItem.SubjectName,
                 ParentName = _currItem.ParentName,
                 CreatedOn = _currItem.CreatedOn,

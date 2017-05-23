@@ -33,6 +33,13 @@ namespace Sinaicsp_API
                 return GC_Subjects.Name;
             }
         }
+        public string CategoryName
+        {
+            get
+            {
+                return GC_Subjects.GC_Category.Name;
+            }
+        }
         [Display(Name = "Parent")]
         public string ParentName
         {

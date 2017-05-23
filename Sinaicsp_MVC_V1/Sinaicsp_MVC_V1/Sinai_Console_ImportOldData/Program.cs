@@ -97,6 +97,7 @@ namespace Sinai_Console_ImportOldData
 
             //// Subjects
             //List<subject> allSubjects = _context.subjects.ToList();
+            //Sinaicsp_API.Subject.AddNew("-", -1);
             //foreach (subject item in allSubjects)
             //{
             //    Sinaicsp_API.Subject.AddNew(item.subject_name, -1);
@@ -170,47 +171,178 @@ namespace Sinai_Console_ImportOldData
             //    Sinaicsp_API.Accommodation.AddNew(_NewStudents.Id, item.accommodation_details, -1);
             //}
 
-            // Goal Catalog
+            //// Goal Catalog
 
-            List<gc_categories> allCategories = _context.gc_categories.ToList();
+            //List<gc_categories> allCategories = _context.gc_categories.ToList();
             Sinaicsp_API.SinaicspDataModelContainer _Ncontext = new Sinaicsp_API.SinaicspDataModelContainer();
 
-            foreach (gc_categories item in allCategories)
+            //foreach (gc_categories item in allCategories)
+            //{
+            //    Sinaicsp_API.GC_Category _NewCategory = new Sinaicsp_API.GC_Category();
+            //    _NewCategory.Name = item.gc_category_name;
+            //    _NewCategory.CreationDate = DateTime.Now;
+            //    _NewCategory.CreatedByUserId = -1;
+
+            //    List<gc_subjects> allCategoiesSubjects = _context.gc_subjects.Where(a => a.gc_category_uuid == item.gc_category_uuid).ToList();
+            //    foreach (gc_subjects subjItem in allCategoiesSubjects)
+            //    {
+            //        Sinaicsp_API.GC_Subjects _NewSubject = new Sinaicsp_API.GC_Subjects();
+            //        _NewSubject.Name = subjItem.gc_subject_name;
+            //        _NewSubject.CreationDate = DateTime.Now;
+            //        _NewSubject.CreatedByUserId = -1;
+            //        _NewCategory.GC_Subjects.Add(_NewSubject);
+
+            //        List<gc_goals> allSubjectGoals = _context.gc_goals.Where(a => a.gc_subject_uuid == subjItem.gc_subject_uuid).ToList();
+            //        foreach (gc_goals goalItem in allSubjectGoals)
+            //        {
+            //            Sinaicsp_API.GoalCatalog _NewGoal = new Sinaicsp_API.GoalCatalog();
+            //            _NewGoal.TextGoal = goalItem.gc_goal_text;
+            //            _NewGoal.CreationDate = DateTime.Now;
+            //            _NewGoal.CreatedByUserId = -1;
+            //            _NewSubject.GoalCatalogs.Add(_NewGoal);
+            //        }
+            //        List<gc_goals> Child_allSubjectGoals = allSubjectGoals.Where(a => a.gc_parent_uuid != null).ToList();
+            //        foreach (gc_goals Childitem in Child_allSubjectGoals)
+            //        {
+            //            string goalParent = _context.gc_goals.Where(a => a.gc_goal_uuid == Childitem.gc_parent_uuid).FirstOrDefault().gc_goal_text;
+            //            Sinaicsp_API.GoalCatalog _ChildGoal = _NewSubject.GoalCatalogs.Where(a => a.TextGoal == Childitem.gc_goal_text).FirstOrDefault();
+            //            Sinaicsp_API.GoalCatalog _ParentGoal = _NewSubject.GoalCatalogs.Where(a => a.TextGoal == goalParent).FirstOrDefault();
+            //            _ChildGoal.ParentGoalCatalog = _ParentGoal;
+            //        }
+            //    }
+            //    _Ncontext.GC_Category.Add(_NewCategory);
+            //    _Ncontext.SaveChanges();
+            //}
+            // School Year
+            // CSP
+            List<iep> allCsps = _context.ieps.ToList();
+            List<string> schoolYears = allCsps.Select(a => a.iep_year).ToList().Distinct().ToList();
+            Sinaicsp_API.SchoolYear.AddNew("-", -1);
+            foreach (string item in schoolYears)
             {
-                Sinaicsp_API.GC_Category _NewCategory = new Sinaicsp_API.GC_Category();
-                _NewCategory.Name = item.gc_category_name;
-                _NewCategory.CreationDate = DateTime.Now;
-                _NewCategory.CreatedByUserId = -1;
-
-                List<gc_subjects> allCategoiesSubjects = _context.gc_subjects.Where(a => a.gc_category_uuid == item.gc_category_uuid).ToList();
-                foreach (gc_subjects subjItem in allCategoiesSubjects)
+                if (string.IsNullOrEmpty(item.Trim()) == false)
                 {
-                    Sinaicsp_API.GC_Subjects _NewSubject = new Sinaicsp_API.GC_Subjects();
-                    _NewSubject.Name = subjItem.gc_subject_name;
-                    _NewSubject.CreationDate = DateTime.Now;
-                    _NewSubject.CreatedByUserId = -1;
-                    _NewCategory.GC_Subjects.Add(_NewSubject);
+                    Sinaicsp_API.SchoolYear.AddNew(item, -1);
+                }
+            }
 
-                    List<gc_goals> allSubjectGoals = _context.gc_goals.Where(a => a.gc_subject_uuid == subjItem.gc_subject_uuid).ToList();
-                    foreach (gc_goals goalItem in allSubjectGoals)
+            foreach (iep item in allCsps)
+            {
+
+                student old_student = _context.students.Where(a => a.student_uuid == item.student_uuid).FirstOrDefault();
+                int newStudentId = _Ncontext.Students.Where(a => a.FirstName == old_student.student_first_name && a.LastName == old_student.student_last_name).FirstOrDefault().Id;
+                subject old_subject = _context.subjects.Where(a => a.subject_uuid == item.iep_subject_uuid).FirstOrDefault();
+                int newSubjectId = 0;
+                if (old_subject == null)
+                {
+                    newSubjectId = Sinaicsp_API.Subject.GetByName("-").Id;
+                }
+                else
+                {
+                    newSubjectId = _Ncontext.Subjects.Where(a => a.Name == old_subject.subject_name).FirstOrDefault().Id;
+                }
+                int newschoolYearId = 0;
+                if (_Ncontext.SchoolYears.Where(a => a.Name == item.iep_year).FirstOrDefault() != null)
+                {
+                    newschoolYearId = _Ncontext.SchoolYears.Where(a => a.Name == item.iep_year).FirstOrDefault().Id;
+                }
+                else
+                {
+                    newschoolYearId = _Ncontext.SchoolYears.Where(a => a.Name == "-").FirstOrDefault().Id;
+                }
+                List<int> teacherIds = new List<int>();
+                string Teacher_1 = _context.usrs.Where(a => a.usr_uuid == item.teacher_uuid).FirstOrDefault().usr_login;
+                string Teacher_2 = item.teacher_2_uuid == null ? string.Empty : _context.usrs.Where(a => a.usr_uuid == item.teacher_2_uuid).FirstOrDefault().usr_login;
+                string Teacher_3 = item.teacher_3_uuid == null ? string.Empty : _context.usrs.Where(a => a.usr_uuid == item.teacher_3_uuid).FirstOrDefault().usr_login;
+                string Teacher_4 = item.teacher_4_uuid == null ? string.Empty : _context.usrs.Where(a => a.usr_uuid == item.teacher_4_uuid).FirstOrDefault().usr_login;
+                string Teacher_5 = item.teacher_5_uuid == null ? string.Empty : _context.usrs.Where(a => a.usr_uuid == item.teacher_5_uuid).FirstOrDefault().usr_login;
+                if (!string.IsNullOrEmpty(Teacher_1))
+                {
+                    teacherIds.Add(Sinaicsp_API.Teacher.GetByEmail(Teacher_1).Id);
+                }
+                if (!string.IsNullOrEmpty(Teacher_2))
+                {
+                    teacherIds.Add(Sinaicsp_API.Teacher.GetByEmail(Teacher_2).Id);
+                }
+                if (!string.IsNullOrEmpty(Teacher_3))
+                {
+                    teacherIds.Add(Sinaicsp_API.Teacher.GetByEmail(Teacher_3).Id);
+                }
+                if (!string.IsNullOrEmpty(Teacher_4))
+                {
+                    teacherIds.Add(Sinaicsp_API.Teacher.GetByEmail(Teacher_4).Id);
+                }
+                if (!string.IsNullOrEmpty(Teacher_5))
+                {
+                    teacherIds.Add(Sinaicsp_API.Teacher.GetByEmail(Teacher_5).Id);
+                }
+
+
+                Sinaicsp_API.CSP _item = new Sinaicsp_API.CSP();
+                _item.SubjectId = newSubjectId;
+                _item.StudentId = newStudentId;
+                _item.SchoolYearId = newschoolYearId;
+                _item.Materials = item.iep_materials;
+                _item.Comments = item.iep_comments;
+                _item.FebruaryNotes = item.iep_feb_notes;
+                _item.JuneNotes = item.iep_june_notes;
+                foreach (int teachItem in teacherIds)
+                {
+                    Sinaicsp_API.TeacherCSP _juTable = new Sinaicsp_API.TeacherCSP();
+                    _juTable.TeacherId = teachItem;
+                    _juTable.CreationDate = DateTime.Now;
+                    _juTable.CreatedByUserId = -1;
+                    _item.TeacherCSPs.Add(_juTable);
+                }
+                _item.Comments = string.Empty;
+                _item.FebruaryNotes = string.Empty;
+                _item.JuneNotes = string.Empty;
+                _item.CreationDate = DateTime.Now;
+                _item.CreatedByUserId = -1;
+
+                // CSP Goals
+                List<iep_data> alliepData = _context.iep_data.Where(a => a.iep_uuid == item.iep_uuid).ToList();
+                foreach (iep_data dataitem in alliepData)
+                {
+                    Sinaicsp_API.CSPGoalCatalog _CSPGoalitem = new Sinaicsp_API.CSPGoalCatalog();
+                    _CSPGoalitem.TextGoal = dataitem.iep_data_text;
+
+
+                    if (dataitem.iep_data_grade_1_id != null)
+                        _CSPGoalitem.Rate1 = _context.grades.Where(a => a.grade_id == dataitem.iep_data_grade_1_id).FirstOrDefault().grade_text;
+                    if (dataitem.iep_data_grade_2_id != null)
+                        _CSPGoalitem.Rate2 = _context.grades.Where(a => a.grade_id == dataitem.iep_data_grade_2_id).FirstOrDefault().grade_text;
+                    if (dataitem.iep_data_grade_3_id != null)
+                        _CSPGoalitem.Rate3 = _context.grades.Where(a => a.grade_id == dataitem.iep_data_grade_3_id).FirstOrDefault().grade_text;
+
+                    _CSPGoalitem.DateInitiated = string.IsNullOrEmpty(_CSPGoalitem.DateInitiated) ? " " : _CSPGoalitem.DateInitiated;
+                    _CSPGoalitem.Rate1 = string.IsNullOrEmpty(_CSPGoalitem.Rate1) ? " " : _CSPGoalitem.Rate1;
+                    _CSPGoalitem.Rate2 = string.IsNullOrEmpty(_CSPGoalitem.Rate2) ? " " : _CSPGoalitem.Rate2;
+                    _CSPGoalitem.Rate3 = string.IsNullOrEmpty(_CSPGoalitem.Rate3) ? " " : _CSPGoalitem.Rate3;
+
+                    _CSPGoalitem.CreationDate = DateTime.Now;
+                    _item.CreatedByUserId = -1;
+                    _item.CSPGoalCatalogs.Add(_CSPGoalitem);
+                }
+                List<iep_data> Child_allSubjectGoals = alliepData.Where(a => a.iep_data_parent_uuid != null).ToList();
+                foreach (iep_data Childitem in Child_allSubjectGoals)
+                {
+                    if (_context.iep_data.Where(a => a.iep_data_uuid == Childitem.iep_data_parent_uuid).FirstOrDefault() != null)
                     {
-                        Sinaicsp_API.GoalCatalog _NewGoal = new Sinaicsp_API.GoalCatalog();
-                        _NewGoal.TextGoal = goalItem.gc_goal_text;
-                        _NewGoal.CreationDate = DateTime.Now;
-                        _NewGoal.CreatedByUserId = -1;
-                        _NewSubject.GoalCatalogs.Add(_NewGoal);
-                    }
-                    List<gc_goals> Child_allSubjectGoals = allSubjectGoals.Where(a => a.gc_parent_uuid != null).ToList();
-                    foreach (gc_goals Childitem in Child_allSubjectGoals)
-                    {
-                        string goalParent = _context.gc_goals.Where(a => a.gc_goal_uuid == Childitem.gc_parent_uuid).FirstOrDefault().gc_goal_text;
-                        Sinaicsp_API.GoalCatalog _ChildGoal = _NewSubject.GoalCatalogs.Where(a => a.TextGoal == Childitem.gc_goal_text).FirstOrDefault();
-                        Sinaicsp_API.GoalCatalog _ParentGoal = _NewSubject.GoalCatalogs.Where(a => a.TextGoal == goalParent).FirstOrDefault();
-                        _ChildGoal.ParentGoalCatalog = _ParentGoal;
+                        string goalParent = _context.iep_data.Where(a => a.iep_data_uuid == Childitem.iep_data_parent_uuid).FirstOrDefault().iep_data_text;
+                        Sinaicsp_API.CSPGoalCatalog _ChildGoal = _item.CSPGoalCatalogs.Where(a => a.TextGoal == Childitem.iep_data_text).FirstOrDefault();
+                        Sinaicsp_API.CSPGoalCatalog _ParentGoal = _item.CSPGoalCatalogs.Where(a => a.TextGoal == goalParent).FirstOrDefault();
+                        if (_ParentGoal != null && _ParentGoal.TextGoal != _ChildGoal.TextGoal)
+                        {
+                            _ChildGoal.ParentCSPGoalCatalog = _ParentGoal;
+                        }
                     }
                 }
-                _Ncontext.GC_Category.Add(_NewCategory);
+
+                _Ncontext.CSPs.Add(_item);
+                _Ncontext.SaveChanges();
             }
+
 
             Console.WriteLine("Items Generated successfully");
             Console.ReadKey();

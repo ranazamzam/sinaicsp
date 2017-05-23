@@ -15,6 +15,7 @@
       .Columns(columns =>
       {
           columns.Template(e => { }).ClientTemplate("<a href='GoalCatalog/AddNewGoalCatalog?ParentId=#= Id #'>New Sub Goal</a><br/><a href='GoalCatalog/AddNewGoalCatalog/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='GoalCatalog/Delete/#= Id #'>Delete</a>").Width(150);
+          columns.Bound(c => c.CategoryName).Title("Category");
           columns.Bound(c => c.SubjectName);
           columns.Bound(c => c.TextGoal);
           columns.Bound(c => c.ParentName);
@@ -34,7 +35,7 @@
       .Filterable()
       .Scrollable()
       .DataSource(dataSource => dataSource
-          .Ajax().Group(g => g.Add(c => c.ParentName))
+          .Ajax()
           .PageSize(20)
           .Read(read => read.Action("GoalCatalogs_Read", "GoalCatalog"))
       )
