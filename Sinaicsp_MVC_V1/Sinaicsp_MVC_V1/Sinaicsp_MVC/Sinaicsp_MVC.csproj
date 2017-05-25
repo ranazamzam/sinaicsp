@@ -524,7 +524,7 @@
     <Content Include="Images\add1.png" />
     <Content Include="Images\Remove.png" />
     <Content Include="Images\SINAI Schools logo.jpeg" />
-    <Content Include="index.html" />
+    <Content Include="IndexGoogle.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\2016.1.112\kendo.black.min.css.map" />
@@ -1622,6 +1622,7 @@
     <Content Include="Views\GoalCatalog\Index.cshtml" />
     <Content Include="Views\GoalCatalog\AddNewGoalCatalog.cshtml" />
     <Content Include="Views\CSPItem\Notes.cshtml" />
+    <Content Include="Views\UserManagement\UpdateCurrentUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

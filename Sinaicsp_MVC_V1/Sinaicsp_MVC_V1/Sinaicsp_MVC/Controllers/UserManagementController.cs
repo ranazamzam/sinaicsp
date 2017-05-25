@@ -65,6 +65,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = CurrentItem.Id,
                 UserName = CurrentItem.UserName,
+                GmailLoginAccount = CurrentItem.GmailLoginAccount,
                 Email = CurrentItem.Email,
                 Roles = CurrentItem.Roles,
                 CreatedOn = CurrentItem.CreatedOn
@@ -96,6 +97,34 @@ namespace Sinaicsp_MVC.Controllers
         {
             ApplicationHelper.LogOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult UpdateCurrentUser(int id)
+        {
+            ApplicationUser _usr = ApplicationUser.GetById(id);
+            return View(_usr);
+        }
+        [HttpPost]
+        public ActionResult UpdateCurrentUser(ApplicationUser model)
+        {
+            ApplicationUser.Update(model.Id, model.GmailLoginAccount);
+            return RedirectToAction("Users");
+        }
+
+        [HttpGet]
+        public JsonResult LoginWithEmail(string email)
+        {
+            ApplicationUser _usr = ApplicationUser.GetByGmailAccount(email);
+            if (_usr != null)
+            {
+                ApplicationHelper.Login(_usr);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }

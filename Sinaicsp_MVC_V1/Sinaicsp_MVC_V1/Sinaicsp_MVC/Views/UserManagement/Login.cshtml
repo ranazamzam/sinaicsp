@@ -47,6 +47,85 @@
     }
 
 </script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qXICbb5X-_w.O/m=auth2/exm=client/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCPa22lAm1LAtKY0sWwDzmRpS0gEKw/cb=gapi.loaded_1" async=""></script>
+<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qXICbb5X-_w.O/m=client/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCPa22lAm1LAtKY0sWwDzmRpS0gEKw/cb=gapi.loaded_0" async=""></script>
+<script src="https://apis.google.com/js/api:client.js" gapi_processed="true"></script>
+<script>
+      var googleUser = {};
+      var startApp = function () {
+          gapi.load('auth2', function () {
+              // Retrieve the singleton for the GoogleAuth library and set up the client.
+              auth2 = gapi.auth2.init({
+                  client_id: '848616608032-2qngic0he777rlqlnqkb5g5jri3o2eub.apps.googleusercontent.com',
+                  cookiepolicy: 'single_host_origin',
+                  // Request scopes in addition to 'profile' and 'email'
+                  //scope: 'additional_scope'
+              });
+              attachSignin(document.getElementById('customBtn'));
+          });
+      };
+      function attachSignin(element) {
+          console.log(element.id);
+          auth2.attachClickHandler(element, {},
+              function (googleUser) {
+                  jQuery.ajax({
+                      type: 'GET',
+                      url: 'LoginWithEmail',
+                      data: { email: googleUser.getBasicProfile().getEmail()},
+                      success: function (data) {
+                          if (data == true) {
+                              var url = '@Url.Action("Index", "Home", new {  })';
+                              window.location.href = url;
+                          } else {
+                              alert('Email dose not have linked user to it !');
+                          }
+                      }
+                  });
+              }, function (error) {
+                  //alert(JSON.stringify(error, undefined, 2));
+              });
+          }
+</script>
+<style type="text/css">
+    #customBtn {
+        display: inline-block;
+        background: #4285f4;
+        color: white;
+        width: 160px;
+        border-radius: 5px;
+        white-space: nowrap;
+    }
+
+        #customBtn:hover {
+            cursor: pointer;
+        }
+
+    span.label {
+        font-weight: bold;
+    }
+
+    span.icon {
+        background: url('images/g-normal.png') transparent 5px 50% no-repeat;
+        display: inline-block;
+        vertical-align: middle;
+        width: 42px;
+        height: 42px;
+        border-right: #2265d4 1px solid;
+    }
+
+    span.buttonText {
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: 42px;
+        padding-right: 42px;
+        font-size: 14px;
+        font-weight: bold;
+        /* Use the Roboto font that is loaded in the <head> */
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Login</h4>
     <div class="widgetcontent">
@@ -57,7 +136,19 @@
         @using (Html.BeginForm("Login", "UserManagement", FormMethod.Post, new { id = "ItemForm" }))
         {
             <table>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center">
+                        <div id="gSignInWrapper">
 
+                            <div id="customBtn" class="customGPlusSignIn"  style="align-self:center;background-color:transparent">
+                               <img src="~/Images/signin_button.png"/>
+                            </div>
+                        </div>
+                        <div id="name"></div>
+                        <script>startApp();</script>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width:110px">
                         User Name / Email
@@ -80,6 +171,7 @@
                     <td>
 
                         <a class="btn btn-primary" onclick="ItemForm.submit();">Login</a>
+
                     </td>
                 </tr>
             </table>

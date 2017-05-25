@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ApplicationUsers">
       <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.ApplicationUser)">
         <MappingFragment StoreEntitySet="ApplicationUsers">
+          <ScalarProperty Name="GmailLoginAccount" ColumnName="GmailLoginAccount" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />

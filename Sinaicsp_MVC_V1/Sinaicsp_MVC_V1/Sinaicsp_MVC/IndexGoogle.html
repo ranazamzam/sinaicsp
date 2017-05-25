@@ -1,0 +1,169 @@
+﻿<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qXICbb5X-_w.O/m=auth2/exm=client/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCPa22lAm1LAtKY0sWwDzmRpS0gEKw/cb=gapi.loaded_1" async=""></script>
+    <script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qXICbb5X-_w.O/m=client/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCPa22lAm1LAtKY0sWwDzmRpS0gEKw/cb=gapi.loaded_0" async=""></script>
+    <script src="https://apis.google.com/js/api:client.js" gapi_processed="true"></script>
+    <script>
+      var googleUser = {};
+      var startApp = function () {
+          gapi.load('auth2', function () {
+              // Retrieve the singleton for the GoogleAuth library and set up the client.
+              auth2 = gapi.auth2.init({
+                  client_id: '848616608032-2qngic0he777rlqlnqkb5g5jri3o2eub.apps.googleusercontent.com',
+                  cookiepolicy: 'single_host_origin',
+                  // Request scopes in addition to 'profile' and 'email'
+                  //scope: 'additional_scope'
+              });
+              attachSignin(document.getElementById('customBtn'));
+          });
+      };
+      function attachSignin(element) {
+          console.log(element.id);
+          auth2.attachClickHandler(element, {},
+              function (googleUser) {
+                  alert(googleUser.getBasicProfile().getEmail());
+                  //document.getElementById('name').innerText = "Signed in: " + googleUser.getBasicProfile().getEmail();
+                  //$find("RadAjaxManager1").ajaxRequest(googleUser.getBasicProfile().getEmail());
+              }, function (error) {
+                  alert(JSON.stringify(error, undefined, 2));
+              });
+          }
+    </script>
+    <style type="text/css">
+        #customBtn {
+            display: inline-block;
+            background: #4285f4;
+            color: white;
+            width: 190px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+            #customBtn:hover {
+                cursor: pointer;
+            }
+
+        span.label {
+            font-weight: bold;
+        }
+
+        span.icon {
+            background: url('images/g-normal.png') transparent 5px 50% no-repeat;
+            display: inline-block;
+            vertical-align: middle;
+            width: 42px;
+            height: 42px;
+            border-right: #2265d4 1px solid;
+        }
+
+        span.buttonText {
+            display: inline-block;
+            vertical-align: middle;
+            padding-left: 42px;
+            padding-right: 42px;
+            font-size: 14px;
+            font-weight: bold;
+            /* Use the Roboto font that is loaded in the <head> */
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<iframe name="oauth2relay984437955" id="oauth2relay984437955" src="https://accounts.google.com/o/oauth2/postmessageRelay?parent=http%3A%2F%2Fsinaicsp.azurewebsites.net&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.qXICbb5X-_w.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPa22lAm1LAtKY0sWwDzmRpS0gEKw#rpctoken=1005415057&amp;forcesecure=1" style="width: 1px; height: 1px; position: absolute; top: -100px;" tabindex="-1" aria-hidden="true"></iframe>
+<body>
+
+    <!-- In the callback, you would hide the gSignInWrapper element on a
+    successful sign in -->
+    <form method="post" action="./" id="Form2">
+        <div class="aspNetHidden">
+            <input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+            <input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+            <input name="__VIEWSTATE" id="__VIEWSTATE" value="10vfJISJOgceVO86Dqv61OJ8u0YDl5UstUOoHomrDHKQxMdRK5sE3qzitrTe2wy5k3vhLj8ZycsRD6Mw6ClxACJHbH6SnhzrkgWLc4N3OD8=" type="hidden">
+        </div>
+
+        <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form2'];
+if (!theForm) {
+    theForm = document.Form2;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+        </script>
+
+
+        <script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZABZqlDTBC4KznLoGtWeMV0ZdZbX2G9hdirxGI6SqF9SzA148HW4Y0EtfZ6jj3GyIg2&amp;t=636245537700974087" type="text/javascript"></script>
+
+
+        <script src="/ScriptResource.axd?d=D9drwtSJ4hBA6O8UhT6CQpnzewA4IsSmxoYtgTtIgH97wMPSjNmkWEFaU_MmgQi0jB0jBj9c6XtvHinnW4vMHAOfwVAFwI_OT-rNsOt_GuUVn-Q5d3e75Ut13G3HLSXpH9dsc1H5K1udhJYuyX-gPtMNQxvFiyOh-2oM8jUJyik1&amp;t=ffffffffd416f7fc" type="text/javascript"></script>
+        <script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+        </script>
+
+        <script src="/ScriptResource.axd?d=JnUc-DEDOM5KzzVKtsL1talLV6vHB_0ACiQNPwhfbsPqiMhCnj4F_09gWa0m46Bu5NaZzUjcPJDQJXvlHAeN0dR3VFRqhvcWSWNJFubRQEKMvU9egWGmNs5TbPI70p5lfT4u6aIi8sjBVBks91RvuTyeQj7kwmwdRgEoQngOMU2RiASFkcckH9w8qB2tqtrN0&amp;t=ffffffffd416f7fc" type="text/javascript"></script>
+        <script src="/ScriptResource.axd?d=TDVjdgRbdvNAY3tnbizUcAbO5WiwNCR35XoNrde9XXl4ITVn5zGL-n1pAhkq7dkPeu1ziCjeBFbIbmWEb-9nr-0hRf6EfxOsIEp_pZfBA789TEHKrB2fqL1iyqT-S7490&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+        <script src="/ScriptResource.axd?d=sF8Y0c2qLAfpveBK9gLo7C2ns8odt1dLTe-bav1cSpS5E4xjV68jW0i-j7qV-5IyFm4FqsAOoAyyYQOS7ZGretxfNBsJTgsoHuWCoEnggMGq1H8a5ONbBnpv5DuqVxOT0&amp;t=ffffffffe8b222c1" type="text/javascript"></script>
+        <div class="aspNetHidden">
+
+            <input name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2EE9ABB" type="hidden">
+        </div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'Form2', ['tRadAjaxManager1SU','RadAjaxManager1SU'], [], [], 30, '');
+//]]>
+        </script>
+
+        <!-- 2013.2.717.45 --><div id="RadAjaxManager1SU" style="display: none;">
+            <span id="RadAjaxManager1" style="display:none;"></span>
+        </div>
+
+        <table id="tblHeading" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="width:100%;" align="center"><p>&nbsp;</p></td>
+                </tr>
+                <tr>
+                    <td style="width:100%;" align="center"><img class="auto-style1" src="images/SINAI%20Schools%20logo.jpeg" height="100px"></td>
+                </tr>
+                <tr>
+                    <td style="width:100%;" align="center"><p>&nbsp;</p></td>
+                </tr>
+                <tr>
+                    <td style="width:100%;" align="center">
+                        <div id="gSignInWrapper">
+
+                            <div id="customBtn" class="customGPlusSignIn" style="align-self:center">
+                                <span class="icon"></span>
+                                <span class="buttonText">Sign In</span>
+                            </div>
+                        </div>
+                        <div id="name"></div>
+                        <script>startApp();</script>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxManager, {"_updatePanels":"","ajaxSettings":[],"clientEvents":{OnRequestStart:"",OnResponseEnd:""},"defaultLoadingPanelID":"","enableAJAX":true,"enableHistory":false,"links":[],"styles":[],"uniqueID":"RadAjaxManager1","updatePanelsRenderMode":0}, null, null, $get("RadAjaxManager1"));
+});
+//]]>
+        </script>
+    </form>
+
+    <iframe style="position: absolute; width: 1px; height: 1px; left: -9999px; display: none;" aria-hidden="true" id="ssIFrame_google" sandbox="allow-scripts allow-same-origin" src="https://accounts.google.com/o/oauth2/iframe#origin=http%3A%2F%2Fsinaicsp.azurewebsites.net&amp;rpcToken=658731593.7956483&amp;clearCache=1"></iframe>
+</body>
+</html>

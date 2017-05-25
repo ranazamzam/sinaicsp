@@ -9,7 +9,7 @@ namespace Sinaicsp_API
 {
     public partial class ApplicationUser
     {
-        public List< E_Role> CurrentRoles
+        public List<E_Role> CurrentRoles
         {
             get
             {
@@ -58,6 +58,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.ApplicationUsers.FirstOrDefault(a => a.Email == email);
         }
+        public static ApplicationUser GetByGmailAccount(string gmailAccount)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.ApplicationUsers.FirstOrDefault(a => a.GmailLoginAccount == gmailAccount);
+        }
         public static ApplicationUser Login(string email, string password)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -92,6 +97,14 @@ namespace Sinaicsp_API
                 return true;
             }
             return false;
+        }
+        public static bool Update(int id, string gmailAccount)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            ApplicationUser _item = _context.ApplicationUsers.FirstOrDefault(a => a.Id == id);
+            _item.GmailLoginAccount = gmailAccount;
+            _context.SaveChanges();
+            return true;
         }
         public static void SoftDelete(int id)
         {

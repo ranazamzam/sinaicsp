@@ -90,6 +90,7 @@
     <Compile Include="CSPGoalCatalog.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>
+    <Content Include="DBScripts\Script_v1.sql" />
     <Compile Include="GC_Category.cs">
       <DependentUpon>SinaicspDataModel.tt</DependentUpon>
     </Compile>

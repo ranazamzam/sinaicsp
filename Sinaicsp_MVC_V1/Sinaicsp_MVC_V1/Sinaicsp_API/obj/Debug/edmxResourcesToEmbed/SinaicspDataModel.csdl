@@ -135,22 +135,23 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Email" Type="String" Nullable="false" />
-    <Property Name="UserName" Type="String" Nullable="false" />
-    <Property Name="Password" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="LastLogin" Type="DateTime" Nullable="true" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="true" Precision="3" />
     <NavigationProperty Name="UserRoles" Relationship="SinaicspDataModel.ApplicationUserUserRole" FromRole="ApplicationUser" ToRole="UserRole" />
+    <Property Name="GmailLoginAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ApplicationRole">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="UserRoles" Relationship="SinaicspDataModel.ApplicationRoleUserRole" FromRole="ApplicationRole" ToRole="UserRole" />
   </EntityType>
   <EntityType Name="UserRole">
@@ -192,9 +193,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Teachers" Relationship="SinaicspDataModel.SchoolTeacher" FromRole="School" ToRole="Teacher" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Students" Relationship="SinaicspDataModel.SchoolStudent" FromRole="School" ToRole="Student" />
@@ -205,14 +206,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" Nullable="false" />
-    <Property Name="Email" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="LastLogin" Type="DateTime" Nullable="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="true" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolTeacher" FromRole="Teacher" ToRole="School" />
     <Property Name="SchoolId" Type="Int32" Nullable="false" />
-    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TeacherCSPs" Relationship="SinaicspDataModel.TeacherTeacherCSP" FromRole="Teacher" ToRole="TeacherCSP" />
   </EntityType>
@@ -233,29 +234,29 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" Nullable="false" />
-    <Property Name="LastName" Type="String" Nullable="false" />
-    <Property Name="Gender" Type="String" Nullable="false" />
-    <Property Name="DOB" Type="DateTime" Nullable="false" />
-    <Property Name="PrimaryParent" Type="String" Nullable="false" />
-    <Property Name="Address" Type="String" Nullable="false" />
-    <Property Name="State" Type="String" Nullable="false" />
-    <Property Name="MotherCell" Type="String" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PrimaryParent" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="MotherCell" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolStudent" FromRole="Student" ToRole="School" />
     <Property Name="SchoolId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="StudentClass" Relationship="SinaicspDataModel.StudentClassStudent" FromRole="Student" ToRole="StudentClass" />
     <Property Name="StudentClassId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="StudentGrade" Relationship="SinaicspDataModel.StudentGradeStudent" FromRole="Student" ToRole="StudentGrade" />
     <Property Name="StudentGradeId" Type="Int32" Nullable="false" />
-    <Property Name="SecondaryParent" Type="String" Nullable="false" />
+    <Property Name="SecondaryParent" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="City" Relationship="SinaicspDataModel.CityStudent" FromRole="Student" ToRole="City" />
     <Property Name="CityId" Type="Int32" Nullable="false" />
-    <Property Name="Phone" Type="String" Nullable="false" />
-    <Property Name="FatherCell" Type="String" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FatherCell" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Inclusions" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Student" ToRole="Inclusion" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.StudentCSP" FromRole="Student" ToRole="CSP" />
     <NavigationProperty Name="Locks" Relationship="SinaicspDataModel.StudentLock" FromRole="Student" ToRole="Lock" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Accommodations" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Student" ToRole="Accommodation" />
@@ -278,8 +279,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Students" Relationship="SinaicspDataModel.StudentClassStudent" FromRole="StudentClass" ToRole="Student" />
@@ -289,8 +290,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Students" Relationship="SinaicspDataModel.StudentGradeStudent" FromRole="StudentGrade" ToRole="Student" />
@@ -324,8 +325,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Students" Relationship="SinaicspDataModel.CityStudent" FromRole="City" ToRole="Student" />
@@ -347,12 +348,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Subject" Type="String" Nullable="false" />
-    <Property Name="Classes" Type="String" Nullable="false" />
-    <Property Name="Teacher" Type="String" Nullable="false" />
-    <Property Name="SessionStart" Type="String" Nullable="false" />
-    <Property Name="SessionEnd" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Classes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Teacher" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SessionStart" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SessionEnd" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentInclusion" FromRole="Inclusion" ToRole="Student" />
@@ -375,8 +376,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentAccommodation" FromRole="Accommodation" ToRole="Student" />
@@ -387,8 +388,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Subjects" Relationship="SinaicspDataModel.SubjectSubject" FromRole="Subject" ToRole="Subject1" />
@@ -414,9 +415,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="CSPs" Relationship="SinaicspDataModel.SchoolYearCSP" FromRole="SchoolYear" ToRole="CSP" />
@@ -426,7 +427,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentCSP" FromRole="CSP" ToRole="Student" />
@@ -434,13 +435,13 @@
     <NavigationProperty Name="TeacherCSPs" Relationship="SinaicspDataModel.CSPTeacherCSP" FromRole="CSP" ToRole="TeacherCSP" />
     <NavigationProperty Name="Subject" Relationship="SinaicspDataModel.SubjectCSP" FromRole="CSP" ToRole="Subject" />
     <Property Name="SubjectId" Type="Int32" Nullable="false" />
-    <Property Name="Materials" Type="String" Nullable="false" />
+    <Property Name="Materials" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="SchoolYear" Relationship="SinaicspDataModel.SchoolYearCSP" FromRole="CSP" ToRole="SchoolYear" />
     <Property Name="SchoolYearId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CSPGoalCatalogs" Relationship="SinaicspDataModel.CSPCSPGoalCatalog" FromRole="CSP" ToRole="CSPGoalCatalog" />
-    <Property Name="Comments" Type="String" Nullable="false" />
-    <Property Name="FebruaryNotes" Type="String" Nullable="false" />
-    <Property Name="JuneNotes" Type="String" Nullable="false" />
+    <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FebruaryNotes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="JuneNotes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
   </EntityType>
   <Association Name="StudentCSP">
     <End Type="SinaicspDataModel.Student" Role="Student" Multiplicity="1" />
@@ -463,7 +464,7 @@
     <Property Name="TeacherId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CSP" Relationship="SinaicspDataModel.CSPTeacherCSP" FromRole="TeacherCSP" ToRole="CSP" />
     <Property Name="CSPId" Type="Int32" Nullable="false" />
-    <Property Name="CreationDate" Nullable="false" Type="DateTime" />
+    <Property Name="CreationDate" Nullable="false" Type="DateTime" Precision="3" />
     <Property Name="IsDeleted" Nullable="false" Type="Boolean" />
     <Property Name="CreatedByUserId" Nullable="false" Type="Int32" />
   </EntityType>
@@ -508,7 +509,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Student" Relationship="SinaicspDataModel.StudentLock" FromRole="Lock" ToRole="Student" />
@@ -557,8 +558,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Services" Relationship="SinaicspDataModel.ProviderService" FromRole="Provider" ToRole="Service" />
@@ -568,18 +569,18 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Provider" Relationship="SinaicspDataModel.ProviderService" FromRole="Service" ToRole="Provider" />
     <Property Name="ProviderId" Type="Int32" Nullable="false" />
-    <Property Name="Model" Type="String" Nullable="false" />
+    <Property Name="Model" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="NumberOfStudents" Type="Int32" Nullable="false" />
-    <Property Name="SessionLength" Type="String" Nullable="false" />
-    <Property Name="WeeklySession" Type="String" Nullable="false" />
-    <Property Name="SessionStart" Type="String" Nullable="false" />
-    <Property Name="SessionEnd" Type="String" Nullable="false" />
+    <Property Name="SessionLength" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="WeeklySession" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SessionStart" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SessionEnd" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="StudentServices" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="Service" ToRole="StudentService" />
   </EntityType>
   <Association Name="ProviderService">
@@ -603,7 +604,7 @@
     <Property Name="StudentId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Service" Relationship="SinaicspDataModel.ServiceStudentService" FromRole="StudentService" ToRole="Service" />
     <Property Name="ServiceId" Type="Int32" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -650,8 +651,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="TextGoal" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TextGoal" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog" ToRole="GoalCatalog1" />
     <NavigationProperty Name="ParentGoalCatalog" Relationship="SinaicspDataModel.GoalCatalogGoalCatalog" FromRole="GoalCatalog1" ToRole="GoalCatalog" />
     <Property Name="ParentGoalCatalogId" Type="Int32" Nullable="true" />
@@ -677,9 +678,9 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="Description" Type="String" Nullable="false" />
-    <Property Name="RateValue" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RateValue" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="School" Relationship="SinaicspDataModel.SchoolRating" FromRole="Rating" ToRole="School" />
     <Property Name="SchoolId" Type="Int32" Nullable="false" />
   </EntityType>
@@ -690,17 +691,17 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-    <Property Name="TextGoal" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TextGoal" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="CSP" Relationship="SinaicspDataModel.CSPCSPGoalCatalog" FromRole="CSPGoalCatalog" ToRole="CSP" />
     <Property Name="CSPId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CSPGoalCatalogs" Relationship="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" FromRole="CSPGoalCatalog" ToRole="CSPGoalCatalog1" />
     <NavigationProperty Name="ParentCSPGoalCatalog" Relationship="SinaicspDataModel.CSPGoalCatalogCSPGoalCatalog" FromRole="CSPGoalCatalog1" ToRole="CSPGoalCatalog" />
     <Property Name="ParentCSPGoalCatalogId" Type="Int32" Nullable="true" />
-    <Property Name="DateInitiated" Type="String" Nullable="false" />
-    <Property Name="Rate1" Type="String" Nullable="false" />
-    <Property Name="Rate2" Type="String" Nullable="false" />
-    <Property Name="Rate3" Type="String" Nullable="false" />
+    <Property Name="DateInitiated" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Rate1" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Rate2" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Rate3" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
   </EntityType>
   <Association Name="CSPCSPGoalCatalog">
     <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="1" />
@@ -744,9 +745,9 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="GC_Subjects" Relationship="SinaicspDataModel.GC_CategoryGC_Subjects" FromRole="GC_Category" ToRole="GC_Subjects" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="GC_Subjects">
@@ -757,9 +758,9 @@
     <NavigationProperty Name="GC_Category" Relationship="SinaicspDataModel.GC_CategoryGC_Subjects" FromRole="GC_Subjects" ToRole="GC_Category" />
     <Property Name="GC_CategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="GoalCatalogs" Relationship="SinaicspDataModel.GC_SubjectsGoalCatalog" FromRole="GC_Subjects" ToRole="GoalCatalog" />
-    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreationDate" Type="DateTime" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="GC_CategoryGC_Subjects">

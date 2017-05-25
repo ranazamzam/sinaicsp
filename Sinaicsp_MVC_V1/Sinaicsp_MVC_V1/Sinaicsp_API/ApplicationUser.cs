@@ -27,6 +27,7 @@ namespace Sinaicsp_API
         public System.DateTime CreationDate { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
+        public string GmailLoginAccount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }

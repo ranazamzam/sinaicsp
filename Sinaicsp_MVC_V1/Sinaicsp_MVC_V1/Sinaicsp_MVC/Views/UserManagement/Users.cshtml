@@ -12,8 +12,10 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
+          columns.Template(e => { }).ClientTemplate("<a href='UpdateCurrentUser/#= Id #'>Edit</a>").Width(85);
           columns.Bound(c => c.UserName);
           columns.Bound(c => c.Email);
+          columns.Bound(c => c.GmailLoginAccount).Title("Gmail Account");
           columns.Bound(c => c.Roles);
           columns.Bound(c => c.CreatedOn);
       })
