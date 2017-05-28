@@ -31,6 +31,8 @@ namespace Sinaicsp_API
         public string Rate1 { get; set; }
         public string Rate2 { get; set; }
         public string Rate3 { get; set; }
+        public int TextOrder { get; set; }
+        public int SubTextOrder { get; set; }
     
         public virtual CSP CSP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

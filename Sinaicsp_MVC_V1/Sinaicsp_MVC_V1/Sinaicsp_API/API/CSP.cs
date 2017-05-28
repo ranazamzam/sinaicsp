@@ -155,5 +155,28 @@ namespace Sinaicsp_API
             _item.JuneNotes = juneNotes;
             _context.SaveChanges();
         }
+        public static void AdjustOrder(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            CSP _item = _context.CSPs.Where(a => a.Id == id).FirstOrDefault();
+            if (_item.CSPGoalCatalogs.Count() > 0 && _item.CSPGoalCatalogs.Select(a => a.TextOrder).Max() == 0)
+            {
+                List<CSPGoalCatalog> parentGoals = _item.CSPGoalCatalogs.Where(a => a.ParentCSPGoalCatalogId == null).ToList();
+                for (int i = 0; i < parentGoals.Count; i++)
+                {
+                    parentGoals.ElementAt(i).TextOrder = i;
+                    if (parentGoals.ElementAt(i).CSPGoalCatalogs.Count() > 0)
+                    {
+                        for (int x = 0; x < _item.CSPGoalCatalogs.ElementAt(i).CSPGoalCatalogs.Count(); x++)
+                        {
+                            _item.CSPGoalCatalogs.ElementAt(i).CSPGoalCatalogs.ElementAt(x).TextOrder = i;
+                            _item.CSPGoalCatalogs.ElementAt(i).CSPGoalCatalogs.ElementAt(x).SubTextOrder = x;
+                        }
+                    }
+                }
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

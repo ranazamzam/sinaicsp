@@ -7,6 +7,7 @@
     jQuery(document).ready(function () {
         jQuery('#g_operations').css('display', 'block');
     });
+    var cspGoalCatalogId = 0;
     function SaveCSPNotes() {
         var txt_comment = $('#txt_comment').val();
         var txt_febNote = $('#txt_febNote').val();
@@ -35,18 +36,14 @@
         jQuery.ajax({
             type: 'GET',
             url: '/CSPItem/AddNewCSPGoalCatalog',
-            data: { parentId: ParentGoal, CSPId: mitemId, dateInitiated: ddl_Dateinitiated, rate1: rate1, rate2: rate2, rate3: rate3, textGoal: txt_goal },
+            data: { cspGoalCatalogId: cspGoalCatalogId, parentId: ParentGoal, CSPId: mitemId, dateInitiated: ddl_Dateinitiated, rate1: rate1, rate2: rate2, rate3: rate3, textGoal: txt_goal },
             success: function (data) {
                 var url = '@Url.Action("Notes", "CSPItem", new {id=Model.Id  })';
                 window.location.href = url;
             }
         });
     }
-    function GetCSPId() {
-        return {
-            cspId: '@Model.Id'
-        }
-    }
+
     function DeleteCSPGoalCatalog(ItemId) {
         var r = confirm("are you sure you want to delete that item?");
         if (r == true) {
@@ -55,10 +52,30 @@
                 url: '/CSPItem/RemoveCSPGoalCatalog',
                 data: { id: ItemId },
                 success: function (data) {
-                    
+                    var url = '@Url.Action("Notes", "CSPItem", new {id=Model.Id  })';
+                    window.location.href = url;
                 }
             });
         }
+    }
+    function EditCspGoalCatalog(ItemId) {
+        jQuery.ajax({
+            type: 'GET',
+            url: '/CSPItem/GetCspGoalCatalog',
+            data: { id: ItemId },
+            success: function (data) {
+                cspGoalCatalogId = data.Id;
+                $('#txt_goal').val(data.TextGoal);
+                $('#ddl_Dateinitiated').val(data.DateInitiated);
+                $('#ParentGoal').val(data.ParentCSPGoalCatalogId);
+                $('#rate1').val(data.Rate1);
+                $('#rate2').val(data.Rate2);
+                $('#rate3').val(data.Rate3);
+                $("#ParentGoal").prop('disabled', 'disabled');
+                $(window).scrollTop(0);
+            }
+        });
+
     }
 </script>
 <div class="widgetbox" style="min-height:610px">
@@ -158,42 +175,78 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a onclick="AddNewCSPGoalCatalog()" class="btn btn-primary">Add</a></td>
+                        <td>
+                            <a onclick="AddNewCSPGoalCatalog()" class="btn btn-primary">Save</a>
+                            <a href="@Url.Action("Notes", new { id = Model.Id })" class="btn btn-primary">Cancel</a>
+                        </td>
                     </tr>
                 </table>
-                @(Html.Kendo().Grid<Sinaicsp_API.CSPGoalCatalog>()
-                          .Name("GoalCatalogGrid")
-                          .HtmlAttributes(new { style = "height:500px" })
-                          .Columns(columns =>
-                          {
-                              columns.Template(e => { }).ClientTemplate("<a onclick= \"DeleteCSPGoalCatalog(#= Id #)\" href=''>Delete</a>").Width(85);
-                              columns.Bound(c => c.ParentName);
-                              columns.Bound(c => c.TextGoal);
-                              columns.Bound(c => c.DateInitiated).Title("Date Initiated");
-                              columns.Bound(c => c.Rate1).Title(ViewBag.rate1);
-                              columns.Bound(c => c.Rate2).Title(ViewBag.rate2);
-                              columns.Bound(c => c.Rate3).Title(ViewBag.rate3);
-                              columns.Bound(c => c.CreatedOn);
-                              columns.Bound(c => c.CreatedByUserName);
-                          })
-                          .Groupable()
-                          .ColumnMenu()
-                          .Sortable(sortable =>
-                          {
-                              sortable.SortMode(GridSortMode.SingleColumn);
-                          })
-                          .Pageable(pageable => pageable
-                                .Refresh(true)
-                                .PageSizes(true)
-                                .ButtonCount(5))
-                          .Filterable()
-                          .Scrollable()
-                          .DataSource(dataSource => dataSource
-                              .Ajax()
-                              .PageSize(20)
-                              .Read(read => read.Action("CSPGoaCatalog_Read", "CSPItem").Data("GetCSPId"))
-                          )
-                )
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th width="30"></th>
+                            <th width="20"></th>
+                            <th width="20"></th>
+                            <th width="20"></th>
+                            <th width="30"></th>
+                            <th>@Model.Student.FirstName will :</th>
+                            <th width="20">Date Initiated</th>
+                            <th width="20">@ViewBag.rate1</th>
+                            <th width="20">@ViewBag.rate2</th>
+                            <th width="20">@ViewBag.rate3</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{List<Sinaicsp_API.CSPGoalCatalog> orderedList = Model.CSPGoalCatalogs.Where(a => a.IsDeleted == false).OrderBy(a => a.TextOrder).ThenBy(a => a.SubTextOrder).ToList();}
+                        @foreach (Sinaicsp_API.CSPGoalCatalog goalItem in orderedList)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @if (goalItem.ParentCSPGoalCatalogId == null)
+                                    {
+                                        <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" /></a>
+                                        <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+                                    }
+                                </td>
+                                <td width="15" style="text-align:center"> <img onclick="DeleteCSPGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/DeleteRed.png" width="15" title="Delete" /></td>
+                                <td width="15" style="text-align:center"><img onclick="EditCspGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/edit.png" width="15" title="Edit" /></td>
+                                <td width="15" style="text-align:center"><img style="cursor:pointer" src="~/Images/copy.png" width="15" title="Copy to clipboard" /></td>
+                                <td style="text-align:center">
+                                    @if (goalItem.ParentCSPGoalCatalogId != null)
+                                    {
+                                        <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })">
+                                            <img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" />
+                                        </a>
+                                        <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+
+                                    }
+                                </td>
+                                @if (goalItem.ParentCSPGoalCatalogId == null)
+                                {
+                                    <td><label style="font-weight:bolder;cursor:default">- @Html.Raw(goalItem.TextGoal)</label></td>
+                                }
+                                else
+                                {
+                                    <td><label style="font-weight:normal;cursor:default;margin-left:70px">@Html.Raw(goalItem.TextGoal)</label></td>
+                                }
+                                <td>
+                                    @goalItem.DateInitiated
+                                </td>
+                                <td>
+                                    @goalItem.Rate1
+                                </td>
+                                <td>
+                                    @goalItem.Rate2
+                                </td>
+                                <td>
+                                    @goalItem.Rate3
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="widgetbox">

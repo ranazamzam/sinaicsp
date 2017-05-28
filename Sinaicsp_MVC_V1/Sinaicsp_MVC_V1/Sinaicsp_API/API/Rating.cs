@@ -44,6 +44,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.Ratings.Where(a => a.IsDeleted == false).ToList();
         }
+        public static List<Rating> GetAll(int schoolId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.Ratings.Where(a => a.IsDeleted == false&&a.SchoolId==schoolId).ToList();
+        }
         public static Rating GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

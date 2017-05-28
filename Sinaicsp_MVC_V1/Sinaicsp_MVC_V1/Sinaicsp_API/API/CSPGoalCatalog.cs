@@ -56,8 +56,19 @@ namespace Sinaicsp_API
         public static bool AddNew(int? parentId, int CSPId, string dateInitiated, string rate1, string rate2, string rate3, string textGoal, int LoggeduserId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-
             CSPGoalCatalog _item = new Sinaicsp_API.CSPGoalCatalog();
+
+            CSP _cspitem = _context.CSPs.FirstOrDefault(a => a.Id == CSPId);
+            if (parentId == null)
+            {
+                _item.TextOrder = _cspitem.CSPGoalCatalogs.Count > 0 ? _cspitem.CSPGoalCatalogs.Select(a => a.TextOrder).Max() + 1 : 0;
+                _item.SubTextOrder = 0;
+            }
+            else
+            {
+                _item.TextOrder = _cspitem.CSPGoalCatalogs.FirstOrDefault(a => a.Id == parentId.Value).TextOrder;
+                _item.SubTextOrder = _cspitem.CSPGoalCatalogs.Where(a => a.ParentCSPGoalCatalogId == parentId).Count() > 0 ? _cspitem.CSPGoalCatalogs.Where(a => a.ParentCSPGoalCatalogId == parentId).Select(a => a.SubTextOrder).Max() + 1 : 0;
+            }
             _item.ParentCSPGoalCatalogId = parentId;
             _item.TextGoal = textGoal;
             _item.CSPId = CSPId;
@@ -90,8 +101,100 @@ namespace Sinaicsp_API
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             CSPGoalCatalog _item = _context.CSPGoalCatalogs.FirstOrDefault(a => a.Id == id);
+            if (_item.CSPGoalCatalogs.Count() > 0)
+            {
+                foreach (CSPGoalCatalog Chitem in _item.CSPGoalCatalogs)
+                {
+                    Chitem.IsDeleted = true;
+                }
+            }
             _item.IsDeleted = true;
             _context.SaveChanges();
+        }
+
+        public static CSP MoveUp(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            CSPGoalCatalog _goalItem = _context.CSPGoalCatalogs.Where(a => a.Id == id).FirstOrDefault();
+            CSP _item = _goalItem.CSP;
+            if (_goalItem.ParentCSPGoalCatalogId == null)
+            {
+                List<CSPGoalCatalog> targetParentList = _item.CSPGoalCatalogs.Where(a => a.ParentCSPGoalCatalogId == null).OrderBy(a => a.TextOrder).ToList();
+                int index = targetParentList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    CSPGoalCatalog _goalAbove = targetParentList[index - 1];
+                    int NeworderSwap = _goalAbove.TextOrder;
+                    _goalAbove.TextOrder = _goalItem.TextOrder;
+                    _goalItem.TextOrder = NeworderSwap;
+                    foreach (CSPGoalCatalog item in _goalItem.CSPGoalCatalogs)
+                    {
+                        item.TextOrder = _goalItem.TextOrder;
+                    }
+                    foreach (CSPGoalCatalog item in _goalAbove.CSPGoalCatalogs)
+                    {
+                        item.TextOrder = _goalAbove.TextOrder;
+                    }
+                }
+            }
+            else
+            {
+                CSPGoalCatalog _parent = _goalItem.ParentCSPGoalCatalog;
+                List<CSPGoalCatalog> targetchildList = _parent.CSPGoalCatalogs.OrderBy(a => a.SubTextOrder).ToList();
+
+                int index = targetchildList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    CSPGoalCatalog _goalAbove = targetchildList[index - 1];
+                    int NeworderSwap = _goalAbove.SubTextOrder;
+                    _goalAbove.SubTextOrder = _goalItem.SubTextOrder;
+                    _goalItem.SubTextOrder = NeworderSwap;
+                }
+            }
+            _context.SaveChanges();
+            return _item;
+        }
+        public static CSP MoveDown(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            CSPGoalCatalog _goalItem = _context.CSPGoalCatalogs.Where(a => a.Id == id).FirstOrDefault();
+            CSP _item = _goalItem.CSP;
+            if (_goalItem.ParentCSPGoalCatalogId == null)
+            {
+                List<CSPGoalCatalog> targetParentList = _item.CSPGoalCatalogs.Where(a => a.ParentCSPGoalCatalogId == null).OrderByDescending(a => a.TextOrder).ToList();
+                int index = targetParentList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    CSPGoalCatalog _goalAbove = targetParentList[index - 1];
+                    int NeworderSwap = _goalAbove.TextOrder;
+                    _goalAbove.TextOrder = _goalItem.TextOrder;
+                    _goalItem.TextOrder = NeworderSwap;
+                    foreach (CSPGoalCatalog item in _goalItem.CSPGoalCatalogs)
+                    {
+                        item.TextOrder = _goalItem.TextOrder;
+                    }
+                    foreach (CSPGoalCatalog item in _goalAbove.CSPGoalCatalogs)
+                    {
+                        item.TextOrder = _goalAbove.TextOrder;
+                    }
+                }
+            }
+            else
+            {
+                CSPGoalCatalog _parent = _goalItem.ParentCSPGoalCatalog;
+                List<CSPGoalCatalog> targetchildList = _parent.CSPGoalCatalogs.OrderByDescending(a => a.SubTextOrder).ToList();
+
+                int index = targetchildList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    CSPGoalCatalog _goalAbove = targetchildList[index - 1];
+                    int NeworderSwap = _goalAbove.SubTextOrder;
+                    _goalAbove.SubTextOrder = _goalItem.SubTextOrder;
+                    _goalItem.SubTextOrder = NeworderSwap;
+                }
+            }
+            _context.SaveChanges();
+            return _item;
         }
     }
 }

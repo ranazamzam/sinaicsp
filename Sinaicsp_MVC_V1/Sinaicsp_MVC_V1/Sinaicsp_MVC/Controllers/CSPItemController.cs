@@ -124,6 +124,7 @@ namespace Sinaicsp_MVC.Controllers
             string rate2 = string.Empty;
             string rate3 = string.Empty;
             CSP _item = CSP.GetById(id);
+            CSP.AdjustOrder(id);
             List<string> dateinitVal = new List<string>();
             int year = int.Parse(DateTime.Now.Year.ToString().Replace("20", ""));
             int orgYear = year;
@@ -155,10 +156,10 @@ namespace Sinaicsp_MVC.Controllers
             ViewBag.rate2 = rate2;
             ViewBag.rate3 = rate3;
             ViewBag.AllDateInitiated = new SelectList(dateinitVal);
-            List<Rating> allrates = Rating.GetAll();
+            List<Rating> allrates = Rating.GetAll(_item.Student.SchoolId);
             allrates.Insert(0, new Rating() { Description = "" });
-            ViewBag.AllRates = new SelectList(allrates, "Description", "Description");
-            List<CSPGoalCatalog> allGoals = CSPGoalCatalog.GetAll(id);
+            ViewBag.AllRates = new SelectList(allrates, "RateValue", "Description");
+            List<CSPGoalCatalog> allGoals = CSPGoalCatalog.GetAll(id).Where(a => a.ParentCSPGoalCatalogId == null).ToList();
             allGoals.Insert(0, new CSPGoalCatalog() { Id = -1, TextGoal = "NONE" });
             ViewBag.allGoals = new SelectList(allGoals, "Id", "TextGoal");
             return View(_item);
@@ -182,19 +183,25 @@ namespace Sinaicsp_MVC.Controllers
             return RedirectToAction("Notes", new { id = nextId });
         }
         [HttpGet]
-        public JsonResult AddNewCSPGoalCatalog(int? parentId, int CSPId, string dateInitiated, string rate1, string rate2, string rate3, string textGoal)
+        public JsonResult AddNewCSPGoalCatalog(int cspGoalCatalogId, int? parentId, int CSPId, string dateInitiated, string rate1, string rate2, string rate3, string textGoal)
         {
-            CSPGoalCatalog.AddNew(parentId > -1 ? parentId : null, CSPId, dateInitiated, rate1, rate2, rate3, textGoal, ApplicationHelper.LoggedUserId);
+            if (cspGoalCatalogId == 0)
+            {
+                CSPGoalCatalog.AddNew(parentId > -1 ? parentId : null, CSPId, dateInitiated, rate1, rate2, rate3, textGoal, ApplicationHelper.LoggedUserId);
+            }else
+            {
+                CSPGoalCatalog.Update(cspGoalCatalogId, dateInitiated, rate1, rate2, rate3, textGoal);
+            }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CSPGoaCatalog_Read([DataSourceRequest]DataSourceRequest request,int cspId)
+        public ActionResult CSPGoaCatalog_Read([DataSourceRequest]DataSourceRequest request, int cspId)
         {
-            
+
             IQueryable<CSPGoalCatalog> items = CSPGoalCatalog.GetAll(cspId).AsQueryable();
             DataSourceResult result = items.ToDataSourceResult(request, _item => new
             {
                 Id = _item.Id,
-                ParentName=_item.ParentName,
+                ParentName = _item.ParentName,
                 TextGoal = _item.TextGoal,
                 DateInitiated = _item.DateInitiated,
                 Rate1 = _item.Rate1,
@@ -212,6 +219,48 @@ namespace Sinaicsp_MVC.Controllers
         {
             CSPGoalCatalog.SoftDelete(id);
             return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Move CSP Goal Catalog Above
+        /// </summary>
+        /// <param name="id">CSP Goal Catalog</param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        public ActionResult MoveOrderUp(int id)
+        {
+            CSP _item = CSPGoalCatalog.MoveUp(id);
+            return RedirectToAction("Notes", new { id = _item.Id });
+        }
+
+        /// <summary>
+        /// Move CSP Goal Catalog Down
+        /// </summary>
+        /// <param name="id">CSP Goal Catalog</param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        public ActionResult MoveOrderDown(int id)
+        {
+            CSP _item = CSPGoalCatalog.MoveDown(id);
+            return RedirectToAction("Notes", new { id = _item.Id });
+        }
+
+        public JsonResult GetCspGoalCatalog(int id)
+        {
+            CSPGoalCatalog _item = CSPGoalCatalog.GetById(id);
+            CSPGoalCatalog _retVal = new CSPGoalCatalog()
+            {
+                Id = _item.Id,
+                ParentCSPGoalCatalogId = _item.ParentCSPGoalCatalogId,
+                TextGoal = _item.TextGoal,
+                DateInitiated = _item.DateInitiated,
+                Rate1 = _item.Rate1,
+                Rate2 = _item.Rate2,
+                Rate3 = _item.Rate3
+            };
+            return Json(_retVal, JsonRequestBehavior.AllowGet);
         }
     }
 }

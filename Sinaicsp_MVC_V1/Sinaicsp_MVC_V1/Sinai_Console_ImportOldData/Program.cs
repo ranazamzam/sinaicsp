@@ -319,8 +319,9 @@ namespace Sinai_Console_ImportOldData
                     _CSPGoalitem.Rate1 = string.IsNullOrEmpty(_CSPGoalitem.Rate1) ? " " : _CSPGoalitem.Rate1;
                     _CSPGoalitem.Rate2 = string.IsNullOrEmpty(_CSPGoalitem.Rate2) ? " " : _CSPGoalitem.Rate2;
                     _CSPGoalitem.Rate3 = string.IsNullOrEmpty(_CSPGoalitem.Rate3) ? " " : _CSPGoalitem.Rate3;
-
                     _CSPGoalitem.CreationDate = DateTime.Now;
+                   // _CSPGoalitem.TextOrder = dataitem.iep_data_sequence;
+                   // _CSPGoalitem.SubTextOrder = dataitem.iep_sub_data_sequence == null ? 0 : dataitem.iep_sub_data_sequence.Value;
                     _item.CreatedByUserId = -1;
                     _item.CSPGoalCatalogs.Add(_CSPGoalitem);
                 }

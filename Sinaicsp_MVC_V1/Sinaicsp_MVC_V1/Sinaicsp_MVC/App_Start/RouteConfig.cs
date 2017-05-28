@@ -18,7 +18,6 @@ namespace Sinaicsp_MVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            routes.Add("catchall", new Route("{*url}", new Signin()));
 
         }
     }

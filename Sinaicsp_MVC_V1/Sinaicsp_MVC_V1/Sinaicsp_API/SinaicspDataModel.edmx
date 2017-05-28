@@ -63,6 +63,8 @@
           <Property Name="Rate1" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Rate2" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Rate3" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TextOrder" Type="int" Nullable="false" />
+          <Property Name="SubTextOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CSPs">
           <Key>
@@ -1446,6 +1448,8 @@
           <Property Name="Rate1" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Rate2" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Rate3" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TextOrder" Type="Int32" Nullable="false" />
+          <Property Name="SubTextOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="CSPCSPGoalCatalog">
           <End Type="SinaicspDataModel.CSP" Role="CSP" Multiplicity="1" />
@@ -1817,7 +1821,9 @@
     <EntitySetMapping Name="CSPGoalCatalogs">
       <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.CSPGoalCatalog)">
         <MappingFragment StoreEntitySet="CSPGoalCatalogs">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubTextOrder" ColumnName="SubTextOrder" />
+                <ScalarProperty Name="TextOrder" ColumnName="TextOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
