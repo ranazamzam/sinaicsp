@@ -61,6 +61,14 @@
     function EditCspGoalCatalog(ItemId) {
         jQuery.ajax({
             type: 'GET',
+            url: '/CSPItem/DownloadCSPReport',
+            data: { id: 1 },
+            success: function (data) {
+             
+            }
+        });
+        jQuery.ajax({
+            type: 'GET',
             url: '/CSPItem/GetCspGoalCatalog',
             data: { id: ItemId },
             success: function (data) {

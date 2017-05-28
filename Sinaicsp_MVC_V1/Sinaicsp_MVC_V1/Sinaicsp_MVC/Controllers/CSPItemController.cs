@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Telerik.Reporting.Processing;
 
 namespace Sinaicsp_MVC.Controllers
 {
@@ -262,5 +263,37 @@ namespace Sinaicsp_MVC.Controllers
             };
             return Json(_retVal, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult DownloadCSPReport(int id)
+        {
+            ExportToPDF(new Report.CSPItemReport());
+            return Json(true, JsonRequestBehavior.AllowGet);
+
+        }
+
+        void ExportToPDF(Telerik.Reporting.Report reportToExport)
+        {
+            ReportProcessor reportProcessor = new ReportProcessor();
+            Telerik.Reporting.InstanceReportSource instanceReportSource = new Telerik.Reporting.InstanceReportSource();
+            instanceReportSource.ReportDocument = reportToExport;
+            RenderingResult result = reportProcessor.RenderReport("PDF", instanceReportSource, null);
+
+            string fileName = result.DocumentName + "." + result.Extension;
+
+            Response.Clear();
+            Response.ContentType = result.MimeType;
+            Response.Cache.SetCacheability(HttpCacheability.Private);
+            Response.Expires = -1;
+            Response.Buffer = true;
+
+            Response.AddHeader("Content-Disposition",
+                               string.Format("{0};FileName=\"{1}\"",
+                                             "attachment",
+                                             fileName));
+
+            Response.BinaryWrite(result.DocumentBytes);
+            Response.End();
+        }
+
     }
 }

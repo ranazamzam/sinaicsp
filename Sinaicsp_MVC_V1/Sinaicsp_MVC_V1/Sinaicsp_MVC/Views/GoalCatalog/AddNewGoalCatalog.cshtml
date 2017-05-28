@@ -26,12 +26,12 @@
                     <td>
                         @if (Model.Id > 0)
                         {
-                            @Html.DropDownListFor(a => a.SubjectId, ViewBag.AllSubjects as SelectList, new { @disabled = "disabled" })
+                            @Html.DropDownListFor(a => a.GC_SubjectsId, ViewBag.AllSubjects as SelectList, new { @disabled = "disabled" })
                         }
                         else
                         {
-                            @Html.DropDownListFor(a => a.SubjectId, ViewBag.AllSubjects as SelectList)
-                            @Html.ValidationMessageFor(a => a.SubjectId, "", new { @Style = "Color:red" })
+                            @Html.DropDownListFor(a => a.GC_SubjectsId, ViewBag.AllSubjects as SelectList)
+                            @Html.ValidationMessageFor(a => a.GC_SubjectsId, "", new { @Style = "Color:red" })
                         }
                     </td>
                 </tr>

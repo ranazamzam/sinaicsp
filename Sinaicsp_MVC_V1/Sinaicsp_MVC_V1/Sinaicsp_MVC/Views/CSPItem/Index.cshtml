@@ -14,7 +14,7 @@
       .HtmlAttributes(new { style = "height:500px" })
       .Columns(columns =>
       {
-          columns.Template(e => { }).ClientTemplate("<a href='CSPItem/Notes/#= Id #'>Notes</a>").Width(125);
+          columns.Template(e => { }).ClientTemplate("<a href='CSPItem/Notes/#= Id #'>Edit</a>").Width(40);
 
           columns.Bound(c => c.StudentName);
           columns.Bound(c => c.SchoolName);
@@ -22,8 +22,6 @@
           columns.Bound(c => c.Materials);
           columns.Bound(c => c.TeacherNames);
           columns.Bound(c => c.SchoolYearName);
-          columns.Bound(c => c.CreatedOn);
-          columns.Bound(c => c.CreatedByUserName);
       })
       .Groupable()
       .ColumnMenu()
