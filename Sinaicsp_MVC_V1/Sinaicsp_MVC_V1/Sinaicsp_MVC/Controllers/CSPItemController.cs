@@ -264,13 +264,13 @@ namespace Sinaicsp_MVC.Controllers
             return Json(_retVal, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult DownloadCSPReport(int id)
+        public ActionResult DownloadCSPReport(int id)
         {
             ExportToPDF(new Report.CSPItemReport());
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Notes", new { id = id });
 
         }
-
+        
         void ExportToPDF(Telerik.Reporting.Report reportToExport)
         {
             ReportProcessor reportProcessor = new ReportProcessor();
