@@ -266,7 +266,7 @@ namespace Sinaicsp_MVC.Controllers
 
         public ActionResult DownloadCSPReport(int id)
         {
-            ExportToPDF(new Report.CSPItemReport());
+            ExportToPDF(new Report.CSPItemReport(id));
             return RedirectToAction("Notes", new { id = id });
 
         }

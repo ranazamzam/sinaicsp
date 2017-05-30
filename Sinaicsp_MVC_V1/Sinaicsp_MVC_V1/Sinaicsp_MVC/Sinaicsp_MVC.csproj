@@ -532,6 +532,7 @@
     <Content Include="Images\DeleteRed.png" />
     <Content Include="Images\Down.png" />
     <Content Include="Images\edit.png" />
+    <Content Include="Images\pdf.png" />
     <Content Include="Images\Remove.png" />
     <Content Include="Images\SINAI Schools logo.jpeg" />
     <Content Include="Images\up.png" />
@@ -1371,6 +1372,8 @@
     <Compile Include="Report\CSPItemReport.Designer.cs">
       <DependentUpon>CSPItemReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\CustomCSPGoalCatalog.cs" />
+    <Compile Include="Report\CustomRatings.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailViewModel.cs" />
     <Compile Include="ViewModels\StudentServiceViewModel.cs" />

@@ -24,7 +24,7 @@ namespace Sinai_Console_ImportOldData
                 }
 
             }
-
+        
             // Students
             List<student> allStudents = _context.students.ToList();
             List<string> allCities = allStudents.Select(a => a.home_city).Distinct().ToList();

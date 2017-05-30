@@ -64,7 +64,7 @@
             url: '/CSPItem/DownloadCSPReport',
             data: { id: 1 },
             success: function (data) {
-             
+
             }
         });
         jQuery.ajax({
@@ -89,6 +89,9 @@
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">CSP Notes</h4>
     <div class="widgetcontent">
+        <div style="text-align:right;height:0px">
+            <a href="@Url.Action("DownloadCSPReport", new { id = Model.Id })"><img src="~/Images/pdf.png" width="45" title="Export as PDF" /></a>
+        </div>
         <table>
             <tr>
                 <td style="width:70px"></td>
@@ -145,6 +148,7 @@
                 </td>
             </tr>
         </table>
+
         <div class="widgetbox">
             <h4 class="widgettitle">Goal Catalog</h4>
             <div class="widgetcontent">
@@ -209,48 +213,48 @@
                         @{List<Sinaicsp_API.CSPGoalCatalog> orderedList = Model.CSPGoalCatalogs.Where(a => a.IsDeleted == false).OrderBy(a => a.TextOrder).ThenBy(a => a.SubTextOrder).ToList();}
                         @foreach (Sinaicsp_API.CSPGoalCatalog goalItem in orderedList)
                         {
-                            <tr>
-                                <td style="text-align:center">
-                                    @if (goalItem.ParentCSPGoalCatalogId == null)
+                        <tr>
+                            <td style="text-align:center">
+                                @if (goalItem.ParentCSPGoalCatalogId == null)
                                     {
-                                        <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" /></a>
-                                        <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+                                    <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" /></a>
+                                    <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
                                     }
-                                </td>
-                                <td width="15" style="text-align:center"> <img onclick="DeleteCSPGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/DeleteRed.png" width="15" title="Delete" /></td>
-                                <td width="15" style="text-align:center"><img onclick="EditCspGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/edit.png" width="15" title="Edit" /></td>
-                                <td width="15" style="text-align:center"><img style="cursor:pointer" src="~/Images/copy.png" width="15" title="Copy to clipboard" /></td>
-                                <td style="text-align:center">
-                                    @if (goalItem.ParentCSPGoalCatalogId != null)
+                            </td>
+                            <td width="15" style="text-align:center"> <img onclick="DeleteCSPGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/DeleteRed.png" width="15" title="Delete" /></td>
+                            <td width="15" style="text-align:center"><img onclick="EditCspGoalCatalog(@goalItem.Id)" style="cursor:pointer" src="~/Images/edit.png" width="15" title="Edit" /></td>
+                            <td width="15" style="text-align:center"><img style="cursor:pointer" src="~/Images/copy.png" width="15" title="Copy to clipboard" /></td>
+                            <td style="text-align:center">
+                                @if (goalItem.ParentCSPGoalCatalogId != null)
                                     {
-                                        <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })">
-                                            <img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" />
-                                        </a>
-                                        <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+                                    <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })">
+                                        <img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" />
+                                    </a>
+                                    <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
 
                                     }
-                                </td>
-                                @if (goalItem.ParentCSPGoalCatalogId == null)
+                            </td>
+                            @if (goalItem.ParentCSPGoalCatalogId == null)
                                 {
-                                    <td><label style="font-weight:bolder;cursor:default">- @Html.Raw(goalItem.TextGoal)</label></td>
+                                <td><label style="font-weight:bolder;cursor:default">- @Html.Raw(goalItem.TextGoal)</label></td>
                                 }
                                 else
                                 {
-                                    <td><label style="font-weight:normal;cursor:default;margin-left:70px">@Html.Raw(goalItem.TextGoal)</label></td>
+                                <td><label style="font-weight:normal;cursor:default;margin-left:70px">@Html.Raw(goalItem.TextGoal)</label></td>
                                 }
-                                <td>
-                                    @goalItem.DateInitiated
-                                </td>
-                                <td>
-                                    @goalItem.Rate1
-                                </td>
-                                <td>
-                                    @goalItem.Rate2
-                                </td>
-                                <td>
-                                    @goalItem.Rate3
-                                </td>
-                            </tr>
+                            <td>
+                                @goalItem.DateInitiated
+                            </td>
+                            <td>
+                                @goalItem.Rate1
+                            </td>
+                            <td>
+                                @goalItem.Rate2
+                            </td>
+                            <td>
+                                @goalItem.Rate3
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

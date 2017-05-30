@@ -38,6 +38,8 @@ namespace Sinaicsp_API
                 return CreationDate.ToShortDateString();
             }
         }
+
+
         public static List<CSPGoalCatalog> GetAll()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
