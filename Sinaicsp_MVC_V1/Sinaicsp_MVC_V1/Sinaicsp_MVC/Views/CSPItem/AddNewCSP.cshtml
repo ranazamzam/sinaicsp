@@ -4,10 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript">
+    var allTeachers = [];
+    var cspId=-1;
+    var schoolId=-1;
+    var studentId=-1;
+    var schoolYearId=-1;
+    var subjectId=-1;
     jQuery(document).ready(function () {
         jQuery('#g_operations').css('display', 'block');
+        @if(Model!=null&& Model.Id>0)
+        {
+           foreach (Sinaicsp_API.TeacherCSP item in Model.TeacherCSPs)
+           {
+               <text>
+                    cspId=@Model.Id;
+                    schoolId=@Model.Student.SchoolId;
+                    studentId=@Model.StudentId;
+                    schoolYearId=@Model.SchoolYearId;
+                    subjectId=@Model.SubjectId;
+                    Edit_AddTeacher('@item.Teacher.Id','@item.Teacher.UserName')
+                </text>
+           }
+        }
     });
-    var allTeachers = [];
+
     function AddTeacher() {
         var value = $('#ddl_teachers').data("kendoDropDownList").value();
         var text = $('#ddl_teachers').data("kendoDropDownList").text();
@@ -21,23 +41,46 @@
             $('#ddl_schools').data("kendoDropDownList").enable(false);
         }
     }
+    function Edit_AddTeacher(tValue,tText) {
+        var value = tValue;
+        var text = tText;
+        if (allTeachers.indexOf(parseInt(value)) > -1) {
+            alert(text + ' already exists !');
+            return;
+        }
+        allTeachers.push(parseInt(value));
+        $('#tbl_teachers tr:last').after("<tr id='TR_" + value + "'><td><a href='#' onclick='RemoveTeacher(" + parseInt(value) + ")' class='delete'><img src='/Images/Remove.png' width='25' /></a></td><td>" + text + "</td></tr>");
+    }
 
     function SaveCSP() {
         var objModel = new Object();
         objModel = {
+            ID:cspId,
             StudentId: $('#ddl_students').data("kendoDropDownList").value(),
             SubjectId: $('#ddl_subjects').data("kendoDropDownList").value(),
             SchoolYearId: $('#ddl_schoolYears').data("kendoDropDownList").value(),
             Materials: $('#Materials').val()
         };
+        if(allTeachers.length==0)
+        {
+            alert('You must have at least one teacher !');
+            return ;
+        }
         jQuery.ajax({
             type: 'POST',
-            url: 'AddNewCSPItem',
+            url: '@Url.Action("AddNewCSPItem")',
             data: { model: objModel, teachersIds: allTeachers },
             success: function (data) {
                 if (data == true) {
-                    var url = '@Url.Action("Index", "CSPItem", new {  })';
-                    window.location.href = url;
+                    if(cspId==0)
+                    {
+                        var url = '@Url.Action("Index", "CSPItem", new { })';
+                        window.location.href = url;
+                    }else
+                    {
+                        var url = '@Url.Action("Notes", "CSPItem", new {id=Model.Id })';
+                        window.location.href = url;
+                    }
                 } else {
                     alert('Please fill all required fields !');
                 }
@@ -52,11 +95,23 @@
         }
     }
     function School_OnChange() {
+        if(cspId>0)
+        {
+            $('#ddl_schools').data("kendoDropDownList").enable(false);
+            $('#ddl_schools').data("kendoDropDownList").value(schoolId);
+        }
         $('#ddl_students').data("kendoDropDownList").dataSource.read();
         $('#ddl_teachers').data("kendoDropDownList").dataSource.read();
     }
     function Student_OnLoaded() {
-        $('#ddl_students').data("kendoDropDownList").select(0);
+        if(cspId>0)
+        {
+            $('#ddl_students').data("kendoDropDownList").enable(false);
+            $('#ddl_students').data("kendoDropDownList").value(studentId);
+        }else
+        {
+            $('#ddl_students').data("kendoDropDownList").select(0);
+        }
     }
     function Teacher_OnLoaded() {
         $('#ddl_teachers').data("kendoDropDownList").select(0);
@@ -67,6 +122,33 @@
             schoolId: selectedSchoolId
         }
     };
+
+    function Subjects_OnLoaded()
+    {
+        if(cspId)
+        {
+            $('#ddl_subjects').data("kendoDropDownList").value(subjectId);
+        }else
+        {
+            $('#ddl_subjects').data("kendoDropDownList").value(0);
+        }
+    }
+    function GetCSPId() {
+       
+        return {
+            cspId: cspId
+        }
+    };
+    function SchoolYear_OnLoaded()
+    {
+        if(cspId>0)
+        {
+            $('#ddl_schoolYears').data("kendoDropDownList").value(schoolYearId);
+        }else
+        {
+            $('#ddl_schoolYears').data("kendoDropDownList").value(0);
+        }
+    }
 </script>
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Add new CSP</h4>
@@ -180,10 +262,12 @@
                         </thead>
                         <tbody>
 
-                            <tr>
-                                @*<td><a href="#" onclick="RemoveStudent('3')"><img src="~/Images/Remove.png" width="25" /></a></td>
-                                    <td>Yasser Shehab</td>*@
-                            </tr>
+
+                            <tr></tr>
+
+                            @*<td><a href="#" onclick="RemoveStudent('3')"><img src="~/Images/Remove.png" width="25" /></a></td>
+                                <td>Yasser Shehab</td>*@
+
                         </tbody>
                     </table>
                 </td>
@@ -203,6 +287,10 @@
                           .DataValueField("Id")
                           .HtmlAttributes(new { style = "width:88%" })
                           .Filter("contains")
+                          .Events(e =>
+                              {
+                                  e.DataBound("Subjects_OnLoaded");
+                              })
                           .DataSource(source =>
                           {
                               source.Read(read =>
@@ -229,11 +317,15 @@
                           .DataValueField("Id")
                           .HtmlAttributes(new { style = "width:88%" })
                           .Filter("contains")
+                           .Events(e =>
+                           {
+                               e.DataBound("SchoolYear_OnLoaded");
+                           })
                           .DataSource(source =>
                           {
                               source.Read(read =>
                               {
-                                  read.Action("SchoolYears_Read", "CSPItem");
+                                  read.Action("SchoolYears_Read", "CSPItem").Data("GetCSPId"); ;
                               });
 
                           })
@@ -248,7 +340,7 @@
                     Materials
                 </td>
                 <td>
-                    @Html.TextBoxFor(a => a.Materials)
+                   <input type="text" class="form-control" id="Materials" value="@Model.Materials" />
                 </td>
 
             </tr>
@@ -257,7 +349,7 @@
                     Date Created
                 </td>
                 <td>
-                    <input type="text" class="form-control" disabled value="@DateTime.Now.ToShortDateString()" />
+                    <input type="text" class="form-control" disabled value="@Model.CreationDate.ToShortDateString()" />
                 </td>
 
             </tr>
@@ -266,7 +358,7 @@
                     Created By
                 </td>
                 <td>
-                    <input type="text" class="form-control" disabled value="@ApplicationHelper.LoggedUserName" />
+                    <input type="text" class="form-control" disabled value="@Model.CreatedByUserName" />
                 </td>
             </tr>
             <tr>

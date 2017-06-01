@@ -17,10 +17,16 @@ namespace Sinaicsp_MVC.Controllers
         {
             return View();
         }
-        public ActionResult AddNewCSP()
+        public ActionResult AddNewCSP(int? id)
         {
+            if (id != null)
+            {
+                CSP _model = CSP.GetById(id.Value);
+                return View(_model);
+            }
             return View();
         }
+
         public JsonResult Schools_Read()
         {
             IQueryable<School> items = new List<School>().AsQueryable();
@@ -79,17 +85,33 @@ namespace Sinaicsp_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult SchoolYears_Read()
+        public JsonResult SchoolYears_Read(int cspId)
         {
-            IQueryable<SchoolYear> items = SchoolYear.GetCurrent().AsQueryable();
-            var result = from item in items
-                         select new
-                         {
-                             Id = item.Id,
-                             Name = item.Name
-                         };
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (cspId == 0) // Inser Mode
+            {
+                IQueryable<SchoolYear> items = SchoolYear.GetCurrent().AsQueryable();
+                var result = from item in items
+                             select new
+                             {
+                                 Id = item.Id,
+                                 Name = item.Name
+                             };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                IQueryable<SchoolYear> items = SchoolYear.GetByCSPId(cspId).AsQueryable();
+                var result = from item in items
+                             select new
+                             {
+                                 Id = item.Id,
+                                 Name = item.Name
+                             };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
         public ActionResult CSPs_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -114,7 +136,13 @@ namespace Sinaicsp_MVC.Controllers
         {
             if (model.StudentId > 0 && model.SubjectId > 0 && model.SchoolYearId > 0 && string.IsNullOrEmpty(model.Materials) == false && teachersIds.Count > 0)
             {
-                CSP.AddNew(model.StudentId, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
+                if (model.Id == 0)
+                {
+                    CSP.AddNew(model.StudentId, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
+                }else
+                {
+                    CSP.Update(model.Id, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
+                }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
@@ -189,7 +217,8 @@ namespace Sinaicsp_MVC.Controllers
             if (cspGoalCatalogId == 0)
             {
                 CSPGoalCatalog.AddNew(parentId > -1 ? parentId : null, CSPId, dateInitiated, rate1, rate2, rate3, textGoal, ApplicationHelper.LoggedUserId);
-            }else
+            }
+            else
             {
                 CSPGoalCatalog.Update(cspGoalCatalogId, dateInitiated, rate1, rate2, rate3, textGoal);
             }
@@ -270,7 +299,7 @@ namespace Sinaicsp_MVC.Controllers
             return RedirectToAction("Notes", new { id = id });
 
         }
-        
+
         void ExportToPDF(Telerik.Reporting.Report reportToExport)
         {
             ReportProcessor reportProcessor = new ReportProcessor();

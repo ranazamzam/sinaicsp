@@ -139,6 +139,30 @@ namespace Sinaicsp_API
             _context.SaveChanges();
             return true;
         }
+
+        public static bool Update(int cspId, int subjectId, int schoolYearId, string matrials, List<int> teacherIds, int LoggeduserId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            CSP _item = _context.CSPs.FirstOrDefault(a => a.Id == cspId);
+            _item.SubjectId = subjectId;
+            _item.SchoolYearId = schoolYearId;
+            _item.Materials = matrials;
+            List<TeacherCSP> allteachers = _item.TeacherCSPs.ToList();
+            for (int i = 0; i < allteachers.Count; i++)
+            {
+                _context.TeacherCSPs.Remove(allteachers[i]);
+            }
+            foreach (int item in teacherIds)
+            {
+                TeacherCSP _juTable = new TeacherCSP();
+                _juTable.TeacherId = item;
+                _juTable.CreationDate = DateTime.Now;
+                _juTable.CreatedByUserId = LoggeduserId;
+                _item.TeacherCSPs.Add(_juTable);
+            }
+            _context.SaveChanges();
+            return true;
+        }
         public static void SoftDelete(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

@@ -37,6 +37,13 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.SchoolYears.Where(a => a.IsDeleted == false).ToList();
         }
+        public static List<SchoolYear> GetByCSPId(int cspId)
+        {
+            List<SchoolYear> retVal = new List<Sinaicsp_API.SchoolYear>();
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            retVal.Add(_context.CSPs.Where(a => a.Id == cspId).FirstOrDefault().SchoolYear);
+            return retVal;
+        }
         public static List<SchoolYear> GetCurrent()
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();

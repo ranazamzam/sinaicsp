@@ -525,7 +525,8 @@
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.1.112\Uniform\sprite_kpi_2x.png" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\edit-csp.png" />
+    <Content Include="Images\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\add1.png" />
     <Content Include="Images\copy.png" />
@@ -1383,9 +1384,9 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Images\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Images\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Images\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Scripts\kendo\2016.1.112\jquery.min.map" />
