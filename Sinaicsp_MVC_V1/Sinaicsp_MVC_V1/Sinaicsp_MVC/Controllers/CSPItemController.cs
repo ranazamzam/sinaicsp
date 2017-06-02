@@ -24,7 +24,14 @@ namespace Sinaicsp_MVC.Controllers
                 CSP _model = CSP.GetById(id.Value);
                 return View(_model);
             }
-            return View(new CSP());
+            else
+            {
+                CSP _item = new CSP();
+                _item.CreatedByUserId = ApplicationHelper.LoggedUserId;
+                _item.CreationDate = DateTime.Now;
+                return View(_item);
+            }
+
         }
 
         public JsonResult Schools_Read()
@@ -136,10 +143,11 @@ namespace Sinaicsp_MVC.Controllers
         {
             if (model.StudentId > 0 && model.SubjectId > 0 && model.SchoolYearId > 0 && string.IsNullOrEmpty(model.Materials) == false && teachersIds.Count > 0)
             {
-                if (model.Id == 0)
+                if (model.Id == -1)
                 {
                     CSP.AddNew(model.StudentId, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
-                }else
+                }
+                else
                 {
                     CSP.Update(model.Id, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
                 }
