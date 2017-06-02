@@ -39,6 +39,7 @@ namespace Sinaicsp_API
         }
         public static List<SchoolYear> GetByCSPId(int cspId)
         {
+
             List<SchoolYear> retVal = new List<Sinaicsp_API.SchoolYear>();
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             retVal.Add(_context.CSPs.Where(a => a.Id == cspId).FirstOrDefault().SchoolYear);

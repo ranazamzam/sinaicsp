@@ -24,7 +24,7 @@ namespace Sinaicsp_MVC.Controllers
                 CSP _model = CSP.GetById(id.Value);
                 return View(_model);
             }
-            return View();
+            return View(new CSP());
         }
 
         public JsonResult Schools_Read()
@@ -88,7 +88,7 @@ namespace Sinaicsp_MVC.Controllers
         public JsonResult SchoolYears_Read(int cspId)
         {
 
-            if (cspId == 0) // Inser Mode
+            if (cspId == -1) // Insert Mode
             {
                 IQueryable<SchoolYear> items = SchoolYear.GetCurrent().AsQueryable();
                 var result = from item in items
