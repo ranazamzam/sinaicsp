@@ -1,44 +1,71 @@
-﻿<script type="text/javascript">
+﻿@model List< Sinaicsp_API.GoalCatalog>
+<script type="text/javascript">
         jQuery(document).ready(function () {
             jQuery('#g_definitions').css('display', 'block');
         });
+
 </script>
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Goal Catalogs</h4>
 
 
     <div class="widgetcontent">
-        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog")">Add New Goal Catalog</a>
-        @(Html.Kendo().Grid<Sinaicsp_API.GoalCatalog>()
-      .Name("grid")
-      .HtmlAttributes(new { style = "height:500px" })
-      .Columns(columns =>
-      {
-          columns.Template(e => { }).ClientTemplate("<a href='GoalCatalog/AddNewGoalCatalog?ParentId=#= Id #'>New Sub Goal</a><br/><a href='GoalCatalog/AddNewGoalCatalog/#= Id #'>Edit</a>&nbsp;&nbsp; <a onclick= \"return confirm('are you sure you want to delete that item?')\" href='GoalCatalog/Delete/#= Id #'>Delete</a>").Width(150);
-          columns.Bound(c => c.CategoryName).Title("Category");
-          columns.Bound(c => c.SubjectName);
-          columns.Bound(c => c.TextGoal);
-          columns.Bound(c => c.ParentName);
+        <table>
+            <tr>
+                <td>Subjects : </td>
+                <td>
 
-      })
-      .Groupable()
-      .ColumnMenu()
-      .Sortable(sortable =>
-      {
-          sortable.SortMode(GridSortMode.SingleColumn);
-      })
-      .Pageable(pageable => pageable
-            .Refresh(true)
-            .PageSizes(true)
-            .ButtonCount(5))
-      .Filterable()
-      .Scrollable()
-      .DataSource(dataSource => dataSource
-          .Ajax()
-          .PageSize(20)
-          .Read(read => read.Action("GoalCatalogs_Read", "GoalCatalog"))
-      )
-        )
+                </td>
+            </tr>
+        </table>
+        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog")">Add New Goal Catalog</a>
+
+        <table class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th width="30"></th>
+                    <th width="20"></th>
+                    <th width="30"></th>
+                    <th>Goal</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{List<Sinaicsp_API.GoalCatalog> orderedList = Model.Where(a => a.IsDeleted == false).OrderBy(a => a.TextOrder).ThenBy(a => a.SubTextOrder).ToList(); }
+                @foreach (Sinaicsp_API.GoalCatalog goalItem in orderedList)
+                {
+                    <tr>
+                        <td style="text-align:center">
+                            @if (goalItem.ParentGoalCatalogId == null)
+                            {
+                                <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" /></a>
+                                <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+                            }
+                        </td>
+                        <td width="15" style="text-align:center"> <a onclick="return confirm('Are you sure ?')" href="@Url.Action("DeleteGoalCatalog", new {id=goalItem.Id })"><img src="~/Images/DeleteRed.png" width="15" title="Delete" /></a></td>
+                        <td style="text-align:center">
+                            @if (goalItem.ParentGoalCatalogId != null)
+                            {
+                                <a href="@Url.Action("MoveOrderUp", new {id=goalItem.Id })">
+                                    <img style="cursor:pointer" src="~/Images/up.png" width="10" title="Up" />
+                                </a>
+                                <a href="@Url.Action("MoveOrderDown", new {id=goalItem.Id })"><img style="cursor:pointer" src="~/Images/Down.png" width="10" title="Down" /></a>
+
+                            }
+                        </td>
+                        @if (goalItem.ParentGoalCatalogId == null)
+                        {
+                            <td><label style="font-weight:bolder;cursor:default">- @Html.Raw(goalItem.TextGoal)</label></td>
+                        }
+                        else
+                        {
+                            <td><label style="font-weight:normal;cursor:default;margin-left:70px">@Html.Raw(goalItem.TextGoal)</label></td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
 
     </div>
 </div>

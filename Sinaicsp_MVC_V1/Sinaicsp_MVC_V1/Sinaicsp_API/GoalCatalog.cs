@@ -27,6 +27,8 @@ namespace Sinaicsp_API
         public string TextGoal { get; set; }
         public Nullable<int> ParentGoalCatalogId { get; set; }
         public int GC_SubjectsId { get; set; }
+        public int TextOrder { get; set; }
+        public int SubTextOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoalCatalog> GoalCatalogs { get; set; }

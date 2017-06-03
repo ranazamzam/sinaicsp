@@ -75,5 +75,27 @@ namespace Sinaicsp_API
             _item.IsDeleted = true;
             _context.SaveChanges();
         }
+        public static void AdjustOrder(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            GC_Subjects _item = _context.GC_Subjects.Where(a => a.Id == id).FirstOrDefault();
+            if (_item.GoalCatalogs.Count() > 0 && _item.GoalCatalogs.Select(a => a.TextOrder).Max() == 0)
+            {
+                List<GoalCatalog> parentGoals = _item.GoalCatalogs.Where(a => a.ParentGoalCatalogId == null).ToList();
+                for (int i = 0; i < parentGoals.Count; i++)
+                {
+                    parentGoals.ElementAt(i).TextOrder = i;
+                    if (parentGoals.ElementAt(i).GoalCatalogs.Count() > 0)
+                    {
+                        for (int x = 0; x < _item.GoalCatalogs.ElementAt(i).GoalCatalogs.Count(); x++)
+                        {
+                            _item.GoalCatalogs.ElementAt(i).GoalCatalogs.ElementAt(x).TextOrder = i;
+                            _item.GoalCatalogs.ElementAt(i).GoalCatalogs.ElementAt(x).SubTextOrder = x;
+                        }
+                    }
+                }
+                _context.SaveChanges();
+            }
+        }
     }
 }

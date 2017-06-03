@@ -114,6 +114,8 @@
           <Property Name="TextGoal" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ParentGoalCatalogId" Type="int" />
           <Property Name="GC_SubjectsId" Type="int" Nullable="false" />
+          <Property Name="TextOrder" Type="int" Nullable="false" />
+          <Property Name="SubTextOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inclusions">
           <Key>
@@ -1404,6 +1406,8 @@
           <Property Name="ParentGoalCatalogId" Type="Int32" Nullable="true" />
           <NavigationProperty Name="GC_Subjects" Relationship="SinaicspDataModel.GC_SubjectsGoalCatalog" FromRole="GoalCatalog" ToRole="GC_Subjects" />
           <Property Name="GC_SubjectsId" Type="Int32" Nullable="false" />
+          <Property Name="TextOrder" Type="Int32" Nullable="false" />
+          <Property Name="SubTextOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="GoalCatalogGoalCatalog">
           <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="0..1" />
@@ -1795,7 +1799,9 @@
     <EntitySetMapping Name="GoalCatalogs">
       <EntityTypeMapping TypeName="IsTypeOf(SinaicspDataModel.GoalCatalog)">
         <MappingFragment StoreEntitySet="GoalCatalogs">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SubTextOrder" ColumnName="SubTextOrder" />
+                <ScalarProperty Name="TextOrder" ColumnName="TextOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />

@@ -11,9 +11,14 @@ namespace Sinaicsp_MVC.Controllers
 {
     public class GoalCatalogController : Controller
     {
-        public ActionResult Index()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">GC_Subject ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int? id)
         {
-            return View();
+            return View(GoalCatalog.GetAll());
         }
 
         public ActionResult GoalCatalogs_Read([DataSourceRequest]DataSourceRequest request)
@@ -23,7 +28,7 @@ namespace Sinaicsp_MVC.Controllers
             {
                 Id = _currItem.Id,
                 TextGoal = _currItem.TextGoal,
-                CategoryName=_currItem.CategoryName,
+                CategoryName = _currItem.CategoryName,
                 SubjectName = _currItem.SubjectName,
                 ParentName = _currItem.ParentName,
                 CreatedOn = _currItem.CreatedOn,
@@ -36,7 +41,7 @@ namespace Sinaicsp_MVC.Controllers
         public ActionResult AddNewGoalCatalog(int? id)
         {
             ViewBag.AllSubjects = new SelectList(GC_Subjects.GetAll(), "Id", "Name");
-            List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAll();
+            List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAllParents();
             allGoalCatalog.Insert(0, new GoalCatalog() { Id = -1, TextGoal = "NONE" });
             ViewBag.AllGoals = new SelectList(allGoalCatalog, "Id", "TextGoal");
             if (id != null)
@@ -63,7 +68,7 @@ namespace Sinaicsp_MVC.Controllers
         [HttpPost]
         public ActionResult AddNewGoalCatalog(GoalCatalog model)
         {
-            List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAll();
+            List<GoalCatalog> allGoalCatalog = GoalCatalog.GetAllParents();
             allGoalCatalog.Insert(0, new GoalCatalog() { Id = -1, TextGoal = "NONE" });
             ViewBag.AllGoals = new SelectList(allGoalCatalog, "Id", "TextGoal");
             ViewBag.AllSubjects = new SelectList(GC_Subjects.GetAll(), "Id", "Name");
@@ -96,10 +101,36 @@ namespace Sinaicsp_MVC.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult DeleteGoalCatalog(int id)
         {
-            GoalCatalog.SoftDelete(id);
-            return RedirectToAction("Index");
+            GC_Subjects _item = GoalCatalog.SoftDelete(id);
+            return RedirectToAction("Index", new { id = _item.Id });
+        }
+
+        /// <summary>
+        /// Move  Goal Catalog Above
+        /// </summary>
+        /// <param name="id"> Goal Catalog</param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        public ActionResult MoveOrderUp(int id)
+        {
+            GC_Subjects _item = GoalCatalog.MoveUp(id);
+            return RedirectToAction("Index", new { id = _item.Id });
+        }
+
+        /// <summary>
+        /// Move  Goal Catalog Down
+        /// </summary>
+        /// <param name="id"> Goal Catalog</param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        public ActionResult MoveOrderDown(int id)
+        {
+            GC_Subjects _item = GoalCatalog.MoveDown(id);
+            return RedirectToAction("Index", new { id = _item.Id });
         }
     }
 }

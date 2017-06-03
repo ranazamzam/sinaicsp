@@ -60,6 +60,11 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.GoalCatalogs.Where(a => a.IsDeleted == false).ToList();
         }
+        public static List<GoalCatalog> GetAllParents()
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.GoalCatalogs.Where(a => a.IsDeleted == false && a.ParentGoalCatalogId == null).ToList();
+        }
         public static GoalCatalog GetById(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
@@ -90,12 +95,98 @@ namespace Sinaicsp_API
             _context.SaveChanges();
             return true;
         }
-        public static void SoftDelete(int id)
+        public static GC_Subjects SoftDelete(int id)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             GoalCatalog _item = _context.GoalCatalogs.FirstOrDefault(a => a.Id == id);
             _item.IsDeleted = true;
             _context.SaveChanges();
+            return _item.GC_Subjects;
+        }
+
+        public static GC_Subjects MoveUp(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            GoalCatalog _goalItem = _context.GoalCatalogs.Where(a => a.Id == id).FirstOrDefault();
+            GC_Subjects _item = _goalItem.GC_Subjects;
+            if (_goalItem.ParentGoalCatalogId == null)
+            {
+                List<GoalCatalog> targetParentList = _item.GoalCatalogs.Where(a => a.ParentGoalCatalogId == null).OrderBy(a => a.TextOrder).ToList();
+                int index = targetParentList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    GoalCatalog _goalAbove = targetParentList[index - 1];
+                    int NeworderSwap = _goalAbove.TextOrder;
+                    _goalAbove.TextOrder = _goalItem.TextOrder;
+                    _goalItem.TextOrder = NeworderSwap;
+                    foreach (GoalCatalog item in _goalItem.GoalCatalogs)
+                    {
+                        item.TextOrder = _goalItem.TextOrder;
+                    }
+                    foreach (GoalCatalog item in _goalAbove.GoalCatalogs)
+                    {
+                        item.TextOrder = _goalAbove.TextOrder;
+                    }
+                }
+            }
+            else
+            {
+                GoalCatalog _parent = _goalItem.ParentGoalCatalog;
+                List<GoalCatalog> targetchildList = _parent.GoalCatalogs.OrderBy(a => a.SubTextOrder).ToList();
+
+                int index = targetchildList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    GoalCatalog _goalAbove = targetchildList[index - 1];
+                    int NeworderSwap = _goalAbove.SubTextOrder;
+                    _goalAbove.SubTextOrder = _goalItem.SubTextOrder;
+                    _goalItem.SubTextOrder = NeworderSwap;
+                }
+            }
+            _context.SaveChanges();
+            return _item;
+        }
+        public static GC_Subjects MoveDown(int id)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            GoalCatalog _goalItem = _context.GoalCatalogs.Where(a => a.Id == id).FirstOrDefault();
+            GC_Subjects _item = _goalItem.GC_Subjects;
+            if (_goalItem.ParentGoalCatalogId == null)
+            {
+                List<GoalCatalog> targetParentList = _item.GoalCatalogs.Where(a => a.ParentGoalCatalogId == null).OrderByDescending(a => a.TextOrder).ToList();
+                int index = targetParentList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    GoalCatalog _goalAbove = targetParentList[index - 1];
+                    int NeworderSwap = _goalAbove.TextOrder;
+                    _goalAbove.TextOrder = _goalItem.TextOrder;
+                    _goalItem.TextOrder = NeworderSwap;
+                    foreach (GoalCatalog item in _goalItem.GoalCatalogs)
+                    {
+                        item.TextOrder = _goalItem.TextOrder;
+                    }
+                    foreach (GoalCatalog item in _goalAbove.GoalCatalogs)
+                    {
+                        item.TextOrder = _goalAbove.TextOrder;
+                    }
+                }
+            }
+            else
+            {
+                GoalCatalog _parent = _goalItem.ParentGoalCatalog;
+                List<GoalCatalog> targetchildList = _parent.GoalCatalogs.OrderByDescending(a => a.SubTextOrder).ToList();
+
+                int index = targetchildList.IndexOf(_goalItem);
+                if (index > 0)
+                {
+                    GoalCatalog _goalAbove = targetchildList[index - 1];
+                    int NeworderSwap = _goalAbove.SubTextOrder;
+                    _goalAbove.SubTextOrder = _goalItem.SubTextOrder;
+                    _goalItem.SubTextOrder = NeworderSwap;
+                }
+            }
+            _context.SaveChanges();
+            return _item;
         }
     }
 }
