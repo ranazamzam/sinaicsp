@@ -75,10 +75,10 @@ namespace Sinaicsp_API
             _item.IsDeleted = true;
             _context.SaveChanges();
         }
-        public static void AdjustOrder(int id)
+        public static void AdjustOrder(int subjectId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            GC_Subjects _item = _context.GC_Subjects.Where(a => a.Id == id).FirstOrDefault();
+            GC_Subjects _item = _context.GC_Subjects.Where(a => a.Id == subjectId).FirstOrDefault();
             if (_item.GoalCatalogs.Count() > 0 && _item.GoalCatalogs.Select(a => a.TextOrder).Max() == 0)
             {
                 List<GoalCatalog> parentGoals = _item.GoalCatalogs.Where(a => a.ParentGoalCatalogId == null).ToList();

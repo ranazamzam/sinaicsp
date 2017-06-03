@@ -3,7 +3,16 @@
         jQuery(document).ready(function () {
             jQuery('#g_definitions').css('display', 'block');
         });
-
+        function SearchGoals()
+        {
+            var subjectId = $('#ddl_subject').data("kendoDropDownList").value();
+            var url = '@Url.Action("Index", "GoalCatalog", new {id= "-1" })';
+            window.location.href = url.replace("-1", subjectId);
+        }
+    function SubjectLoaded()
+    {
+        $('#ddl_subject').data("kendoDropDownList").value(@ViewBag.SubjectId);
+    }
 </script>
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Goal Catalogs</h4>
@@ -12,13 +21,35 @@
     <div class="widgetcontent">
         <table>
             <tr>
-                <td>Subjects : </td>
+                <td>Subjects : &nbsp;</td>
                 <td>
+                    <div class="demo-section k-content" style="width:200px">
+                        @(Html.Kendo().DropDownList()
+                          .Name("ddl_subject")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .HtmlAttributes(new { style = "width:88%" })
+                          .Filter("contains")
+                          .Events(e =>
+                          {
+                              e.DataBound("SubjectLoaded");
+                          })
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetAllSubjects_Read", "GoalCatalog");
+                              });
 
+                          })
+                        )
+                    </div>
                 </td>
+                <td><a href="#" onclick="SearchGoals()" style="margin-left:-20px" class="btn btn-primary" >Search</a></td>
             </tr>
         </table>
-        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog")">Add New Goal Catalog</a>
+        <br />
+        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog",new { subjectId = ViewBag.SubjectId })">Add New Goal Catalog</a>
 
         <table class="table table-bordered ">
             <thead>

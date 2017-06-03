@@ -658,6 +658,8 @@
     <Property Name="ParentGoalCatalogId" Type="Int32" Nullable="true" />
     <NavigationProperty Name="GC_Subjects" Relationship="SinaicspDataModel.GC_SubjectsGoalCatalog" FromRole="GoalCatalog" ToRole="GC_Subjects" />
     <Property Name="GC_SubjectsId" Type="Int32" Nullable="false" />
+    <Property Name="TextOrder" Type="Int32" Nullable="false" />
+    <Property Name="SubTextOrder" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="GoalCatalogGoalCatalog">
     <End Type="SinaicspDataModel.GoalCatalog" Role="GoalCatalog" Multiplicity="0..1" />

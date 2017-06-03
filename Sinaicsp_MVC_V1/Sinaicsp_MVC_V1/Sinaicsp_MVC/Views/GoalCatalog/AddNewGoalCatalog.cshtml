@@ -12,10 +12,7 @@
 <div class="widgetbox" style="min-height:610px">
     <h4 class="widgettitle">Add new Goal Catalog</h4>
     <div class="widgetcontent">
-        @if (ViewBag.AlreadyExists)
-        {
-            <h4 class="widgettitle title-danger">Goal Catalog already exists !</h4><br />
-        }
+
         @using (Html.BeginForm("AddNewGoalCatalog", "GoalCatalog", FormMethod.Post, new { id = "ItemForm" }))
         {
             <table>
@@ -90,7 +87,7 @@
                     <td>
 
                         <a class="btn btn-primary" onclick="ItemForm.submit();">Save</a>
-                        <a class="btn btn-primary" href="@Url.Action("AddNewGoalCatalog","GoalCatalog")">Clear</a>
+                        <a class="btn btn-primary" href="@Url.Action("Index", "GoalCatalog", new { id = ViewBag.SubjectId })">Cancel</a>
                     </td>
                 </tr>
             </table>

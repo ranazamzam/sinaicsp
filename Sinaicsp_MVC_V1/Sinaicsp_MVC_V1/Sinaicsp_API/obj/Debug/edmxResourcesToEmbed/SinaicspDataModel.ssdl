@@ -109,6 +109,8 @@
     <Property Name="TextGoal" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ParentGoalCatalogId" Type="int" />
     <Property Name="GC_SubjectsId" Type="int" Nullable="false" />
+    <Property Name="TextOrder" Type="int" Nullable="false" />
+    <Property Name="SubTextOrder" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Inclusions">
     <Key>

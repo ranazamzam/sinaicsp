@@ -60,10 +60,15 @@ namespace Sinaicsp_API
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.GoalCatalogs.Where(a => a.IsDeleted == false).ToList();
         }
-        public static List<GoalCatalog> GetAllParents()
+        public static List<GoalCatalog> GetAllBySubjectId(int subjectId)
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
-            return _context.GoalCatalogs.Where(a => a.IsDeleted == false && a.ParentGoalCatalogId == null).ToList();
+            return _context.GoalCatalogs.Where(a => a.IsDeleted == false && a.GC_SubjectsId == subjectId).ToList();
+        }
+        public static List<GoalCatalog> GetAllParents(int subjectId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            return _context.GoalCatalogs.Where(a => a.IsDeleted == false && a.ParentGoalCatalogId == null&&a.GC_SubjectsId==subjectId).ToList();
         }
         public static GoalCatalog GetById(int id)
         {
@@ -78,6 +83,17 @@ namespace Sinaicsp_API
             _item.TextGoal = textGoal;
             _item.GC_SubjectsId = GCsubjectId;
             _item.ParentGoalCatalogId = parentId;
+            GC_Subjects _subjectItem= _context.GC_Subjects.FirstOrDefault(a => a.Id == GCsubjectId);
+            if (parentId == null)
+            {
+                _item.TextOrder = _subjectItem.GoalCatalogs.Count > 0 ? _subjectItem.GoalCatalogs.Select(a => a.TextOrder).Max() + 1 : 0;
+                _item.SubTextOrder = 0;
+            }
+            else
+            {
+                _item.TextOrder = _subjectItem.GoalCatalogs.FirstOrDefault(a => a.Id == parentId.Value).TextOrder;
+                _item.SubTextOrder = _subjectItem.GoalCatalogs.Where(a => a.ParentGoalCatalogId == parentId).Count() > 0 ? _subjectItem.GoalCatalogs.Where(a => a.ParentGoalCatalogId == parentId).Select(a => a.SubTextOrder).Max() + 1 : 0;
+            }
             _item.CreationDate = DateTime.Now;
             _item.CreatedByUserId = LoggeduserId;
             _context.GoalCatalogs.Add(_item);
