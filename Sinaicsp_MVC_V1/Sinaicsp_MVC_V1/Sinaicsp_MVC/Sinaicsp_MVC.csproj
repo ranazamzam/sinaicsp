@@ -1375,6 +1375,7 @@
     </Compile>
     <Compile Include="Report\CustomCSPGoalCatalog.cs" />
     <Compile Include="Report\CustomRatings.cs" />
+    <Compile Include="ViewModels\CSPFilterViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailViewModel.cs" />
     <Compile Include="ViewModels\StudentServiceViewModel.cs" />

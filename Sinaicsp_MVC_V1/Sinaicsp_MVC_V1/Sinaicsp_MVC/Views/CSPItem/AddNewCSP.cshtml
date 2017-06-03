@@ -72,7 +72,7 @@
             data: { model: objModel, teachersIds: allTeachers },
             success: function (data) {
                 if (data == true) {
-                    if(cspId==0)
+                    if(cspId==-1)
                     {
                         var url = '@Url.Action("Index", "CSPItem", new { })';
                         window.location.href = url;

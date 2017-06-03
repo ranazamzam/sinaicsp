@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Sinaicsp_API;
+using Sinaicsp_MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,14 @@ namespace Sinaicsp_MVC.Controllers
                 CSP _model = CSP.GetById(id.Value);
                 return View(_model);
             }
-            return View(new CSP());
+            else
+            {
+                CSP _item = new CSP();
+                _item.CreatedByUserId = ApplicationHelper.LoggedUserId;
+                _item.CreationDate = DateTime.Now;
+                return View(_item);
+            }
+
         }
 
         public JsonResult Schools_Read()
@@ -113,13 +121,14 @@ namespace Sinaicsp_MVC.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult CSPs_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult CSPs_Read([DataSourceRequest]DataSourceRequest request, CSPFilterViewModel filter)
         {
-            IQueryable<CSP> items = CSP.GetAll().AsQueryable();
+            IQueryable<CSP> items = CSP.GetAll(filter.StudentId,filter.TeacherId,filter.SchoolId,filter.SchoolYearId,filter.SubjectId,filter.ClassId).AsQueryable();
             DataSourceResult result = items.ToDataSourceResult(request, _item => new
             {
                 Id = _item.Id,
                 StudentName = _item.StudentName,
+                StudentClass = _item.StudentClass,
                 SchoolName = _item.SchoolName,
                 SubjectName = _item.SubjectName,
                 TeacherNames = _item.TeacherNames,
@@ -136,10 +145,11 @@ namespace Sinaicsp_MVC.Controllers
         {
             if (model.StudentId > 0 && model.SubjectId > 0 && model.SchoolYearId > 0 && string.IsNullOrEmpty(model.Materials) == false && teachersIds.Count > 0)
             {
-                if (model.Id == 0)
+                if (model.Id == -1)
                 {
                     CSP.AddNew(model.StudentId, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
-                }else
+                }
+                else
                 {
                     CSP.Update(model.Id, model.SubjectId, model.SchoolYearId, model.Materials, teachersIds, ApplicationHelper.LoggedUserId);
                 }
@@ -324,5 +334,93 @@ namespace Sinaicsp_MVC.Controllers
             Response.End();
         }
 
+
+        #region Filter Section
+        public JsonResult GetAllTeachers_Read()
+        {
+            List<Teacher> allTeacher = Teacher.GetAll();
+            allTeacher.Insert(0, new Teacher() { UserName = "All", Id = -1 });
+            IQueryable<Teacher> items = allTeacher.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             UserName = item.UserName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllStudents_Read()
+        {
+            List<Student> allStudents = Student.GetAll();
+            allStudents.Insert(0, new Student() { FirstName = "All", Id = -1 });
+            IQueryable<Student> items = allStudents.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             FullName = item.FullName
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllSubjects_Read()
+        {
+            List<Subject> allSubjects = Subject.GetAll();
+            allSubjects.Insert(0, new Subject() { Name = "All", Id = -1 });
+            IQueryable<Subject> items = allSubjects.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             Name = item.Name
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllClasses_Read()
+        {
+            List<StudentClass> allitems = StudentClass.GetAll();
+            allitems.Insert(0, new StudentClass() { Name = "All", Id = -1 });
+            IQueryable<StudentClass> items = allitems.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             Name = item.Name
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllSchools_Read()
+        {
+            List<School> allitems = School.GetAll();
+            allitems.Insert(0, new School() { Name = "All", Id = -1 });
+            IQueryable<School> items = allitems.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             Name = item.Name
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetAllSchoolYears_Read()
+        {
+            List<SchoolYear> allitems = SchoolYear.GetAll();
+            allitems.Insert(0, new SchoolYear() { Name = "All", Id = -1 });
+            IQueryable<SchoolYear> items = allitems.AsQueryable();
+            var result = from item in items
+                         select new
+                         {
+                             Id = item.Id,
+                             Name = item.Name
+                         };
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }

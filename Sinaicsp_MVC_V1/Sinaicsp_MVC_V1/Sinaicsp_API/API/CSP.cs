@@ -64,6 +64,13 @@ namespace Sinaicsp_API
                 }
             }
         }
+        public string StudentClass
+        {
+            get
+            {
+                return Student.ClassName;
+            }
+        }
         public string CreatedOn
         {
             get
@@ -75,6 +82,19 @@ namespace Sinaicsp_API
         {
             SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
             return _context.CSPs.Where(a => a.IsDeleted == false).ToList();
+        }
+        public static List<CSP> GetAll(int studentId, int teacherId, int schooldId, int schoolYearId, int subjectId, int classId)
+        {
+            SinaicspDataModelContainer _context = new Sinaicsp_API.SinaicspDataModelContainer();
+            List<CSP> allItems = _context.CSPs.Where(a => a.IsDeleted == false).ToList();
+            allItems = studentId != -1 ? allItems.Where(a => a.StudentId == studentId).ToList() : allItems;
+            allItems = schoolYearId != -1 ? allItems.Where(a => a.SchoolYearId == schoolYearId).ToList() : allItems;
+            allItems = subjectId != -1 ? allItems.Where(a => a.SubjectId == subjectId).ToList() : allItems;
+            allItems = schooldId != -1 ? allItems.Where(a => a.Student.SchoolId == schooldId).ToList() : allItems;
+            allItems = classId != -1 ? allItems.Where(a => a.Student.StudentClassId == classId).ToList() : allItems;
+            allItems = teacherId != -1 ? allItems.Where(a => a.TeacherCSPs.Where(x => x.TeacherId == teacherId).Count() > 0).ToList() : allItems;
+
+            return allItems;
         }
         public static CSP GetById(int id)
         {
